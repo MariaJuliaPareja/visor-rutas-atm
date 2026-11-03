@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { FORMULACIONES, calcularMetricas, formato } from "../lib/metricas.js";
-import MapaRutas from "./MapaRutas.jsx";
-import DetalleCorrida from "./DetalleCorrida.jsx";
+import { FORMULACIONES, calcularMetricas, formato } from "../metricas/metricas.js";
+import MapaRutas from "../visualizacion/MapaRutas.jsx";
+import DetalleCorrida from "../visualizacion/DetalleCorrida.jsx";
 
 // PAN-03: barra superior, comparacion (tarjetas + tabla) y mapa, visibles a la vez.
 export default function VistaPrincipal({ doc, advertencias, nombre, onCargarOtro }) {
