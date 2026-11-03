@@ -133,3 +133,13 @@ th.num { text-align: right; }
   .mapa.con-panel .mapa-cabecera, .mapa.con-panel .leyenda { margin-right: 380px; }
   .mapa.con-panel .mapa-cabecera { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+/* Historial guardado en IndexedDB */
+.historial { border: 1px solid var(--borde); border-radius: 8px; padding: 12px 16px; }
+.historial header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.historial h2 { font-size: 15px; margin: 0; }
+.historial ul { list-style: none; padding: 0; margin: 8px 0 0; }
+.historial li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+.historial li .nota { margin: 2px 0 0; }
+.confirmar { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; }
+.peligro { background: var(--error); color: #fff; border: 1px solid var(--error); }
