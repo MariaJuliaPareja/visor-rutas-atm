@@ -8,7 +8,7 @@ import os
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-SAMPLERS_VALIDOS = ("simulado", "qpu")
+SAMPLERS_VALIDOS = ("simulado", "qpu", "ibm")
 DISTANCIAS_VALIDAS = ("linea_recta", "vial")
 OSRM_PUBLICO = "https://router.project-osrm.org"
 
@@ -57,6 +57,7 @@ class Configuracion:
     annealing_time_us: int = 20
     distancia: str = "linea_recta"
     osrm_url: str = OSRM_PUBLICO
+    qaoa_reps: int = 1
 
     @classmethod
     def desde_entorno(cls) -> "Configuracion":
@@ -78,6 +79,7 @@ class Configuracion:
             nivel_log=os.getenv("RUTAS_NIVEL_LOG", "INFO").upper(),
             annealing_time_us=_entero("RUTAS_ANNEALING_TIME", 20),
             distancia=distancia,
+            qaoa_reps=_entero("RUTAS_QAOA_REPS", 1),
             osrm_url=os.getenv("RUTAS_OSRM_URL", OSRM_PUBLICO).strip() or OSRM_PUBLICO,
         )
 

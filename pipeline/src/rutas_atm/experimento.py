@@ -69,8 +69,13 @@ def ejecutar_experimento(cajeros: int, corridas_por_formulacion: int, cfg: Confi
         modelo = construir_modelo(formulacion, instancia.distancias)
         log.info("%s: %d variables binarias", formulacion, modelo.num_variables)
         for replica in range(corridas_por_formulacion):
-            r = muestrear(modelo, cfg.sampler, cfg.num_reads, cfg.semilla + replica,
-                          annealing_time_us=cfg.annealing_time_us, fabrica_qpu=fabrica_qpu)
+            if cfg.sampler == "ibm":
+                from .cliente_ibm import muestrear_ibm
+                r = muestrear_ibm(modelo, cfg.num_reads, cfg.semilla + replica, reps=cfg.qaoa_reps,
+                                  fabrica_backend=fabrica_qpu)
+            else:
+                r = muestrear(modelo, cfg.sampler, cfg.num_reads, cfg.semilla + replica,
+                              annealing_time_us=cfg.annealing_time_us, fabrica_qpu=fabrica_qpu)
             secuencia, factible = decodificar(modelo, r.bits)
             lote.corridas.append(CorridaCruda(
                 id_corrida=id_corrida, formulacion=formulacion, sampler=cfg.sampler,

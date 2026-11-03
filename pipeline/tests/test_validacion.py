@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from rutas_atm import VERSION_ESQUEMA
 from rutas_atm.config import Configuracion
 from rutas_atm.conversor_resultados import ArchivoInvalido, convertir, escribir
 from rutas_atm.experimento import ejecutar_experimento
@@ -56,7 +57,7 @@ def test_migracion_1_0_a_1_1(documento):
         del c["sampler"]
         c["metricas"]["tiempo_anneal"] = 20.0
     migrado = migrar(viejo)
-    assert migrado["version_esquema"] == "1.1"
+    assert migrado["version_esquema"] == VERSION_ESQUEMA
     assert all(c["sampler"] == "qpu" for c in migrado["corridas"])
 
 

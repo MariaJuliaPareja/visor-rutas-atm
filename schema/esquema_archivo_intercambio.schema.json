@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "esquema_archivo_intercambio_v1.1",
+  "$id": "esquema_archivo_intercambio_v1.2",
   "title": "Archivo de intercambio - Sistema de Optimizacion de Rutas ATM",
-  "description": "Contrato entre el pipeline (CMP-05) y el visor web (CMP-06). Version 1.1: agrega el campo sampler a cada corrida y admite null en las metricas propias del QPU cuando la corrida usa el recocido simulado (DEC-01). Las reglas entre entidades se verifican por programacion en ambos lados.",
+  "description": "Contrato entre el pipeline (CMP-05) y el visor web (CMP-06). Version 1.2: agrega el sampler ibm (QAOA en IBM Quantum, DEC-08) y la metrica opcional de la matriz de distancias (DEC-07). Version 1.1: agrega el campo sampler a cada corrida y admite null en las metricas propias del QPU cuando la corrida no usa D-Wave (DEC-01). Las reglas entre entidades se verifican por programacion en ambos lados.",
   "type": "object",
   "required": ["version_esquema", "fecha_generacion", "instancia", "corridas"],
   "additionalProperties": false,
@@ -105,7 +105,7 @@
       "properties": {
         "id_corrida": { "type": "integer", "minimum": 1 },
         "formulacion": { "type": "string", "enum": ["GPS", "QUBO"] },
-        "sampler": { "type": "string", "enum": ["simulado", "qpu"] },
+        "sampler": { "type": "string", "enum": ["simulado", "qpu", "ibm"] },
         "parametros": { "type": ["object", "null"] },
         "ruta": {
           "type": "object",
