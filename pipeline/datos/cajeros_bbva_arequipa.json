@@ -1,0 +1,77 @@
+{
+  "entidad": "BBVA",
+  "fuente": "OpenStreetMap (API Overpass)",
+  "atribucion": "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)",
+  "descargado": "2026-11-03T17:03:16+00:00",
+  "recuadro": [
+    -16.48,
+    -71.62,
+    -16.33,
+    -71.47
+  ],
+  "cajeros": [
+    {
+      "osm_id": "node/10910525152",
+      "nombre": "BBVA",
+      "direccion": null,
+      "latitud": -16.42313,
+      "longitud": -71.544873
+    },
+    {
+      "osm_id": "node/11539874627",
+      "nombre": "Scotiabank, BBVA continental",
+      "direccion": null,
+      "latitud": -16.344512,
+      "longitud": -71.567679
+    },
+    {
+      "osm_id": "node/2894700029",
+      "nombre": "BBVA Perú",
+      "direccion": "Avenida Ejército",
+      "latitud": -16.389908,
+      "longitud": -71.546072
+    },
+    {
+      "osm_id": "node/3929538795",
+      "nombre": "BBVA",
+      "direccion": null,
+      "latitud": -16.396942,
+      "longitud": -71.547218
+    },
+    {
+      "osm_id": "node/4018911855",
+      "nombre": "BBVA",
+      "direccion": null,
+      "latitud": -16.374762,
+      "longitud": -71.557802
+    },
+    {
+      "osm_id": "node/4020677848",
+      "nombre": "BBVA",
+      "direccion": null,
+      "latitud": -16.417797,
+      "longitud": -71.51388
+    },
+    {
+      "osm_id": "node/4354902492",
+      "nombre": "BBVA",
+      "direccion": null,
+      "latitud": -16.416296,
+      "longitud": -71.513886
+    },
+    {
+      "osm_id": "node/5813092796",
+      "nombre": "Cajero BBVA",
+      "direccion": null,
+      "latitud": -16.389518,
+      "longitud": -71.550353
+    },
+    {
+      "osm_id": "way/534115321",
+      "nombre": "BBVA",
+      "direccion": "San Francisco 108",
+      "latitud": -16.39819,
+      "longitud": -71.535766
+    }
+  ]
+}
