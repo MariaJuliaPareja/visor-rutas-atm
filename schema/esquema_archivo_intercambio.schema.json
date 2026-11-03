@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "esquema_archivo_intercambio_v1.1",
+  "title": "Archivo de intercambio - Sistema de Optimizacion de Rutas ATM",
+  "description": "Contrato entre el pipeline (CMP-05) y el visor web (CMP-06). Version 1.1: agrega el campo sampler a cada corrida y admite null en las metricas propias del QPU cuando la corrida usa el recocido simulado (DEC-01). Las reglas entre entidades se verifican por programacion en ambos lados.",
+  "type": "object",
+  "required": ["version_esquema", "fecha_generacion", "instancia", "corridas"],
+  "additionalProperties": false,
+  "properties": {
+    "version_esquema": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$",
+      "description": "Version del esquema; el visor acepta versiones 1.x y migra las anteriores"
+    },
+    "fecha_generacion": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora de generacion del archivo (ISO 8601)"
+    },
+    "instancia": { "$ref": "#/$defs/instancia" },
+    "corridas": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/corrida" }
+    }
+  },
+  "$defs": {
+    "id_cajero": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Identificador del cajero; coincide con su indice en la matriz (0 a n-1)"
+    },
+    "distancia": { "type": "number", "minimum": 0 },
+    "instancia": {
+      "type": "object",
+      "required": ["id_instancia", "tipo_instancia", "cajeros", "matriz_distancias", "linea_base"],
+      "additionalProperties": false,
+      "properties": {
+        "id_instancia": { "type": "integer", "minimum": 1 },
+        "tipo_instancia": { "type": "string", "enum": ["representativa", "reducida"] },
+        "cajeros": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 100,
+          "items": { "$ref": "#/$defs/cajero" }
+        },
+        "matriz_distancias": { "$ref": "#/$defs/matriz_distancias" },
+        "linea_base": { "$ref": "#/$defs/linea_base" }
+      }
+    },
+    "cajero": {
+      "type": "object",
+      "required": ["id_cajero", "latitud", "longitud"],
+      "additionalProperties": false,
+      "properties": {
+        "id_cajero": { "$ref": "#/$defs/id_cajero" },
+        "latitud": { "type": "number", "minimum": -90, "maximum": 90 },
+        "longitud": { "type": "number", "minimum": -180, "maximum": 180 }
+      }
+    },
+    "matriz_distancias": {
+      "type": "object",
+      "required": ["unidad", "distancias"],
+      "additionalProperties": false,
+      "properties": {
+        "unidad": { "type": "string", "enum": ["km", "m"] },
+        "distancias": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 100,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 100,
+            "items": { "$ref": "#/$defs/distancia" }
+          }
+        }
+      }
+    },
+    "linea_base": {
+      "type": "object",
+      "required": ["dist_optima", "ruta"],
+      "additionalProperties": false,
+      "properties": {
+        "dist_optima": { "type": "number", "exclusiveMinimum": 0 },
+        "ruta": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id_cajero" }
+        }
+      }
+    },
+    "corrida": {
+      "type": "object",
+      "required": ["id_corrida", "formulacion", "sampler", "parametros", "ruta", "metricas"],
+      "additionalProperties": false,
+      "properties": {
+        "id_corrida": { "type": "integer", "minimum": 1 },
+        "formulacion": { "type": "string", "enum": ["GPS", "QUBO"] },
+        "sampler": { "type": "string", "enum": ["simulado", "qpu"] },
+        "parametros": { "type": ["object", "null"] },
+        "ruta": {
+          "type": "object",
+          "required": ["factible", "secuencia"],
+          "additionalProperties": false,
+          "properties": {
+            "factible": { "type": "boolean" },
+            "secuencia": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 100,
+              "items": { "$ref": "#/$defs/id_cajero" }
+            }
+          }
+        },
+        "metricas": {
+          "type": "object",
+          "required": ["distancia_total", "tiempo_anneal", "chain_break_fraction"],
+          "additionalProperties": false,
+          "properties": {
+            "distancia_total": { "type": "number", "minimum": 0 },
+            "tiempo_anneal": {
+              "type": ["number", "null"],
+              "exclusiveMinimum": 0,
+              "description": "Microsegundos de recocido en el QPU; null con el sampler simulado"
+            },
+            "chain_break_fraction": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Fraccion de cadenas rotas; null con el sampler simulado (no hay embedding)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

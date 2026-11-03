@@ -1,0 +1,27 @@
+# Secretos y configuracion local: nunca al repositorio
+.env
+.env.*
+!.env.example
+dwave.conf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Resultados generados por el pipeline (se regeneran; el ejemplo versionado esta en ejemplos/)
+pipeline/salidas/
+*.pkl
+
+# Node
+web/node_modules/
+web/dist/
+
+# Sistema y editores
+.DS_Store
+.vscode/
+.idea/
