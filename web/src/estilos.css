@@ -829,7 +829,7 @@ tr.seleccionada:hover td:first-child {
    Agregados de la v0.9.0 con el mismo lenguaje visual: resumen para gerencia (DEC-09),
    supuestos editables, base de operaciones en el mapa. */
 .subtitulo {
-  margin: 20px 0 0;
+  margin: 16px 12px 0;
   padding: 0 0 4px;
   border-bottom: 2px solid var(--tinta);
   font-size: 13px;
@@ -892,7 +892,9 @@ tr.seleccionada:hover td:first-child {
 .comparativa tbody tr:hover td { background: none; }
 .comparativa .num, .comparativa td:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .comparativa .num { text-align: right; }
-.comparativa td:last-child { white-space: nowrap; font-size: 11.5px; }
+.comparativa td:last-child { white-space: normal; overflow-wrap: anywhere; font-size: 11.5px; }
+.comparativa th, .comparativa td { height: auto; }
+.comparativa td:first-child { font-family: var(--sans); white-space: nowrap; }
 .supuestos { margin-top: 8px; }
 .supuestos summary { cursor: pointer; font-size: 12px; color: var(--tinta); }
 .supuestos .campos { display: grid; gap: 0; margin-top: 6px; }
