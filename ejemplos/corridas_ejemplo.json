@@ -1,0 +1,264 @@
+{
+  "version_esquema": "1.1",
+  "fecha_generacion": "2026-11-03T01:48:24+00:00",
+  "instancia": {
+    "id_instancia": 1,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.382463,
+        "longitud": -71.538667
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.377384,
+        "longitud": -71.523158
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.423249,
+        "longitud": -71.506463
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.383232,
+        "longitud": -71.517836
+      },
+      {
+        "id_cajero": 4,
+        "latitud": -16.421213,
+        "longitud": -71.537977
+      },
+      {
+        "id_cajero": 5,
+        "latitud": -16.406652,
+        "longitud": -71.509394
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "distancias": [
+        [
+          0.0,
+          1.748,
+          5.689,
+          2.224,
+          4.309,
+          4.121
+        ],
+        [
+          1.748,
+          0.0,
+          5.402,
+          0.863,
+          5.124,
+          3.57
+        ],
+        [
+          5.689,
+          5.402,
+          0.0,
+          4.612,
+          3.369,
+          1.872
+        ],
+        [
+          2.224,
+          0.863,
+          4.612,
+          0.0,
+          4.738,
+          2.755
+        ],
+        [
+          4.309,
+          5.124,
+          3.369,
+          4.738,
+          0.0,
+          3.452
+        ],
+        [
+          4.121,
+          3.57,
+          1.872,
+          2.755,
+          3.452,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 14.917,
+      "ruta": [
+        0,
+        4,
+        2,
+        5,
+        3,
+        1
+      ]
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 42,
+        "replica": 0,
+        "num_variables": 120
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          4,
+          1,
+          2,
+          5
+        ]
+      },
+      "metricas": {
+        "distancia_total": 20.828,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 43,
+        "replica": 1,
+        "num_variables": 120
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          1,
+          4,
+          5,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 19.032,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 3,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 44,
+        "replica": 2,
+        "num_variables": 120
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          4
+        ]
+      },
+      "metricas": {
+        "distancia_total": 11.272,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 4,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 42,
+        "replica": 0,
+        "num_variables": 36
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          3,
+          5,
+          4,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 24.646,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 5,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 43,
+        "replica": 1,
+        "num_variables": 36
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          1,
+          4,
+          2,
+          3,
+          5
+        ]
+      },
+      "metricas": {
+        "distancia_total": 21.73,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 6,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1,
+        "seed": 44,
+        "replica": 2,
+        "num_variables": 36
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          5,
+          4,
+          3,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 24.266,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}
