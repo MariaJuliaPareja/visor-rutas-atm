@@ -5,15 +5,16 @@ Prototipo del Proyecto de Fin de Carrera *Optimización de rutas para el reabast
 Compara dos formulaciones QUBO del problema del vendedor viajero, **GPS** (González-Bermejo et al., 2022) y **QUBO tradicional** (one-hot), resueltas por recocido, contra una línea base exacta (Held-Karp). Tiene dos subsistemas desacoplados por un único archivo de intercambio `.json`:
 
 ```
-pipeline/  (Python)             schema/                      web/  (React + Leaflet)
-CMP-01 instancia                esquema_archivo_             CMP-06 carga y validación
-CMP-02 formulaciones GPS/QUBO   intercambio.schema.json      CMP-07 métricas
-CMP-03 recocido (simulado/QPU)  ← contrato compartido →      CMP-08 mapa y detalle
-CMP-04 Held-Karp
-CMP-05 conversor → .json  ─────────── archivo .json ──────→  (se carga en el navegador)
+pipeline/  (Python)                    schema/                     web/  (React + Leaflet)
+CMP-01 preparacion_datos.py            contrato compartido         CMP-06 carga/        validación
+CMP-02 formulacion_tsp.py (GPS/QUBO)   (JSON Schema 2020-12)       CMP-07 metricas/     métricas
+CMP-03 cliente_dwave.py (sim./QPU)                                 CMP-08 visualizacion/ mapa y detalle
+CMP-04 linea_base.py (Held-Karp)                                   CMP-09 reportes/     reporte PDF
+       experimento.py → lote crudo .pkl                            persistencia/        IndexedDB (NoSQL)
+CMP-05 conversor_resultados.py → .json ──── archivo .json ───────→ (se carga en el navegador)
 ```
 
-> Estado: incremento de la Práctica 08. La exportación del reporte (RF05, CMP-09) queda para el siguiente incremento.
+> Estado: incremento de la Práctica 08. Los datos se guardan como documentos (NoSQL): lote crudo `.pkl`, archivo de intercambio `.json` e historial del visor en IndexedDB. Ver `docs/modelo-datos-nosql.md`.
 
 ## Requisitos
 
@@ -37,12 +38,11 @@ cp .env.example .env               # ajusta los valores si hace falta
 PYTHONPATH=src python -m rutas_atm --cajeros 5 --corridas 3
 ```
 
-Escribe `salidas/corridas_i1_n5_simulado_<fecha>.json`. El archivo se valida contra el esquema antes de escribirse y nunca se sobrescribe uno existente.
-
-Para validar un archivo ya generado:
+Escribe el lote crudo `salidas/crudos/corridas_i1_n5_simulado_<fecha>.pkl` (después de cada corrida) y el archivo de intercambio `salidas/corridas_i1_n5_simulado_<fecha>.json`. El `.json` se valida contra el esquema antes de escribirse y nunca se sobrescribe uno existente.
 
 ```bash
-PYTHONPATH=src python -m rutas_atm --validar salidas/<archivo>.json
+PYTHONPATH=src python -m rutas_atm --convertir salidas/crudos/<lote>.pkl   # regenera el .json desde el .pkl
+PYTHONPATH=src python -m rutas_atm --validar salidas/<archivo>.json        # valida un .json existente
 ```
 
 ### 2. Visor web
@@ -53,7 +53,7 @@ npm ci
 npm run dev        # http://localhost:5173
 ```
 
-Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador y no se envía a ningún servidor.
+Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador y no se envía a ningún servidor. Cada archivo válido queda en el historial del navegador (IndexedDB) para reabrirlo sin volver a subirlo; **Exportar reporte** descarga un PDF con las mismas cifras de la pantalla.
 
 ### 3. Pruebas
 
@@ -91,10 +91,10 @@ Cada corrida consume minutos del plan gratuito de Leap (RNF04): empieza con inst
 
 ```
 schema/        contrato del archivo de intercambio (JSON Schema 2020-12), compartido
-pipeline/      src/rutas_atm (CMP-01 a CMP-05), tests/, requirements*.txt
-web/           src/lib (validación y métricas), src/componentes (pantallas), pruebas con Vitest
+pipeline/      src/rutas_atm (un módulo por componente CMP-01 a CMP-05), tests/, requirements*.txt
+web/src/       carga/, metricas/, visualizacion/, reportes/ (CMP-06 a CMP-09), persistencia/ (IndexedDB), pantallas/
 ejemplos/      archivo de intercambio de ejemplo (datos sintéticos)
-docs/          decisiones, integración, incidencias y evidencias
+docs/          decisiones, integración, incidencias, modelo de datos NoSQL y evidencias
 ```
 
 ## Datos

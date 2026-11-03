@@ -12,7 +12,7 @@ function NoComparable() {
     <span className="nota-info" tabIndex={0} role="button" aria-label={`No comparable. ${NOTA_NO_COMPARABLE}`}
       onMouseEnter={() => setAbierta(true)} onMouseLeave={() => setAbierta(false)}
       onFocus={() => setAbierta(true)} onBlur={() => setAbierta(false)}
-      onClick={(e) => { e.stopPropagation(); setAbierta((v) => !v); }}
+      onClick={() => setAbierta((v) => !v)}
       onKeyDown={(e) => { if (e.key === "Escape") setAbierta(false); }}>
       No comparable ⓘ
       {abierta && <span className="burbuja" role="tooltip">{NOTA_NO_COMPARABLE}</span>}
