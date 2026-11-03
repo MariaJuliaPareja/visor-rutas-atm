@@ -15,7 +15,7 @@ export default function DetalleCorrida({ corrida, onCerrar }) {
         <button className="icono" onClick={onCerrar} aria-label="Cerrar detalle">×</button>
       </header>
       {ruta.factible ? <span className="etiqueta ok">Factible</span> : <span className="etiqueta mal">Infactible</span>}
-      {!ruta.factible && <p className="mensaje advertencia">⚠ Esta ruta no visita cada cajero exactamente una vez.</p>}
+      {!ruta.factible && <p className="mensaje advertencia">Esta ruta no visita cada cajero exactamente una vez.</p>}
 
       <h3>Métricas</h3>
       <dl className="metricas">

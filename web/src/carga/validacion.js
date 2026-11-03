@@ -17,7 +17,7 @@ const MIGRACIONES = {
     version_esquema: "1.1",
     corridas: doc.corridas.map((c) => ({ sampler: "qpu", ...c })),
   }),
-  // 1.2 solo agrega valores opcionales (sampler ibm, metrica de distancias)
+  // 1.2 solo agrega valores opcionales (sampler ibm, metrica, nombres, tiempos y fuente)
   "1.1": (doc) => ({ ...doc, version_esquema: "1.2" }),
 };
 
@@ -102,6 +102,8 @@ export function validarReglas(doc, toleranciaKm = 0.01) {
     throw new ErrorDeCarga(5, `Se encontraron ${errores.length} problemas en el archivo:`, errores);
   }
   if (d.some((fila, i) => fila[i] !== 0)) errores.push("la diagonal de la matriz de distancias debe ser 0");
+  const t = doc.instancia.matriz_tiempos?.tiempos;
+  if (t && (t.length !== n || t.some((fila) => fila.length !== n))) errores.push(`la matriz de tiempos debe ser de ${n} x ${n}`);
   if (!esPermutacion(linea_base.ruta)) errores.push("la ruta de la línea base debe visitar cada cajero exactamente una vez");
   const ids = doc.corridas.map((c) => c.id_corrida);
   if (new Set(ids).size !== ids.length) errores.push("id_corrida debe ser único");

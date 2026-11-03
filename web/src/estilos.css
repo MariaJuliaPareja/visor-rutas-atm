@@ -1,6 +1,6 @@
 /* Visor de rutas. Papel, tinta y un acento. Sin degradados ni sombras difusas.
    El ancho del panel (380px) tiene que coincidir con ANCHO_PANEL en MapaRutas.jsx. */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+/* IBM Plex se instala con el proyecto (@fontsource, importado en main.jsx): no se pide a Google Fonts (RNF06). */
 
 :root {
   --tinta: #14213d;
@@ -824,3 +824,107 @@ tr.seleccionada:hover td:first-child {
   .etiqueta.mal, .mal-texto { text-decoration: underline; }
   .marcador.alerta { border: 2px solid Highlight; }
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Agregados de la v0.9.0 con el mismo lenguaje visual: resumen para gerencia (DEC-09),
+   supuestos editables, base de operaciones en el mapa. */
+.subtitulo {
+  margin: 20px 0 0;
+  padding: 0 0 4px;
+  border-bottom: 2px solid var(--tinta);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.04em;
+  color: var(--tinta);
+}
+.gerencia { padding: 8px 12px 10px; border-bottom: 2px solid var(--tinta); }
+.gerencia header { padding-bottom: 4px; border-bottom: 1px solid var(--borde); }
+.gerencia header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.04em;
+}
+.gerencia header p { margin: 2px 0 0; font-size: 12px; color: var(--texto-2); }
+.cifras { margin: 0; }
+.cifras > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "dt dd" "span span";
+  column-gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--suave);
+}
+.cifras dt {
+  grid-area: dt;
+  align-self: baseline;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.03em;
+  color: var(--texto-2);
+}
+.cifras dd {
+  grid-area: dd;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--tinta);
+}
+.cifras > div:first-child dd { color: var(--acento); font-weight: 600; }
+.cifras span { grid-area: span; font-size: 12px; color: var(--texto-2); }
+.comparativa { width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 12px; }
+.comparativa th {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--tinta);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-caps: all-small-caps;
+  text-align: left;
+  color: var(--texto-2);
+}
+.comparativa td { padding: 4px 6px; border-bottom: 1px solid var(--suave); cursor: default; }
+.comparativa tbody tr:hover td { background: none; }
+.comparativa .num, .comparativa td:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.comparativa .num { text-align: right; }
+.comparativa td:last-child { white-space: nowrap; font-size: 11.5px; }
+.supuestos { margin-top: 8px; }
+.supuestos summary { cursor: pointer; font-size: 12px; color: var(--tinta); }
+.supuestos .campos { display: grid; gap: 0; margin-top: 6px; }
+.supuestos label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px 110px;
+  gap: 8px;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--suave);
+  font-size: 12px;
+}
+.supuestos input {
+  padding: 2px 6px;
+  border: 1px solid var(--borde);
+  border-radius: 0;
+  background: var(--papel);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: right;
+  color: var(--tinta);
+}
+.supuestos input:focus-visible { outline: 2px solid var(--acento); outline-offset: 1px; }
+.supuestos em { font-style: normal; color: var(--texto-2); }
+.enlace {
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: inherit;
+  color: var(--tinta);
+  text-decoration: underline;
+}
+.marcador.deposito { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
+

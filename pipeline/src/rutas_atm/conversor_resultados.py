@@ -17,13 +17,16 @@ class ArchivoInvalido(ValueError):
 
 def convertir(lote: LoteCrudo) -> dict:
     inst = lote.instancia
-    return {
+    etiquetas = getattr(inst, "etiquetas", None)  # los .pkl anteriores no tienen estos campos
+    tiempos = getattr(inst, "tiempos", None)
+    fuente = getattr(inst, "fuente", None)
+    doc = {
         "version_esquema": VERSION_ESQUEMA,
         "fecha_generacion": lote.fecha,
         "instancia": {
             "id_instancia": inst.id_instancia,
             "tipo_instancia": inst.tipo,
-            "cajeros": [{"id_cajero": i, "latitud": lat, "longitud": lon}
+            "cajeros": [_cajero(i, lat, lon, etiquetas[i] if etiquetas else None)
                         for i, (lat, lon) in enumerate(inst.coordenadas)],
             "matriz_distancias": {
                 "unidad": "km",
@@ -45,6 +48,19 @@ def convertir(lote: LoteCrudo) -> dict:
             },
         } for c in lote.corridas],
     }
+    if tiempos is not None:
+        doc["instancia"]["matriz_tiempos"] = {"unidad": "min",
+                                              "tiempos": [[round(float(x), 2) for x in fila] for fila in tiempos]}
+    if fuente:
+        doc["instancia"]["fuente"] = {k: v for k, v in fuente.items() if v is not None}
+    return doc
+
+
+def _cajero(i: int, lat: float, lon: float, etiqueta: dict | None) -> dict:
+    cajero = {"id_cajero": i, "latitud": lat, "longitud": lon}
+    if etiqueta:
+        cajero.update({k: v for k, v in etiqueta.items() if v is not None})
+    return cajero
 
 
 def escribir(doc: dict, ruta: Path) -> list[str]:

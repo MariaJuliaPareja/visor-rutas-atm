@@ -2,7 +2,7 @@
 // asi el reporte nunca contradice lo que el usuario vio. Se genera en el navegador (RNF06).
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
-import { FORMULACIONES, formato } from "../metricas/metricas.js";
+import { FORMULACIONES, formato, resumenGerencial } from "../metricas/metricas.js";
 
 export const NOTA_INFACTIBLE =
   "Ruta infactible: no visita cada cajero exactamente una vez. Su gap no es comparable y se excluye del resumen.";
@@ -12,11 +12,34 @@ export function nombreReporte(doc) {
 }
 
 // Contenido del reporte como datos puros (probado sin generar el PDF).
-export function contenidoReporte(doc, { corridas, resumen }, advertencias) {
+export function contenidoReporte(doc, metricas, advertencias, gerencia = resumenGerencial(doc, metricas)) {
+  const { corridas, resumen } = metricas;
   const inst = doc.instancia;
+  const g = gerencia;
+  const entero = (x) => formato(x, 0);
   const avisos = new Map(advertencias.map((a) => [a.id_corrida, a.mensaje]));
   return {
-    titulo: "Reporte consolidado de corridas",
+    titulo: "Reporte de optimización de rutas de reabastecimiento",
+    gerencia: {
+      sinAhorro: g.sinAhorro,
+      cifras: [
+        ["Ahorro en combustible al año", `S/ ${formato(g.porAnio.soles)}`, `S/ ${formato(g.porRecorrido.soles)} por recorrido`],
+        ["Diésel ahorrado al año", `${entero(g.porAnio.litros)} litros`, `${formato(g.porRecorrido.litros)} litros por recorrido`],
+        ["Distancia ahorrada", `${formato(g.porRecorrido.pct, 1)} %`, `${formato(g.porRecorrido.km)} km por recorrido · ${entero(g.porAnio.km)} km al año`],
+        ["Tiempo ahorrado", `${entero(g.porRecorrido.min)} min por recorrido`, `${formato(g.porAnio.horas, 1)} h al año${g.tiempoEstimado ? " (estimado con velocidad media)" : " (tiempos de manejo por calles)"}`],
+        ["CO2 evitado al año", `${entero(g.porAnio.co2)} kg`, `${formato(g.porRecorrido.co2)} kg por recorrido`],
+      ],
+      rutas: [
+        ["Habitual (orden de la planilla)", formato(g.habitual.km), entero(g.habitual.min), formato(g.consumo.habitual.litros), formato(g.consumo.habitual.soles), [...g.habitual.secuencia, g.habitual.secuencia[0]].join(" - ")],
+        ["Propuesta", formato(g.propuesta.km), entero(g.propuesta.min), formato(g.consumo.propuesta.litros), formato(g.consumo.propuesta.soles), [...g.propuesta.secuencia, g.propuesta.secuencia[0]].join(" - ")],
+      ],
+      origen: `Ruta propuesta: ${g.propuesta.origen}. ${g.alcanzaOptimo ? "Coincide con la mejor ruta posible (Held-Karp)." : `La mejor ruta posible mide ${formato(g.optimoKm)} km (Held-Karp).`}`,
+      supuestos: `Supuestos: rendimiento ${formato(g.supuestos.rendimiento_km_l, 1)} km/l · diésel S/ ${formato(g.supuestos.precio_soles_l)} por litro · ${formato(g.supuestos.co2_kg_l)} kg CO2 por litro · ${entero(g.supuestos.recorridos_anio)} recorridos al año${g.tiempoEstimado ? ` · velocidad media ${entero(g.supuestos.velocidad_kmh)} km/h` : ""}.`,
+    },
+    paradas: inst.cajeros.map((c) => [String(c.id_cajero), c.nombre ?? (c.id_cajero === 0 ? "Depósito" : `Cajero ${c.id_cajero}`), c.direccion ?? "—"]),
+    fuente: inst.fuente?.tipo === "osm"
+      ? `Ubicaciones de cajeros ${inst.fuente.entidad ?? ""}: ${inst.fuente.atribucion ?? "OpenStreetMap"}. Son ubicaciones públicas; no se usan datos operativos del banco.`
+      : "Ubicaciones sintéticas generadas para la prueba.",
     encabezado: [
       ["Instancia", `${inst.id_instancia} (${inst.tipo_instancia})`],
       ["Cajeros", String(inst.cajeros.length)],
@@ -30,7 +53,7 @@ export function contenidoReporte(doc, { corridas, resumen }, advertencias) {
         f,
         r.total === 0 ? "Sin corridas" : `${r.factibles} / ${r.total}`,
         r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`,
-        r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`,
+        f === "GPS" ? "Referencia" : r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`,
       ];
     }),
     corridas: corridas.map((c) => [
@@ -54,12 +77,52 @@ export function contenidoReporte(doc, { corridas, resumen }, advertencias) {
 
 export function generarPdf(contenido) {
   const pdf = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+  const g = contenido.gerencia;
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(16);
   pdf.text(contenido.titulo, 40, 50);
 
+  // Pagina 1: resumen para gerencia
+  pdf.setFontSize(12);
+  pdf.text("Resumen para gerencia", 40, 78);
   autoTable(pdf, {
-    startY: 70,
+    startY: 88,
+    body: g.sinAhorro
+      ? [[{ content: "En esta instancia el orden de la planilla ya es la mejor ruta: no hay ahorro que reportar. Con más cajeros por recorrido es menos probable que el orden de la planilla sea el óptimo.", colSpan: 3 }]]
+      : g.cifras,
+    theme: "grid",
+    styles: { fontSize: 11, cellPadding: 6 },
+    columnStyles: { 0: { fontStyle: "bold", cellWidth: 220 }, 1: { fontStyle: "bold", fontSize: 13, cellWidth: 200 } },
+  });
+  autoTable(pdf, {
+    head: [["Ruta", "km", "min", "Diésel (L)", "Costo (S/)", "Orden de visita"]],
+    body: g.rutas,
+    headStyles: { fillColor: [20, 33, 61] },
+    styles: { fontSize: 10 },
+  });
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(9);
+  let yg = pdf.lastAutoTable.finalY + 18;
+  for (const linea of [g.origen, g.supuestos, contenido.fuente]) {
+    const partes = pdf.splitTextToSize(linea, 760);
+    pdf.text(partes, 40, yg);
+    yg += partes.length * 12 + 2;
+  }
+  autoTable(pdf, {
+    startY: yg + 6,
+    head: [["Punto", "Nombre", "Dirección"]],
+    body: contenido.paradas,
+    headStyles: { fillColor: [20, 33, 61] },
+    styles: { fontSize: 9 },
+  });
+
+  // Pagina 2: detalle tecnico
+  pdf.addPage();
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(12);
+  pdf.text("Detalle técnico de las corridas", 40, 50);
+  autoTable(pdf, {
+    startY: 60,
     body: contenido.encabezado,
     theme: "plain",
     styles: { fontSize: 10, cellPadding: 3 },

@@ -53,7 +53,7 @@ export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar, 
       <main className="carga">
         {rechazo && (
           <section className="mensaje error" role="alert">
-            <h2>⚠ No se pudo cargar el archivo</h2>
+            <h2>No se pudo cargar el archivo</h2>
             <p>{rechazo.titulo}</p>
             {rechazo.detalles.length > 0 && (
               <ul className="detalle-tecnico">
@@ -74,7 +74,7 @@ export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar, 
             <ol>
               {PASOS.map((p, i) => (
                 <li key={p} className={i < progreso.paso ? "hecho" : i === progreso.paso ? "en-curso" : ""}>
-                  <span>{i < progreso.paso ? "✓" : i === progreso.paso ? "…" : "○"}</span> {p}
+                  <span>{i < progreso.paso ? "OK" : i === progreso.paso ? "··" : "--"}</span> {p}
                   <em>{i < progreso.paso ? "Completado" : i === progreso.paso ? "En curso" : "Pendiente"}</em>
                 </li>
               ))}

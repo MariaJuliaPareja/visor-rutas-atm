@@ -28,9 +28,10 @@ def _coordenadas_osrm(coordenadas: list) -> str:
 
 
 def matriz_vial(coordenadas: list, url: str = OSRM_PUBLICO, timeout: float = 30.0,
-                abrir=urllib.request.urlopen) -> np.ndarray:
-    """Devuelve la matriz simetrica de distancias por calles, en km."""
-    consulta = f"{url.rstrip('/')}/table/v1/driving/{_coordenadas_osrm(coordenadas)}?annotations=distance"
+                abrir=urllib.request.urlopen, con_tiempos: bool = False):
+    """Matriz simetrica de distancias por calles, en km. Con con_tiempos=True devuelve (km, minutos)."""
+    anotaciones = "distance,duration" if con_tiempos else "distance"
+    consulta = f"{url.rstrip('/')}/table/v1/driving/{_coordenadas_osrm(coordenadas)}?annotations={anotaciones}"
     try:
         with abrir(consulta, timeout=timeout) as respuesta:
             datos = json.loads(respuesta.read().decode("utf-8"))
@@ -51,7 +52,16 @@ def matriz_vial(coordenadas: list, url: str = OSRM_PUBLICO, timeout: float = 30.
     if any(x is None for fila in metros for x in fila):
         raise ErrorDeDistancias("Algun cajero no tiene camino por calles hacia otro (OSRM devolvio null)")
 
-    d = np.array(metros, dtype=float) / 1000.0
-    d = (d + d.T) / 2.0  # DEC-07: promedio de ambos sentidos
-    np.fill_diagonal(d, 0.0)
-    return d
+    d = _simetrica(np.array(metros, dtype=float) / 1000.0)  # DEC-07: promedio de ambos sentidos
+    if not con_tiempos:
+        return d
+    segundos = datos.get("durations")
+    if not segundos or any(x is None for fila in segundos for x in fila):
+        raise ErrorDeDistancias("El servicio de rutas no devolvio los tiempos de manejo")
+    return d, _simetrica(np.array(segundos, dtype=float) / 60.0)
+
+
+def _simetrica(m: np.ndarray) -> np.ndarray:
+    m = (m + m.T) / 2.0
+    np.fill_diagonal(m, 0.0)
+    return m

@@ -13,12 +13,13 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .cajeros_osm import cargar_catalogo
 from .cliente_dwave import muestrear
 from .config import Configuracion
 from .distancias_viales import matriz_vial
 from .formulacion_tsp import construir_modelo, decodificar
 from .linea_base import held_karp
-from .preparacion_datos import Instancia, distancia_ruta, generar_instancia
+from .preparacion_datos import Instancia, distancia_ruta, generar_instancia, instancia_desde_catalogo
 
 log = logging.getLogger("rutas_atm")
 FORMULACIONES = ("GPS", "QUBO")
@@ -53,9 +54,17 @@ def ejecutar_experimento(cajeros: int, corridas_por_formulacion: int, cfg: Confi
     calcular_vial = None
     if cfg.distancia == "vial":
         def calcular_vial(coordenadas):
-            return matriz_vial(coordenadas, url=cfg.osrm_url)
-    instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia,
-                                  metrica=cfg.distancia, calcular_vial=calcular_vial)
+            return matriz_vial(coordenadas, url=cfg.osrm_url, con_tiempos=True)
+    if cfg.fuente == "osm":
+        catalogo = cargar_catalogo(cfg.catalogo)
+        instancia = instancia_desde_catalogo(catalogo, cajeros, semilla=cfg.semilla, id_instancia=id_instancia,
+                                             deposito=cfg.base, radio_km=cfg.radio_km,
+                                             metrica=cfg.distancia, calcular_vial=calcular_vial)
+        log.info("Cajeros reales de %s (OpenStreetMap): base + %d cajeros a menos de %.1f km",
+                 catalogo.get("entidad"), cajeros - 1, cfg.radio_km)
+    else:
+        instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia,
+                                      metrica=cfg.distancia, calcular_vial=calcular_vial)
     log.info("Instancia %d: %d cajeros (%s), distancias %s", id_instancia, instancia.n, instancia.tipo,
              "por calles (OSRM)" if instancia.metrica == "vial" else "en linea recta")
 

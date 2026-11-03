@@ -54,3 +54,10 @@ Cambios o precisiones respecto al diseño de las prácticas 05 (arquitectura), 0
 - **Ahorro de QPU:** los ángulos se eligen en local (optimización exacta hasta 18 qubits, rampa lineal por encima) y cada corrida envía un solo job.
 - **Consecuencia:** QAOA y el recocido no son el mismo algoritmo; el informe compara formulaciones dentro de cada sampler, no entre samplers.
 
+## DEC-09 · Cajeros reales de OpenStreetMap y resumen para gerencia
+
+- **Problema:** con puntos sintéticos y métricas técnicas (gap, chain break fraction), la demo no mostraba un beneficio que entienda alguien del negocio.
+- **Cajeros reales:** `--descargar-cajeros BBVA` consulta OpenStreetMap (API Overpass) y guarda en `pipeline/datos/` las ubicaciones públicas de cajeros y agencias con cajero BBVA de Arequipa. Con `RUTAS_FUENTE=osm`, el nodo 0 es la base de operaciones (`RUTAS_BASE`, supuesta en el Cercado) y los demás se eligen con semilla entre los cajeros a menos de `RUTAS_RADIO_KM`. Son datos públicos bajo licencia ODbL, con atribución; no son datos operativos del banco (RNF06).
+- **Resumen para gerencia:** el visor y el reporte PDF comparan la mejor ruta factible obtenida con la **ruta habitual** (visitar los cajeros en el orden de la planilla) y la traducen a km, minutos, soles de diésel y kg de CO₂, por recorrido y por año. Los tiempos salen de OSRM cuando el lote usa `--distancia vial`; si no, se estiman con una velocidad media.
+- **Supuestos:** rendimiento, precio del diésel, factor de CO₂, recorridos al año y velocidad son editables en pantalla y se imprimen en el reporte. Los valores por defecto son referenciales y deben ajustarse a la flota y al precio vigente.
+

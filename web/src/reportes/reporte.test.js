@@ -38,3 +38,21 @@ describe("CMP-09 reporte consolidado", () => {
     expect(nombreReporte(doc)).toBe("reporte_instancia1.pdf");
   });
 });
+
+describe("CMP-09 resumen para gerencia en el reporte", () => {
+  const { doc, advertencias } = procesarTexto(texto);
+  const contenido = contenidoReporte(doc, calcularMetricas(doc), advertencias);
+
+  it("incluye cifras en soles, km, tiempo y CO2 con sus supuestos", () => {
+    expect(contenido.gerencia.cifras.map((f) => f[0])).toEqual([
+      "Ahorro en combustible al año", "Diésel ahorrado al año", "Distancia ahorrada", "Tiempo ahorrado", "CO2 evitado al año",
+    ]);
+    expect(contenido.gerencia.supuestos).toContain("S/");
+    expect(JSON.stringify(contenido.gerencia)).not.toContain("₂"); // Helvetica de jsPDF no tiene el subindice
+    expect(contenido.paradas).toHaveLength(doc.instancia.cajeros.length);
+  });
+
+  it("genera el PDF con la pagina de gerencia y la tecnica", () => {
+    expect(generarPdf(contenido).getNumberOfPages()).toBeGreaterThanOrEqual(2);
+  });
+});
