@@ -65,6 +65,11 @@
       "additionalProperties": false,
       "properties": {
         "unidad": { "type": "string", "enum": ["km", "m"] },
+        "metrica": {
+          "type": "string",
+          "enum": ["linea_recta", "vial"],
+          "description": "Como se midieron las distancias: linea_recta (haversine) o vial (por calles de OpenStreetMap, OSRM). Opcional; si falta se asume linea_recta (DEC-07)"
+        },
         "distancias": {
           "type": "array",
           "minItems": 3,

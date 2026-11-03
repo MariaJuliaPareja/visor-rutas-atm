@@ -27,6 +27,7 @@ def convertir(lote: LoteCrudo) -> dict:
                         for i, (lat, lon) in enumerate(inst.coordenadas)],
             "matriz_distancias": {
                 "unidad": "km",
+                "metrica": getattr(inst, "metrica", "linea_recta"),  # .pkl anteriores no la tienen
                 "distancias": [[round(float(x), 3) for x in fila] for fila in inst.distancias],
             },
             "linea_base": {"dist_optima": round(lote.dist_optima, 3), "ruta": lote.ruta_optima},

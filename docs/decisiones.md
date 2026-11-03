@@ -39,3 +39,11 @@ Cambios o precisiones respecto al diseño de las prácticas 05 (arquitectura), 0
 
 - **Diseño original:** el panel de detalle se abre *sobre* el mapa (wireframe de la Práctica 07, Figura 18).
 - **Implementación:** se respeta el wireframe. Para que el panel no tape cajeros, el mapa se reencuadra dejando libre el ancho del panel, y la cabecera y la leyenda se acomodan al área visible. Ver INC-03.
+
+## DEC-07 · Rutas por las calles de OpenStreetMap (OSRM)
+
+- **Problema:** el mapa unía los cajeros con líneas rectas que cruzaban manzanas, y las distancias eran en línea recta (haversine).
+- **Decisión:** el visor pide a OSRM el trazado de cada ruta por la red vial de OpenStreetMap (`/route`, `overview=full`, `geometries=geojson`) y, si el servicio no responde, vuelve a la línea recta y lo avisa en la leyenda. El pipeline puede medir las distancias por calles con `RUTAS_DISTANCIA=vial` (`/table`), y el archivo lo indica en `matriz_distancias.metrica` (campo opcional, compatible con 1.1).
+- **Simetría:** las calles de un solo sentido hacen que A→B ≠ B→A; como GPS y QUBO asumen una matriz simétrica, se usa el promedio de ambos sentidos.
+- **Privacidad:** solo salen del navegador las coordenadas de los cajeros, que son sintéticas (RNF06). `VITE_OSRM_URL` permite usar un OSRM propio o desactivar el trazado (`off`).
+

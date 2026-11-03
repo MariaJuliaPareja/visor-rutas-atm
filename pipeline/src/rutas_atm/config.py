@@ -9,6 +9,8 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 
 SAMPLERS_VALIDOS = ("simulado", "qpu")
+DISTANCIAS_VALIDAS = ("linea_recta", "vial")
+OSRM_PUBLICO = "https://router.project-osrm.org"
 
 
 class ErrorDeConfiguracion(ValueError):
@@ -53,6 +55,8 @@ class Configuracion:
     directorio_salida: Path
     nivel_log: str
     annealing_time_us: int = 20
+    distancia: str = "linea_recta"
+    osrm_url: str = OSRM_PUBLICO
 
     @classmethod
     def desde_entorno(cls) -> "Configuracion":
@@ -61,6 +65,11 @@ class Configuracion:
             raise ErrorDeConfiguracion(
                 f"RUTAS_SAMPLER debe ser uno de {SAMPLERS_VALIDOS}; se recibio {sampler!r}"
             )
+        distancia = os.getenv("RUTAS_DISTANCIA", "linea_recta").strip().lower()
+        if distancia not in DISTANCIAS_VALIDAS:
+            raise ErrorDeConfiguracion(
+                f"RUTAS_DISTANCIA debe ser una de {DISTANCIAS_VALIDAS}; se recibio {distancia!r}"
+            )
         return cls(
             sampler=sampler,
             num_reads=_entero("RUTAS_NUM_READS", 200),
@@ -68,9 +77,16 @@ class Configuracion:
             directorio_salida=Path(os.getenv("RUTAS_DIR_SALIDA", "salidas")),
             nivel_log=os.getenv("RUTAS_NIVEL_LOG", "INFO").upper(),
             annealing_time_us=_entero("RUTAS_ANNEALING_TIME", 20),
+            distancia=distancia,
+            osrm_url=os.getenv("RUTAS_OSRM_URL", OSRM_PUBLICO).strip() or OSRM_PUBLICO,
         )
 
     def con_sampler(self, sampler: str) -> "Configuracion":
         if sampler not in SAMPLERS_VALIDOS:
             raise ErrorDeConfiguracion(f"El sampler debe ser uno de {SAMPLERS_VALIDOS}; se recibio {sampler!r}")
         return replace(self, sampler=sampler)
+
+    def con_distancia(self, distancia: str) -> "Configuracion":
+        if distancia not in DISTANCIAS_VALIDAS:
+            raise ErrorDeConfiguracion(f"La distancia debe ser una de {DISTANCIAS_VALIDAS}; se recibio {distancia!r}")
+        return replace(self, distancia=distancia)

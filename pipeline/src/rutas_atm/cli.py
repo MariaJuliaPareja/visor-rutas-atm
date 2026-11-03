@@ -5,6 +5,7 @@
   python -m rutas_atm --validar ARCHIVO.json       valida un archivo de intercambio
   python -m rutas_atm --probar-leap                verifica el token y el solver de D-Wave Leap (sin usar el QPU)
   python -m rutas_atm --sampler qpu ...            ejecuta en el QPU de D-Wave Leap (o RUTAS_SAMPLER=qpu)
+  python -m rutas_atm --distancia vial ...         distancias por calles de OpenStreetMap (o RUTAS_DISTANCIA=vial)
 """
 
 import argparse
@@ -17,6 +18,7 @@ from pathlib import Path
 from .cliente_dwave import ErrorDeMuestreo, probar_conexion
 from .config import Configuracion, ErrorDeConfiguracion, cargar_env
 from .conversor_resultados import ArchivoInvalido, convertir, escribir
+from .distancias_viales import ErrorDeDistancias
 from .experimento import cargar_crudos, ejecutar_experimento
 from .validacion import migrar, validar
 
@@ -54,6 +56,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--corridas", type=int, default=3, help="corridas por formulacion")
     parser.add_argument("--instancia", type=int, default=1, help="identificador de la instancia")
     parser.add_argument("--sampler", choices=("simulado", "qpu"), help="sobrescribe RUTAS_SAMPLER")
+    parser.add_argument("--distancia", choices=("linea_recta", "vial"),
+                        help="sobrescribe RUTAS_DISTANCIA (vial = por calles de OpenStreetMap)")
     grupo = parser.add_mutually_exclusive_group()
     grupo.add_argument("--probar-leap", action="store_true", help="verifica la conexion con Leap sin usar el QPU")
     grupo.add_argument("--validar", metavar="ARCHIVO.json", help="solo valida un archivo de intercambio")
@@ -65,6 +69,8 @@ def main(argv: list[str] | None = None) -> int:
         cfg = Configuracion.desde_entorno()
         if args.sampler:
             cfg = cfg.con_sampler(args.sampler)
+        if args.distancia:
+            cfg = cfg.con_distancia(args.distancia)
     except ErrorDeConfiguracion as exc:
         print(f"Error de configuracion: {exc}", file=sys.stderr)
         return 2
@@ -95,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
     ruta_pkl = cfg.directorio_salida / "crudos" / f"{nombre}.pkl"
     try:
         lote = ejecutar_experimento(args.cajeros, args.corridas, cfg, args.instancia, ruta_pkl)
-    except (ValueError, ErrorDeMuestreo) as exc:
+    except (ErrorDeDistancias, ValueError, ErrorDeMuestreo) as exc:
         log.error("%s", exc)
         return 1
     log.info("Lote crudo guardado en %s", ruta_pkl)
