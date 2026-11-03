@@ -143,3 +143,4 @@ th.num { text-align: right; }
 .historial li .nota { margin: 2px 0 0; }
 .confirmar { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; }
 .peligro { background: var(--error); color: #fff; border: 1px solid var(--error); }
+.nota-trazado { margin-left: auto; color: var(--texto-2); }

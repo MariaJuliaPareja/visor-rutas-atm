@@ -53,7 +53,7 @@ npm ci
 npm run dev        # http://localhost:5173
 ```
 
-Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador y no se envía a ningún servidor. Cada archivo válido queda en el historial del navegador (IndexedDB) para reabrirlo sin volver a subirlo; **Exportar reporte** descarga un PDF con las mismas cifras de la pantalla.
+Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador; para dibujar las rutas por las calles, solo las coordenadas de los cajeros (sintéticas) se envían al servicio de rutas OSRM. Con `VITE_OSRM_URL=off` se dibujan en línea recta y nada sale del navegador. Cada archivo válido queda en el historial del navegador (IndexedDB) para reabrirlo sin volver a subirlo; **Exportar reporte** descarga un PDF con las mismas cifras de la pantalla.
 
 ### 3. Pruebas
 
@@ -72,6 +72,8 @@ Las mismas comprobaciones corren en GitHub Actions en cada *push* a `main` y en 
 | `RUTAS_NUM_READS` | Lecturas por corrida | `200` |
 | `RUTAS_SEMILLA` | Semilla de la instancia y del recocido simulado | `42` |
 | `RUTAS_ANNEALING_TIME` | Microsegundos de recocido por lectura en el QPU | `20` |
+| `RUTAS_DISTANCIA` | `linea_recta` (haversine) o `vial` (por calles de OpenStreetMap, OSRM) | `linea_recta` |
+| `RUTAS_OSRM_URL` | Servidor OSRM para `vial` | `https://router.project-osrm.org` |
 | `RUTAS_DIR_SALIDA` | Carpeta de los `.json` generados | `salidas` |
 | `RUTAS_NIVEL_LOG` | Nivel de registro | `INFO` |
 | `DWAVE_API_TOKEN` | Token de Leap, solo con `qpu` (mejor: `dwave config create`) | — |

@@ -15,6 +15,7 @@ from pathlib import Path
 
 from .cliente_dwave import muestrear
 from .config import Configuracion
+from .distancias_viales import matriz_vial
 from .formulacion_tsp import construir_modelo, decodificar
 from .linea_base import held_karp
 from .preparacion_datos import Instancia, distancia_ruta, generar_instancia
@@ -49,8 +50,14 @@ class LoteCrudo:
 
 def ejecutar_experimento(cajeros: int, corridas_por_formulacion: int, cfg: Configuracion,
                          id_instancia: int = 1, ruta_pkl: Path | None = None, fabrica_qpu=None) -> LoteCrudo:
-    instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia)
-    log.info("Instancia %d: %d cajeros (%s)", id_instancia, instancia.n, instancia.tipo)
+    calcular_vial = None
+    if cfg.distancia == "vial":
+        def calcular_vial(coordenadas):
+            return matriz_vial(coordenadas, url=cfg.osrm_url)
+    instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia,
+                                  metrica=cfg.distancia, calcular_vial=calcular_vial)
+    log.info("Instancia %d: %d cajeros (%s), distancias %s", id_instancia, instancia.n, instancia.tipo,
+             "por calles (OSRM)" if instancia.metrica == "vial" else "en linea recta")
 
     t0 = time.perf_counter()
     dist_optima, ruta_optima = held_karp(instancia.distancias)
