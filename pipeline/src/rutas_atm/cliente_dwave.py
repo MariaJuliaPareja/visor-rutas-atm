@@ -8,7 +8,7 @@
 import logging
 from dataclasses import dataclass
 
-from .formulaciones import ModeloQUBO
+from .formulacion_tsp import ModeloQUBO
 
 log = logging.getLogger(__name__)
 
