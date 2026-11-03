@@ -24,16 +24,17 @@ export function contenidoReporte(doc, metricas, advertencias, gerencia = resumen
       sinAhorro: g.sinAhorro,
       cifras: [
         ["Ahorro en combustible al año", `S/ ${formato(g.porAnio.soles)}`, `S/ ${formato(g.porRecorrido.soles)} por recorrido`],
+        ["Diésel ahorrado al año", `${entero(g.porAnio.litros)} litros`, `${formato(g.porRecorrido.litros)} litros por recorrido`],
         ["Distancia ahorrada", `${formato(g.porRecorrido.pct, 1)} %`, `${formato(g.porRecorrido.km)} km por recorrido · ${entero(g.porAnio.km)} km al año`],
         ["Tiempo ahorrado", `${entero(g.porRecorrido.min)} min por recorrido`, `${formato(g.porAnio.horas, 1)} h al año${g.tiempoEstimado ? " (estimado con velocidad media)" : " (tiempos de manejo por calles)"}`],
-        ["CO₂ evitado al año", `${entero(g.porAnio.co2)} kg`, `${formato(g.porRecorrido.co2)} kg por recorrido`],
+        ["CO2 evitado al año", `${entero(g.porAnio.co2)} kg`, `${formato(g.porRecorrido.co2)} kg por recorrido`],
       ],
       rutas: [
-        ["Habitual (orden de la planilla)", formato(g.habitual.km), entero(g.habitual.min), [...g.habitual.secuencia, g.habitual.secuencia[0]].join(" - ")],
-        ["Propuesta", formato(g.propuesta.km), entero(g.propuesta.min), [...g.propuesta.secuencia, g.propuesta.secuencia[0]].join(" - ")],
+        ["Habitual (orden de la planilla)", formato(g.habitual.km), entero(g.habitual.min), formato(g.consumo.habitual.litros), formato(g.consumo.habitual.soles), [...g.habitual.secuencia, g.habitual.secuencia[0]].join(" - ")],
+        ["Propuesta", formato(g.propuesta.km), entero(g.propuesta.min), formato(g.consumo.propuesta.litros), formato(g.consumo.propuesta.soles), [...g.propuesta.secuencia, g.propuesta.secuencia[0]].join(" - ")],
       ],
       origen: `Ruta propuesta: ${g.propuesta.origen}. ${g.alcanzaOptimo ? "Coincide con la mejor ruta posible (Held-Karp)." : `La mejor ruta posible mide ${formato(g.optimoKm)} km (Held-Karp).`}`,
-      supuestos: `Supuestos: rendimiento ${formato(g.supuestos.rendimiento_km_l, 1)} km/l · diésel S/ ${formato(g.supuestos.precio_soles_l)} por litro · ${formato(g.supuestos.co2_kg_l)} kg CO₂ por litro · ${entero(g.supuestos.recorridos_anio)} recorridos al año${g.tiempoEstimado ? ` · velocidad media ${entero(g.supuestos.velocidad_kmh)} km/h` : ""}.`,
+      supuestos: `Supuestos: rendimiento ${formato(g.supuestos.rendimiento_km_l, 1)} km/l · diésel S/ ${formato(g.supuestos.precio_soles_l)} por litro · ${formato(g.supuestos.co2_kg_l)} kg CO2 por litro · ${entero(g.supuestos.recorridos_anio)} recorridos al año${g.tiempoEstimado ? ` · velocidad media ${entero(g.supuestos.velocidad_kmh)} km/h` : ""}.`,
     },
     paradas: inst.cajeros.map((c) => [String(c.id_cajero), c.nombre ?? (c.id_cajero === 0 ? "Depósito" : `Cajero ${c.id_cajero}`), c.direccion ?? "—"]),
     fuente: inst.fuente?.tipo === "osm"
@@ -86,13 +87,15 @@ export function generarPdf(contenido) {
   pdf.text("Resumen para gerencia", 40, 78);
   autoTable(pdf, {
     startY: 88,
-    body: g.sinAhorro ? [["En esta instancia la ruta habitual ya es tan corta como la propuesta: no hay ahorro que reportar.", "", ""]] : g.cifras,
+    body: g.sinAhorro
+      ? [[{ content: "En esta instancia el orden de la planilla ya es la mejor ruta: no hay ahorro que reportar. Con más cajeros por recorrido es menos probable que el orden de la planilla sea el óptimo.", colSpan: 3 }]]
+      : g.cifras,
     theme: "grid",
     styles: { fontSize: 11, cellPadding: 6 },
     columnStyles: { 0: { fontStyle: "bold", cellWidth: 220 }, 1: { fontStyle: "bold", fontSize: 13, cellWidth: 200 } },
   });
   autoTable(pdf, {
-    head: [["Ruta", "km", "min", "Orden de visita"]],
+    head: [["Ruta", "km", "min", "Diésel (L)", "Costo (S/)", "Orden de visita"]],
     body: g.rutas,
     headStyles: { fillColor: [20, 33, 61] },
     styles: { fontSize: 10 },

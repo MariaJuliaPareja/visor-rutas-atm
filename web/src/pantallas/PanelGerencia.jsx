@@ -22,11 +22,13 @@ export default function PanelGerencia({ resumen, onCambiarSupuesto }) {
 
       {resumen.sinAhorro ? (
         <p className="mensaje advertencia">
-          En esta instancia la ruta habitual ya es tan corta como la propuesta: no hay ahorro que reportar.
+          En esta instancia el orden de la planilla ya es la mejor ruta: no hay ahorro que reportar. Con más
+          cajeros por recorrido es menos probable que el orden de la planilla sea el óptimo.
         </p>
       ) : (
         <dl className="cifras">
           <div><dt>Ahorro al año</dt><dd>S/ {formato(a.soles)}</dd><span>S/ {formato(r.soles)} por recorrido</span></div>
+          <div><dt>Diésel ahorrado al año</dt><dd>{entero(a.litros)} L</dd><span>{formato(r.litros)} L por recorrido</span></div>
           <div><dt>Distancia ahorrada</dt><dd>{formato(r.pct, 1)} %</dd><span>{formato(r.km)} km por recorrido · {entero(a.km)} km al año</span></div>
           <div><dt>Tiempo ahorrado</dt><dd>{entero(r.min)} min</dd><span>por recorrido · {formato(a.horas, 1)} h al año{resumen.tiempoEstimado ? " (estimado)" : ""}</span></div>
           <div><dt>CO₂ evitado al año</dt><dd>{entero(a.co2)} kg</dd><span>{formato(r.co2)} kg por recorrido</span></div>
@@ -35,11 +37,11 @@ export default function PanelGerencia({ resumen, onCambiarSupuesto }) {
 
       <table className="comparativa">
         <thead>
-          <tr><th scope="col">Ruta</th><th scope="col" className="num">km</th><th scope="col" className="num">min</th><th scope="col">Orden de visita</th></tr>
+          <tr><th scope="col">Ruta</th><th scope="col" className="num">km</th><th scope="col" className="num">min</th><th scope="col" className="num">Diésel (L)</th><th scope="col" className="num">Costo (S/)</th><th scope="col">Orden de visita</th></tr>
         </thead>
         <tbody>
-          <tr><td>Habitual (planilla)</td><td className="num">{formato(habitual.km)}</td><td className="num">{entero(habitual.min)}</td><td>{habitual.secuencia.join(" → ")} → 0</td></tr>
-          <tr><td>Propuesta</td><td className="num">{formato(propuesta.km)}</td><td className="num">{entero(propuesta.min)}</td><td>{propuesta.secuencia.join(" → ")} → {propuesta.secuencia[0]}</td></tr>
+          <tr><td>Habitual (planilla)</td><td className="num">{formato(habitual.km)}</td><td className="num">{entero(habitual.min)}</td><td className="num">{formato(resumen.consumo.habitual.litros)}</td><td className="num">{formato(resumen.consumo.habitual.soles)}</td><td>{habitual.secuencia.join(" → ")} → 0</td></tr>
+          <tr><td>Propuesta</td><td className="num">{formato(propuesta.km)}</td><td className="num">{entero(propuesta.min)}</td><td className="num">{formato(resumen.consumo.propuesta.litros)}</td><td className="num">{formato(resumen.consumo.propuesta.soles)}</td><td>{propuesta.secuencia.join(" → ")} → {propuesta.secuencia[0]}</td></tr>
         </tbody>
       </table>
       <p className="nota">

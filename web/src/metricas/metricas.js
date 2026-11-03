@@ -99,8 +99,12 @@ export function resumenGerencial(doc, { corridas }, supuestos = SUPUESTOS) {
   return {
     habitual: { secuencia: habitualSec, km: habitualKm, min: minutos(habitualSec, habitualKm) },
     propuesta: { secuencia: propuestaSec, km: propuestaKm, min: minutos(propuestaSec, propuestaKm), origen },
-    porRecorrido: { km, min, soles, co2, pct: habitualKm > 0 ? (km / habitualKm) * 100 : 0 },
-    porAnio: { km: km * anio, horas: (min * anio) / 60, soles: soles * anio, co2: co2 * anio },
+    porRecorrido: { km, min, litros, soles, co2, pct: habitualKm > 0 ? (km / habitualKm) * 100 : 0 },
+    porAnio: { km: km * anio, horas: (min * anio) / 60, litros: litros * anio, soles: soles * anio, co2: co2 * anio },
+    consumo: {
+      habitual: { litros: habitualKm / supuestos.rendimiento_km_l, soles: (habitualKm / supuestos.rendimiento_km_l) * supuestos.precio_soles_l },
+      propuesta: { litros: propuestaKm / supuestos.rendimiento_km_l, soles: (propuestaKm / supuestos.rendimiento_km_l) * supuestos.precio_soles_l },
+    },
     alcanzaOptimo: Math.abs(propuestaKm - optimoKm) < 0.01,
     optimoKm,
     tiempoEstimado: !T,

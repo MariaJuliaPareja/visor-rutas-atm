@@ -45,9 +45,10 @@ describe("CMP-09 resumen para gerencia en el reporte", () => {
 
   it("incluye cifras en soles, km, tiempo y CO2 con sus supuestos", () => {
     expect(contenido.gerencia.cifras.map((f) => f[0])).toEqual([
-      "Ahorro en combustible al año", "Distancia ahorrada", "Tiempo ahorrado", "CO₂ evitado al año",
+      "Ahorro en combustible al año", "Diésel ahorrado al año", "Distancia ahorrada", "Tiempo ahorrado", "CO2 evitado al año",
     ]);
     expect(contenido.gerencia.supuestos).toContain("S/");
+    expect(JSON.stringify(contenido.gerencia)).not.toContain("₂"); // Helvetica de jsPDF no tiene el subindice
     expect(contenido.paradas).toHaveLength(doc.instancia.cajeros.length);
   });
 
