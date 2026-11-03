@@ -4,10 +4,10 @@ import L from "leaflet";
 import { formato } from "../metricas/metricas.js";
 import { TRAZADO_ACTIVO, trazarPorCalles } from "./trazadoVial.js";
 
-const icono = (id, alerta) =>
+const icono = (id, alerta, deposito) =>
   L.divIcon({
     className: "",
-    html: `<div class="marcador${alerta ? " alerta" : ""}" aria-label="Cajero ${id}">${id}</div>`,
+    html: `<div class="marcador${alerta ? " alerta" : ""}${deposito ? " deposito" : ""}" aria-label="${deposito ? "Base de operaciones" : `Cajero ${id}`}">${deposito ? "B" : id}</div>`,
     iconSize: [30, 30],
     iconAnchor: [15, 15],
   });
@@ -62,6 +62,7 @@ export default function MapaRutas({ instancia, corrida, panelAbierto = false }) 
   const porCalles = trazoOptima.porCalles && (!seleccionada || trazoSeleccionada.porCalles);
   const fallo = trazoOptima.fallo || trazoSeleccionada.fallo;
   const metrica = instancia.matriz_distancias.metrica ?? "linea_recta";
+  const real = instancia.fuente?.tipo === "osm";
   const sinVisitar = new Set(corrida?.noVisitados ?? []);
   const limites = useMemo(() => L.latLngBounds(instancia.cajeros.map((c) => [c.latitud, c.longitud])).pad(0.15), [instancia]);
 
@@ -70,7 +71,7 @@ export default function MapaRutas({ instancia, corrida, panelAbierto = false }) 
       <div className="mapa-cabecera">
         <div>
           <h2>Mapa de rutas</h2>
-          <p>{instancia.cajeros.length} cajeros · depósito en el punto 0 · distancias {metrica === "vial" ? "por calles" : "en línea recta"}</p>
+          <p>{real ? `${instancia.cajeros.length - 1} cajeros ${instancia.fuente.entidad ?? ""} · base de operaciones (B) en el punto 0` : `${instancia.cajeros.length} cajeros · depósito en el punto 0`} · distancias {metrica === "vial" ? "por calles" : "en línea recta"}</p>
         </div>
         {corrida && <p className="chip">Corrida {corrida.id_corrida} · <b>{corrida.formulacion}</b> · {formato(corrida.metricas.distancia_total)} km</p>}
       </div>
@@ -78,11 +79,16 @@ export default function MapaRutas({ instancia, corrida, panelAbierto = false }) 
         <AjustarVista limites={limites} panelAbierto={panelAbierto} />
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {/* Las ubicaciones de cajeros reales tambien vienen de OpenStreetMap (ODbL): la atribucion de arriba las cubre */}
         <Polyline positions={trazoOptima.trazo} pathOptions={{ color: "#5f5e5a", weight: 3, dashArray: "8 8" }} />
         {seleccionada && <Polyline positions={trazoSeleccionada.trazo} pathOptions={{ color: "#14213d", weight: 5 }} />}
         {coord.map((p, i) => (
-          <Marker key={i} position={p} icon={icono(i, sinVisitar.has(i))}>
-            <Tooltip>Cajero {i}{sinVisitar.has(i) ? " · no visitado" : ""}</Tooltip>
+          <Marker key={i} position={p} icon={icono(i, sinVisitar.has(i), instancia.cajeros[i].rol === "deposito")}>
+            <Tooltip>
+              <b>{i} · {instancia.cajeros[i].nombre ?? `Cajero ${i}`}</b>
+              {instancia.cajeros[i].direccion && <><br />{instancia.cajeros[i].direccion}</>}
+              {sinVisitar.has(i) ? " · no visitado" : ""}
+            </Tooltip>
           </Marker>
         ))}
       </MapContainer>

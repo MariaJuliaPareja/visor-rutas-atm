@@ -144,3 +144,23 @@ th.num { text-align: right; }
 .confirmar { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; }
 .peligro { background: var(--error); color: #fff; border: 1px solid var(--error); }
 .nota-trazado { margin-left: auto; color: var(--texto-2); }
+
+/* Resumen para gerencia (DEC-09) */
+.gerencia { border: 1px solid var(--borde); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; }
+.gerencia header h2 { font-size: 15px; margin: 0; }
+.gerencia header p { margin: 2px 0 10px; font-size: 12px; color: var(--texto-2); }
+.cifras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 0 12px; }
+.cifras dt { font-size: 11px; text-transform: uppercase; color: var(--texto-2); }
+.cifras dd { margin: 4px 0 2px; font-size: 22px; font-weight: 700; color: var(--oscuro); font-variant-numeric: tabular-nums; }
+.cifras span { font-size: 12px; color: var(--texto-2); }
+.comparativa { width: 100%; font-size: 13px; border-collapse: collapse; }
+.comparativa th, .comparativa td { text-align: left; padding: 4px 6px; border-bottom: 1px solid #eee; }
+.comparativa .num { text-align: right; font-variant-numeric: tabular-nums; }
+.supuestos summary { cursor: pointer; font-size: 13px; margin-top: 6px; }
+.supuestos .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 8px; }
+.supuestos label { display: grid; grid-template-columns: 1fr 90px auto; gap: 6px; align-items: center; font-size: 12px; }
+.supuestos input { font: inherit; padding: 4px 6px; border: 1px solid var(--texto-2); border-radius: 4px; text-align: right; }
+.supuestos em { font-style: normal; color: var(--texto-2); }
+.subtitulo { font-size: 13px; text-transform: uppercase; color: var(--texto-2); margin: 8px 0; }
+.marcador.deposito { background: var(--oscuro); color: #fff; border-color: var(--oscuro); border-radius: 4px; }
+@media (max-width: 1100px) { .cifras { grid-template-columns: 1fr 1fr; } .supuestos .campos { grid-template-columns: 1fr; } }

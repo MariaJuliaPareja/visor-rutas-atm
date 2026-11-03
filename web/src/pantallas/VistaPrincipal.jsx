@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { FORMULACIONES, calcularMetricas, formato } from "../metricas/metricas.js";
+import { FORMULACIONES, SUPUESTOS, calcularMetricas, formato, resumenGerencial } from "../metricas/metricas.js";
+import PanelGerencia from "./PanelGerencia.jsx";
 import MapaRutas from "../visualizacion/MapaRutas.jsx";
 import DetalleCorrida from "../visualizacion/DetalleCorrida.jsx";
 
@@ -24,6 +25,12 @@ function NoComparable() {
 export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
   const metricas = useMemo(() => calcularMetricas(doc), [doc]);
   const { corridas, resumen } = metricas;
+  const [supuestos, setSupuestos] = useState(SUPUESTOS);
+  const gerencia = useMemo(() => resumenGerencial(doc, metricas, supuestos), [doc, metricas, supuestos]);
+  const cambiarSupuesto = (clave, valor) => {
+    const x = Number(valor);
+    if (Number.isFinite(x) && x > 0) setSupuestos((s) => ({ ...s, [clave]: x }));
+  };
   const [seleccion, setSeleccion] = useState(null);
   const [exportacion, setExportacion] = useState(null); // null | "generando" | { ok, texto }
   const corrida = corridas.find((c) => c.id_corrida === seleccion) ?? null;
@@ -35,7 +42,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
     try {
       // CMP-09 se carga solo al exportar: jsPDF no pesa en la carga inicial del visor (RNF01).
       const { contenidoReporte, generarPdf, nombreReporte } = await import("../reportes/reporte.js");
-      const contenido = contenidoReporte(doc, metricas, advertencias);
+      const contenido = contenidoReporte(doc, metricas, advertencias, gerencia);
       generarPdf(contenido).save(nombreReporte(doc));
       const n = contenido.infactibles;
       const extra = n ? ` · Incluye ${n} ${n === 1 ? "ruta infactible marcada" : "rutas infactibles marcadas"} con su nota explicativa` : "";
@@ -51,7 +58,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
       <header className="barra">
         <h1>Visor de Rutas ATM</h1>
         <p className="contexto">
-          Instancia {inst.id_instancia} · {inst.tipo_instancia} · {inst.cajeros.length} cajeros · esquema {doc.version_esquema}
+          Instancia {inst.id_instancia} · {inst.fuente?.tipo === "osm" ? `cajeros reales ${inst.fuente.entidad ?? ""} (OpenStreetMap)` : "datos sintéticos"} · {inst.cajeros.length} puntos · esquema {doc.version_esquema}
         </p>
         <button className="secundario" onClick={onCargarOtro}>Cargar otro archivo</button>
         <button className="principal" onClick={exportar} disabled={exportacion === "generando"}>
@@ -61,6 +68,8 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
 
       <main className="principal-grid">
         <section className="comparacion">
+          <PanelGerencia resumen={gerencia} onCambiarSupuesto={cambiarSupuesto} />
+          <h2 className="subtitulo">Comparación técnica de formulaciones</h2>
           <div className="tarjetas">
             {FORMULACIONES.map((f) => {
               const r = resumen[f];

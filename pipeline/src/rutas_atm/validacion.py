@@ -64,6 +64,9 @@ def validar_reglas(doc: dict, tolerancia_km: float = 0.01) -> tuple[list[str], l
         return errores, advertencias
     if any(d[i][i] != 0 for i in range(n)):
         errores.append("la diagonal de la matriz de distancias debe ser 0")
+    t = inst.get("matriz_tiempos", {}).get("tiempos")
+    if t is not None and (len(t) != n or any(len(fila) != n for fila in t)):
+        errores.append(f"la matriz de tiempos debe ser de {n} x {n}")
 
     if sorted(inst["linea_base"]["ruta"]) != list(range(n)):
         errores.append("la ruta de la linea base debe visitar cada cajero exactamente una vez")

@@ -10,6 +10,9 @@ from pathlib import Path
 
 SAMPLERS_VALIDOS = ("simulado", "qpu", "ibm")
 DISTANCIAS_VALIDAS = ("linea_recta", "vial")
+FUENTES_VALIDAS = ("sintetica", "osm")
+CATALOGO_POR_DEFECTO = "datos/cajeros_bbva_arequipa.json"
+BASE_POR_DEFECTO = (-16.3989, -71.5350)  # Cercado de Arequipa; supuesto editable con RUTAS_BASE
 OSRM_PUBLICO = "https://router.project-osrm.org"
 
 
@@ -47,6 +50,39 @@ def _entero(nombre: str, por_defecto: int, minimo: int = 1) -> int:
     return valor
 
 
+def _opcion(nombre: str, por_defecto: str, validas: tuple) -> str:
+    valor = (os.getenv(nombre) or por_defecto).strip().lower()
+    if valor not in validas:
+        raise ErrorDeConfiguracion(f"{nombre} debe ser una de {validas}; se recibio {valor!r}")
+    return valor
+
+
+def _decimal(nombre: str, por_defecto: float) -> float:
+    crudo = os.getenv(nombre)
+    if not crudo:
+        return por_defecto
+    try:
+        valor = float(crudo)
+    except ValueError as exc:
+        raise ErrorDeConfiguracion(f"{nombre} debe ser un numero; se recibio {crudo!r}") from exc
+    if valor <= 0:
+        raise ErrorDeConfiguracion(f"{nombre} debe ser mayor que 0; se recibio {valor}")
+    return valor
+
+
+def _coordenada(nombre: str, por_defecto: tuple) -> tuple:
+    crudo = os.getenv(nombre)
+    if not crudo:
+        return por_defecto
+    try:
+        lat, lon = (float(x) for x in crudo.split(","))
+    except ValueError as exc:
+        raise ErrorDeConfiguracion(f"{nombre} debe tener la forma 'latitud,longitud'; se recibio {crudo!r}") from exc
+    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        raise ErrorDeConfiguracion(f"{nombre} esta fuera de rango: {crudo!r}")
+    return (lat, lon)
+
+
 @dataclass(frozen=True)
 class Configuracion:
     sampler: str
@@ -58,6 +94,10 @@ class Configuracion:
     distancia: str = "linea_recta"
     osrm_url: str = OSRM_PUBLICO
     qaoa_reps: int = 1
+    fuente: str = "sintetica"
+    catalogo: Path = Path(CATALOGO_POR_DEFECTO)
+    base: tuple = BASE_POR_DEFECTO
+    radio_km: float = 4.0
 
     @classmethod
     def desde_entorno(cls) -> "Configuracion":
@@ -80,6 +120,10 @@ class Configuracion:
             annealing_time_us=_entero("RUTAS_ANNEALING_TIME", 20),
             distancia=distancia,
             qaoa_reps=_entero("RUTAS_QAOA_REPS", 1),
+            fuente=_opcion("RUTAS_FUENTE", "sintetica", FUENTES_VALIDAS),
+            catalogo=Path(os.getenv("RUTAS_CATALOGO", CATALOGO_POR_DEFECTO)),
+            base=_coordenada("RUTAS_BASE", BASE_POR_DEFECTO),
+            radio_km=_decimal("RUTAS_RADIO_KM", 4.0),
             osrm_url=os.getenv("RUTAS_OSRM_URL", OSRM_PUBLICO).strip() or OSRM_PUBLICO,
         )
 
@@ -92,3 +136,8 @@ class Configuracion:
         if distancia not in DISTANCIAS_VALIDAS:
             raise ErrorDeConfiguracion(f"La distancia debe ser una de {DISTANCIAS_VALIDAS}; se recibio {distancia!r}")
         return replace(self, distancia=distancia)
+
+    def con_fuente(self, fuente: str) -> "Configuracion":
+        if fuente not in FUENTES_VALIDAS:
+            raise ErrorDeConfiguracion(f"La fuente debe ser una de {FUENTES_VALIDAS}; se recibio {fuente!r}")
+        return replace(self, fuente=fuente)

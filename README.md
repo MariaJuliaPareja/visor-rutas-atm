@@ -94,6 +94,15 @@ PYTHONPATH=src python -m rutas_atm --sampler qpu --cajeros 4 --corridas 1
 
 También puede ejecutarse desde GitHub Actions (**Ejecucion en D-Wave Leap**, solo a mano), con el token guardado como secreto. Cada corrida consume tiempo de QPU del plan de Leap (RNF04): empieza con instancias pequeñas. Guía completa: `docs/ejecucion-dwave-leap.md`.
 
+### Cajeros reales de BBVA en Arequipa
+
+```bash
+PYTHONPATH=src python -m rutas_atm --descargar-cajeros BBVA       # guarda datos/cajeros_bbva_arequipa.json
+PYTHONPATH=src python -m rutas_atm --fuente osm --distancia vial --cajeros 4 --corridas 1
+```
+
+El nodo 0 es la base de operaciones (`RUTAS_BASE`) y los demás son cajeros BBVA reales a menos de `RUTAS_RADIO_KM` km, tomados de OpenStreetMap (© colaboradores de OpenStreetMap, ODbL). El visor muestra un **resumen para gerencia**: ahorro en soles, km, minutos y CO₂ frente a la ruta habitual (DEC-09).
+
 ### Ejecutar en IBM Quantum
 
 ```bash
