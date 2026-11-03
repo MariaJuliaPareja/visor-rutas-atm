@@ -56,7 +56,7 @@ def test_errores_controlados(tmp_path):
     def sin_red(peticion, timeout):
         raise urllib.error.URLError("sin conexion")
     with pytest.raises(ErrorDeCatalogo, match="Overpass"):
-        descargar(abrir=sin_red)
+        descargar(abrir=sin_red, espera_s=0)
     with pytest.raises(ErrorDeCatalogo, match="--descargar-cajeros"):
         cargar_catalogo(tmp_path / "no-existe.json")
 
@@ -98,3 +98,16 @@ def test_lote_con_cajeros_reales_y_tiempos(tmp_path, monkeypatch, catalogo):
     assert inst["cajeros"][0]["nombre"] == "Base de operaciones"
     assert inst["matriz_tiempos"]["tiempos"][0][1] == 3.0
     assert inst["fuente"]["entidad"] == "BBVA"
+
+
+def test_usa_un_espejo_si_el_principal_esta_saturado():
+    llamadas = []
+
+    def abrir(peticion, timeout):
+        llamadas.append(peticion.full_url)
+        if "overpass-api.de" in peticion.full_url:
+            raise urllib.error.HTTPError(peticion.full_url, 502, "Bad Gateway", {}, None)
+        return io.BytesIO(json.dumps(RESPUESTA).encode())
+    catalogo = descargar("BBVA", abrir=abrir, espera_s=0)
+    assert len(catalogo["cajeros"]) == 4
+    assert llamadas[:2] == [llamadas[0]] * 2 and "kumi" in llamadas[2]  # 2 intentos y luego el espejo

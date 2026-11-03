@@ -9,7 +9,9 @@ Los datos de OpenStreetMap estan bajo licencia ODbL: el catalogo guarda la atrib
 """
 
 import json
+import os
 import re
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -17,6 +19,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
+# Servidores espejo publicos: se prueban en orden si el principal esta saturado (502/503/504) o no responde.
+ESPEJOS = (
+    OVERPASS,
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter",
+)
 # Arequipa metropolitana: Cercado, Yanahuara, Cayma, Cerro Colorado, JLByR, Paucarpata, Socabaya, etc.
 BBOX_AREQUIPA = (-16.48, -71.62, -16.33, -71.47)  # sur, oeste, norte, este
 ATRIBUCION = "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)"
@@ -71,16 +79,34 @@ def extraer_cajeros(datos: dict, entidad: str = "BBVA") -> list[dict]:
     return sorted(cajeros, key=lambda c: c["osm_id"])
 
 
-def descargar(entidad: str = "BBVA", bbox: tuple = BBOX_AREQUIPA, url: str = OVERPASS,
-              timeout: float = 90.0, abrir=urllib.request.urlopen) -> dict:
-    """Descarga el catalogo de cajeros de la entidad dentro del recuadro."""
+def descargar(entidad: str = "BBVA", bbox: tuple = BBOX_AREQUIPA, url: str | None = None,
+              timeout: float = 90.0, abrir=urllib.request.urlopen, intentos: int = 2, espera_s: float = 5.0) -> dict:
+    """Descarga el catalogo de cajeros de la entidad dentro del recuadro.
+
+    Prueba RUTAS_OVERPASS_URL (o `url`) y luego los espejos publicos, con `intentos` por servidor.
+    """
+    elegido = url or os.getenv("RUTAS_OVERPASS_URL")
+    servidores = (elegido,) if elegido else ESPEJOS
     cuerpo = urllib.parse.urlencode({"data": consulta_overpass(bbox)}).encode()
-    peticion = urllib.request.Request(url, data=cuerpo, headers={"User-Agent": "visor-rutas-atm/0.9 (tesis UCSM)"})
-    try:
-        with abrir(peticion, timeout=timeout) as respuesta:
-            datos = json.loads(respuesta.read().decode("utf-8"))
-    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
-        raise ErrorDeCatalogo(f"No se pudo consultar OpenStreetMap (Overpass): {exc}") from exc
+    fallos = []
+    datos = None
+    for servidor in servidores:
+        for intento in range(intentos):
+            peticion = urllib.request.Request(servidor, data=cuerpo,
+                                              headers={"User-Agent": "visor-rutas-atm/0.9 (tesis UCSM)"})
+            try:
+                with abrir(peticion, timeout=timeout) as respuesta:
+                    datos = json.loads(respuesta.read().decode("utf-8"))
+                break
+            except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+                fallos.append(f"{servidor}: {exc}")
+                if intento + 1 < intentos:
+                    time.sleep(espera_s)
+        if datos is not None:
+            break
+    if datos is None:
+        raise ErrorDeCatalogo("No se pudo consultar OpenStreetMap (Overpass). Los servidores pueden estar "
+                              "saturados; reintenta en unos minutos. Detalle: " + " | ".join(fallos))
     cajeros = extraer_cajeros(datos, entidad)
     if not cajeros:
         raise ErrorDeCatalogo(f"OpenStreetMap no tiene cajeros de {entidad!r} en el recuadro {bbox}")
