@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ErrorDeCarga, PASOS, leer, migrar, validarArchivo, validarEstructura, validarReglas } from "../lib/validacion.js";
+import { ErrorDeCarga, PASOS, leer, migrar, validarArchivo, validarEstructura, validarReglas } from "../carga/validacion.js";
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 

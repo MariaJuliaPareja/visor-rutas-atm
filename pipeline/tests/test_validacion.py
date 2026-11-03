@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from rutas_atm.cli import ejecutar
 from rutas_atm.config import Configuracion
-from rutas_atm.conversor import ArchivoInvalido, escribir
+from rutas_atm.conversor_resultados import ArchivoInvalido, convertir, escribir
+from rutas_atm.experimento import ejecutar_experimento
 from rutas_atm.validacion import migrar, validar
 
 EJEMPLO = Path(__file__).resolve().parents[2] / "ejemplos" / "corridas_ejemplo.json"
@@ -15,7 +15,7 @@ EJEMPLO = Path(__file__).resolve().parents[2] / "ejemplos" / "corridas_ejemplo.j
 @pytest.fixture(scope="module")
 def documento():
     cfg = Configuracion("simulado", num_reads=20, semilla=42, directorio_salida=Path("."), nivel_log="WARNING")
-    return ejecutar(cajeros=4, corridas_por_formulacion=2, cfg=cfg)
+    return convertir(ejecutar_experimento(cajeros=4, corridas_por_formulacion=2, cfg=cfg))
 
 
 def test_documento_generado_es_valido(documento):

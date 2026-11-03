@@ -32,6 +32,9 @@ jobs:
         run: |
           PYTHONPATH=src python -m rutas_atm --cajeros 4 --corridas 1
           PYTHONPATH=src python -m rutas_atm --validar "$(ls salidas/*.json | head -1)"
+          rm salidas/*.json
+          PYTHONPATH=src python -m rutas_atm --convertir "$(ls salidas/crudos/*.pkl | head -1)"
+          PYTHONPATH=src python -m rutas_atm --validar "$(ls salidas/*.json | head -1)"
 
   web:
     name: Visor web (React)

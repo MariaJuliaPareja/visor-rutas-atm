@@ -1,4 +1,4 @@
-import { formato } from "../lib/metricas.js";
+import { formato } from "../metricas/metricas.js";
 
 // PAN-04: detalle de una corrida. La secuencia en texto es la alternativa accesible del mapa.
 export default function DetalleCorrida({ corrida, onCerrar }) {

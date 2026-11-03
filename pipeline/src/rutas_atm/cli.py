@@ -1,63 +1,28 @@
-"""Punto de entrada del pipeline: python -m rutas_atm --cajeros 5 --corridas 3
+"""Punto de entrada del pipeline de experimentacion.
 
-Para cada formulacion (GPS y QUBO) ejecuta el numero de corridas pedido sobre la misma instancia,
-calcula la linea base exacta y escribe un unico archivo de intercambio .json.
+  python -m rutas_atm --cajeros 5 --corridas 3     ejecuta el lote: .pkl crudo y .json de intercambio
+  python -m rutas_atm --convertir LOTE.pkl         regenera el .json desde un .pkl del pipeline
+  python -m rutas_atm --validar ARCHIVO.json       valida un archivo de intercambio
 """
 
 import argparse
+import json
 import logging
 import sys
-import time
 from datetime import datetime
 from pathlib import Path
 
+from .cliente_dwave import ErrorDeMuestreo
 from .config import Configuracion, ErrorDeConfiguracion, cargar_env
-from .conversor import ArchivoInvalido, documento_intercambio, escribir
-from .formulaciones import construir_modelo, decodificar
-from .held_karp import held_karp
-from .instancia import distancia_ruta, generar_instancia
-from .muestreo import ErrorDeMuestreo, muestrear
+from .conversor_resultados import ArchivoInvalido, convertir, escribir
+from .experimento import cargar_crudos, ejecutar_experimento
 from .validacion import migrar, validar
 
 log = logging.getLogger("rutas_atm")
 
 
-def ejecutar(cajeros: int, corridas_por_formulacion: int, cfg: Configuracion, id_instancia: int = 1) -> dict:
-    instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia)
-    log.info("Instancia %d: %d cajeros (%s)", id_instancia, instancia.n, instancia.tipo)
-
-    t0 = time.perf_counter()
-    dist_optima, ruta_optima = held_karp(instancia.distancias)
-    log.info("Held-Karp: %.3f km en %.1f ms, ruta %s", dist_optima, (time.perf_counter() - t0) * 1000, ruta_optima)
-
-    corridas, id_corrida = [], 1
-    for formulacion in ("GPS", "QUBO"):
-        modelo = construir_modelo(formulacion, instancia.distancias)
-        log.info("%s: %d variables binarias", formulacion, modelo.num_variables)
-        for replica in range(corridas_por_formulacion):
-            resultado = muestrear(modelo, cfg.sampler, cfg.num_reads, cfg.semilla + replica)
-            secuencia, factible = decodificar(modelo, resultado.bits)
-            corridas.append({
-                "id_corrida": id_corrida,
-                "formulacion": formulacion,
-                "sampler": cfg.sampler,
-                "parametros": {**resultado.parametros, "replica": replica, "num_variables": modelo.num_variables},
-                "ruta": {"factible": factible, "secuencia": secuencia},
-                "metricas": {
-                    "distancia_total": round(distancia_ruta(secuencia, instancia.distancias), 3),
-                    "tiempo_anneal": resultado.tiempo_anneal_us,
-                    "chain_break_fraction": resultado.chain_break_fraction,
-                },
-            })
-            log.info("  corrida %d (%s, replica %d): %s %s", id_corrida, formulacion, replica,
-                     "factible" if factible else "INFACTIBLE", secuencia)
-            id_corrida += 1
-    return documento_intercambio(instancia, dist_optima, ruta_optima, corridas)
-
-
-def _subcomando_validar(ruta: str) -> int:
-    import json
-    doc = migrar(json.loads(open(ruta, encoding="utf-8").read()))
+def _validar(ruta: str) -> int:
+    doc = migrar(json.loads(Path(ruta).read_text(encoding="utf-8")))
     errores, advertencias = validar(doc)
     for a in advertencias:
         print(f"ADVERTENCIA: {a}")
@@ -70,12 +35,25 @@ def _subcomando_validar(ruta: str) -> int:
     return 0
 
 
+def _escribir_json(lote, ruta_json: Path) -> int:
+    try:
+        for advertencia in escribir(convertir(lote), ruta_json):
+            log.warning("%s", advertencia)
+    except (ArchivoInvalido, FileExistsError) as exc:
+        log.error("No se escribio el archivo: %s", exc)
+        return 1
+    log.info("Archivo de intercambio escrito en %s", ruta_json)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="rutas_atm", description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(prog="rutas_atm", description="Pipeline de experimentacion de rutas ATM")
     parser.add_argument("--cajeros", type=int, default=5, help="numero de cajeros de la instancia (3 a 7 recomendado)")
     parser.add_argument("--corridas", type=int, default=3, help="corridas por formulacion")
     parser.add_argument("--instancia", type=int, default=1, help="identificador de la instancia")
-    parser.add_argument("--validar", metavar="ARCHIVO", help="solo valida un archivo de intercambio existente")
+    grupo = parser.add_mutually_exclusive_group()
+    grupo.add_argument("--validar", metavar="ARCHIVO.json", help="solo valida un archivo de intercambio")
+    grupo.add_argument("--convertir", metavar="LOTE.pkl", help="regenera el .json desde un .pkl del pipeline")
     args = parser.parse_args(argv)
 
     cargar_env(Path(".env"))
@@ -87,24 +65,26 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=cfg.nivel_log, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
     if args.validar:
-        return _subcomando_validar(args.validar)
+        return _validar(args.validar)
+    if args.convertir:
+        origen = Path(args.convertir)
+        try:
+            lote = cargar_crudos(origen)
+        except (OSError, TypeError) as exc:
+            log.error("No se pudo abrir el lote: %s", exc)
+            return 1
+        return _escribir_json(lote, cfg.directorio_salida / f"{origen.stem}.json")
 
+    marca = datetime.now().strftime("%Y%m%d-%H%M%S-%f")[:-3]
+    nombre = f"corridas_i{args.instancia}_n{args.cajeros}_{cfg.sampler}_{marca}"
+    ruta_pkl = cfg.directorio_salida / "crudos" / f"{nombre}.pkl"
     try:
-        doc = ejecutar(args.cajeros, args.corridas, cfg, args.instancia)
+        lote = ejecutar_experimento(args.cajeros, args.corridas, cfg, args.instancia, ruta_pkl)
     except (ValueError, ErrorDeMuestreo) as exc:
         log.error("%s", exc)
         return 1
-
-    marca = datetime.now().strftime("%Y%m%d-%H%M%S-%f")[:-3]
-    ruta = cfg.directorio_salida / f"corridas_i{args.instancia}_n{args.cajeros}_{cfg.sampler}_{marca}.json"
-    try:
-        for advertencia in escribir(doc, ruta):
-            log.warning("%s", advertencia)
-    except (ArchivoInvalido, FileExistsError) as exc:
-        log.error("No se escribio el archivo: %s", exc)
-        return 1
-    log.info("Archivo de intercambio escrito en %s", ruta)
-    return 0
+    log.info("Lote crudo guardado en %s", ruta_pkl)
+    return _escribir_json(lote, cfg.directorio_salida / f"{nombre}.json")
 
 
 if __name__ == "__main__":

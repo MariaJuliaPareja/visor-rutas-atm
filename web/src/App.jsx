@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PantallaCarga from "./componentes/PantallaCarga.jsx";
-import VistaPrincipal from "./componentes/VistaPrincipal.jsx";
+import PantallaCarga from "./pantallas/PantallaCarga.jsx";
+import VistaPrincipal from "./pantallas/VistaPrincipal.jsx";
 
 // Dos pantallas (mapa de navegacion): carga y vista principal.
 // Un archivo rechazado no altera lo que ya estaba cargado (RNF11).

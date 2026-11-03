@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { ErrorDeCarga, procesarTexto, validarArchivo } from "./validacion.js";
-import { calcularMetricas } from "./metricas.js";
+import { calcularMetricas } from "../metricas/metricas.js";
 
 const ejemplo = readFileSync(new URL("../../../ejemplos/corridas_ejemplo.json", import.meta.url), "utf8");
 const doc = () => JSON.parse(ejemplo);

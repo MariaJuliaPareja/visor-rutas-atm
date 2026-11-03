@@ -2,8 +2,8 @@ import itertools
 
 import pytest
 
-from rutas_atm.held_karp import held_karp
-from rutas_atm.instancia import distancia_ruta, generar_instancia
+from rutas_atm.linea_base import held_karp
+from rutas_atm.preparacion_datos import distancia_ruta, generar_instancia
 
 
 def fuerza_bruta(d):
