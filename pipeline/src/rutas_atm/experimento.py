@@ -48,7 +48,7 @@ class LoteCrudo:
 
 
 def ejecutar_experimento(cajeros: int, corridas_por_formulacion: int, cfg: Configuracion,
-                         id_instancia: int = 1, ruta_pkl: Path | None = None) -> LoteCrudo:
+                         id_instancia: int = 1, ruta_pkl: Path | None = None, fabrica_qpu=None) -> LoteCrudo:
     instancia = generar_instancia(cajeros, semilla=cfg.semilla, id_instancia=id_instancia)
     log.info("Instancia %d: %d cajeros (%s)", id_instancia, instancia.n, instancia.tipo)
 
@@ -62,7 +62,8 @@ def ejecutar_experimento(cajeros: int, corridas_por_formulacion: int, cfg: Confi
         modelo = construir_modelo(formulacion, instancia.distancias)
         log.info("%s: %d variables binarias", formulacion, modelo.num_variables)
         for replica in range(corridas_por_formulacion):
-            r = muestrear(modelo, cfg.sampler, cfg.num_reads, cfg.semilla + replica)
+            r = muestrear(modelo, cfg.sampler, cfg.num_reads, cfg.semilla + replica,
+                          annealing_time_us=cfg.annealing_time_us, fabrica_qpu=fabrica_qpu)
             secuencia, factible = decodificar(modelo, r.bits)
             lote.corridas.append(CorridaCruda(
                 id_corrida=id_corrida, formulacion=formulacion, sampler=cfg.sampler,
