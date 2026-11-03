@@ -5,6 +5,8 @@
   python -m rutas_atm --validar ARCHIVO.json       valida un archivo de intercambio
   python -m rutas_atm --probar-leap                verifica el token y el solver de D-Wave Leap (sin usar el QPU)
   python -m rutas_atm --sampler qpu ...            ejecuta en el QPU de D-Wave Leap (o RUTAS_SAMPLER=qpu)
+  python -m rutas_atm --probar-ibm                 verifica la cuenta de IBM Quantum y lista backends (sin usar el QPU)
+  python -m rutas_atm --sampler ibm ...            ejecuta QAOA en hardware de IBM Quantum (o RUTAS_SAMPLER=ibm)
   python -m rutas_atm --distancia vial ...         distancias por calles de OpenStreetMap (o RUTAS_DISTANCIA=vial)
 """
 
@@ -55,11 +57,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cajeros", type=int, default=5, help="numero de cajeros de la instancia (3 a 7 recomendado)")
     parser.add_argument("--corridas", type=int, default=3, help="corridas por formulacion")
     parser.add_argument("--instancia", type=int, default=1, help="identificador de la instancia")
-    parser.add_argument("--sampler", choices=("simulado", "qpu"), help="sobrescribe RUTAS_SAMPLER")
+    parser.add_argument("--sampler", choices=("simulado", "qpu", "ibm"), help="sobrescribe RUTAS_SAMPLER")
     parser.add_argument("--distancia", choices=("linea_recta", "vial"),
                         help="sobrescribe RUTAS_DISTANCIA (vial = por calles de OpenStreetMap)")
     grupo = parser.add_mutually_exclusive_group()
     grupo.add_argument("--probar-leap", action="store_true", help="verifica la conexion con Leap sin usar el QPU")
+    grupo.add_argument("--probar-ibm", action="store_true", help="verifica la cuenta de IBM Quantum sin usar el QPU")
     grupo.add_argument("--validar", metavar="ARCHIVO.json", help="solo valida un archivo de intercambio")
     grupo.add_argument("--convertir", metavar="LOTE.pkl", help="regenera el .json desde un .pkl del pipeline")
     args = parser.parse_args(argv)
@@ -75,6 +78,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Error de configuracion: {exc}", file=sys.stderr)
         return 2
     logging.basicConfig(level=cfg.nivel_log, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    for ruidoso in ("qiskit", "qiskit_ibm_runtime", "stevedore"):  # sus INFO ocultan el progreso del lote
+        logging.getLogger(ruidoso).setLevel(max(logging.WARNING, logging.getLevelName(cfg.nivel_log)))
 
     if args.validar:
         return _validar(args.validar)
@@ -86,6 +91,16 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print(f"Conexion con D-Wave Leap correcta. Solver: {info['solver']} ({info['topologia']}, "
               f"{info['qubits_activos']} qubits activos). No se uso tiempo de QPU.")
+        return 0
+    if args.probar_ibm:
+        from .cliente_ibm import probar_conexion_ibm
+        try:
+            info = probar_conexion_ibm()
+        except ErrorDeMuestreo as exc:
+            log.error("%s", exc)
+            return 1
+        print("Conexion con IBM Quantum correcta. Backends: " + ", ".join(info["backends"]))
+        print(f"Menos ocupado ahora: {info['menos_ocupado']}. No se uso tiempo de QPU.")
         return 0
     if args.convertir:
         origen = Path(args.convertir)

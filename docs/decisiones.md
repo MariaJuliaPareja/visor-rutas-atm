@@ -47,3 +47,10 @@ Cambios o precisiones respecto al diseño de las prácticas 05 (arquitectura), 0
 - **Simetría:** las calles de un solo sentido hacen que A→B ≠ B→A; como GPS y QUBO asumen una matriz simétrica, se usa el promedio de ambos sentidos.
 - **Privacidad:** solo salen del navegador las coordenadas de los cajeros, que son sintéticas (RNF06). `VITE_OSRM_URL` permite usar un OSRM propio o desactivar el trazado (`off`).
 
+## DEC-08 · QAOA en IBM Quantum como hardware cuántico real
+
+- **Problema:** D-Wave Leap no da servicio desde Perú (INC-08), así que el modo `qpu` no puede ejecutarse desde aquí.
+- **Decisión:** se agrega el sampler `ibm`, que resuelve los mismos modelos GPS y QUBO con QAOA en procesadores de compuerta de IBM Quantum (plan Open, accesible desde Perú). El esquema pasa a 1.2 con el valor `ibm`; la migración desde 1.1 no cambia datos.
+- **Ahorro de QPU:** los ángulos se eligen en local (optimización exacta hasta 18 qubits, rampa lineal por encima) y cada corrida envía un solo job.
+- **Consecuencia:** QAOA y el recocido no son el mismo algoritmo; el informe compara formulaciones dentro de cada sampler, no entre samplers.
+

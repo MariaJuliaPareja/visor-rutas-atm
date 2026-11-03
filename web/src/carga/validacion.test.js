@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { ErrorDeCarga, procesarTexto, validarArchivo } from "./validacion.js";
+import { ErrorDeCarga, VERSION_ESQUEMA, procesarTexto, validarArchivo } from "./validacion.js";
 import { calcularMetricas } from "../metricas/metricas.js";
 
 const ejemplo = readFileSync(new URL("../../../ejemplos/corridas_ejemplo.json", import.meta.url), "utf8");
@@ -34,12 +34,12 @@ describe("CMP-06 validacion compartida con el pipeline", () => {
     expect(rechazoEn(JSON.stringify({ ...doc(), version_esquema: "0.9" })).paso).toBe(3);
   });
 
-  it("migra la version 1.0 a la 1.1", () => {
+  it("migra la version 1.0 hasta la actual", () => {
     const viejo = doc();
     viejo.version_esquema = "1.0";
     viejo.corridas.forEach((c) => { delete c.sampler; c.metricas.tiempo_anneal = 20; });
     const { doc: migrado } = procesarTexto(JSON.stringify(viejo));
-    expect(migrado.version_esquema).toBe("1.1");
+    expect(migrado.version_esquema).toBe(VERSION_ESQUEMA);
     expect(migrado.corridas.every((c) => c.sampler === "qpu")).toBe(true);
   });
 

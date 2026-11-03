@@ -1,0 +1,9 @@
+# Ejecucion con QAOA en hardware de IBM Quantum (RUTAS_SAMPLER=ibm o --sampler ibm)
+-r requirements.txt
+qiskit==2.2.3
+qiskit-ibm-runtime==0.47.0
+# simulador local con ruido: pruebas sin gastar tiempo de QPU
+qiskit-aer==0.18.2
+scipy>=1.13
+# dwave-cloud-client exige python-dateutil < 3
+python-dateutil>=2.8,<3

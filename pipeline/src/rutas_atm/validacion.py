@@ -23,7 +23,13 @@ def _1_0_a_1_1(doc: dict) -> dict:
     return doc
 
 
-MIGRACIONES = {"1.0": ("1.1", _1_0_a_1_1)}
+def _1_1_a_1_2(doc: dict) -> dict:
+    """La 1.2 solo agrega valores opcionales (sampler ibm, metrica de distancias): no cambia los datos."""
+    doc["version_esquema"] = "1.2"
+    return doc
+
+
+MIGRACIONES = {"1.0": ("1.1", _1_0_a_1_1), "1.1": ("1.2", _1_1_a_1_2)}
 
 
 def migrar(doc: dict) -> dict:

@@ -22,7 +22,8 @@ CMP-05 conversor_resultados.py → .json ──── archivo .json ────
 |---|---|
 | Python | 3.12 y 3.13 |
 | Node.js | 22 |
-| Cuenta de D-Wave Leap | Solo para `RUTAS_SAMPLER=qpu` |
+| Cuenta de D-Wave Leap | Solo para `RUTAS_SAMPLER=qpu` (no disponible desde Perú, INC-08) |
+| Cuenta de IBM Quantum (plan Open) | Solo para `RUTAS_SAMPLER=ibm` |
 
 ## Instalación y ejecución
 
@@ -68,7 +69,9 @@ Las mismas comprobaciones corren en GitHub Actions en cada *push* a `main` y en 
 
 | Variable | Propósito | Valor por defecto |
 |---|---|---|
-| `RUTAS_SAMPLER` | `simulado` (local, sin costo) o `qpu` (D-Wave Leap) | `simulado` |
+| `RUTAS_SAMPLER` | `simulado` (local, sin costo), `qpu` (D-Wave Leap) o `ibm` (QAOA en IBM Quantum) | `simulado` |
+| `RUTAS_QAOA_REPS` | Capas de QAOA con `ibm` | `1` |
+| `RUTAS_IBM_BACKEND` | Backend fijo de IBM (vacío = el menos ocupado) | — |
 | `RUTAS_NUM_READS` | Lecturas por corrida | `200` |
 | `RUTAS_SEMILLA` | Semilla de la instancia y del recocido simulado | `42` |
 | `RUTAS_ANNEALING_TIME` | Microsegundos de recocido por lectura en el QPU | `20` |
@@ -90,6 +93,17 @@ PYTHONPATH=src python -m rutas_atm --sampler qpu --cajeros 4 --corridas 1
 ```
 
 También puede ejecutarse desde GitHub Actions (**Ejecucion en D-Wave Leap**, solo a mano), con el token guardado como secreto. Cada corrida consume tiempo de QPU del plan de Leap (RNF04): empieza con instancias pequeñas. Guía completa: `docs/ejecucion-dwave-leap.md`.
+
+### Ejecutar en IBM Quantum
+
+```bash
+pip install -r requirements-ibm.txt
+python -c "from qiskit_ibm_runtime import QiskitRuntimeService as S; S.save_account(channel='ibm_quantum_platform', token='TU_API_KEY', set_as_default=True)"
+PYTHONPATH=src python -m rutas_atm --probar-ibm                 # verifica la cuenta, sin usar el QPU
+PYTHONPATH=src python -m rutas_atm --sampler ibm --cajeros 3 --corridas 1
+```
+
+Guía completa: `docs/ejecucion-ibm-quantum.md`.
 
 ## Estructura
 

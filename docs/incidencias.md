@@ -9,3 +9,10 @@
 | INC-05 | CMP-02 | Una prueba esperaba "infactible" para un estado con dos cajeros en una posición, y la ruta decodificada era válida | La regla de factibilidad no estaba precisada | DEC-03 y prueba `test_factibilidad_se_evalua_sobre_la_ruta_decodificada` | `pipeline/tests/test_formulacion_tsp.py` |
 | INC-06 | CMP-09 | La construcción del visor advertía un paquete de casi 900 kB | jsPDF incluido en la carga inicial | Carga diferida del generador de reportes al pulsar **Exportar reporte** | Salida de `npm run build` sin advertencias |
 | INC-07 | PAN-03 | Un clic sobre "No comparable" abría la nota pero no seleccionaba la corrida | `stopPropagation` en la nota | Se quitó; el clic abre la nota y selecciona la fila | `evidencias/05_detalle_infactible.png` |
+
+## INC-08 · D-Wave Leap restringe el acceso desde Perú
+
+- **Síntoma:** al entrar a Leap aparece «Access Restricted».
+- **Causa:** Leap solo da servicio en una lista de países que no incluye Perú (soporte de D-Wave, «From What Countries Can I Access Leap?»).
+- **Solución:** la ruta del QPU de D-Wave se mantiene probada con `MockDWaveSampler`, y la ejecución en hardware real se hace con QAOA en IBM Quantum (DEC-08). Se descartó usar VPN u otra región para no incumplir la política del proveedor.
+

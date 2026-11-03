@@ -4,7 +4,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import esquema from "../../../schema/esquema_archivo_intercambio.schema.json";
 
-export const VERSION_ESQUEMA = "1.1";
+export const VERSION_ESQUEMA = "1.2";
 export const LIMITE_BYTES = 1024 * 1024; // 1 MB: una instancia de 100 cajeros con decenas de corridas ocupa menos
 
 const ajv = new Ajv2020({ allErrors: true, strict: false, verbose: true });
@@ -17,6 +17,8 @@ const MIGRACIONES = {
     version_esquema: "1.1",
     corridas: doc.corridas.map((c) => ({ sampler: "qpu", ...c })),
   }),
+  // 1.2 solo agrega valores opcionales (sampler ibm, metrica de distancias)
+  "1.1": (doc) => ({ ...doc, version_esquema: "1.2" }),
 };
 
 export class ErrorDeCarga extends Error {
