@@ -18,7 +18,7 @@ function NoComparable() {
       onFocus={() => setAbierta(true)} onBlur={() => setAbierta(false)}
       onClick={() => setAbierta((v) => !v)}
       onKeyDown={(e) => { if (e.key === "Escape") setAbierta(false); }}>
-      No comparable ⓘ
+      No comparable
       {abierta && <span className="burbuja" role="tooltip">{NOTA_NO_COMPARABLE}</span>}
     </span>
   );
@@ -116,7 +116,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
             </header>
             {advertencias.length > 0 && (
               <div className="mensaje advertencia" role="status">
-                {advertencias.map((a) => <p key={a.id_corrida}><span aria-hidden="true">⚠</span> <b>Advertencia:</b> {a.mensaje}</p>)}
+                {advertencias.map((a) => <p key={a.id_corrida}><b>Advertencia:</b> {a.mensaje}</p>)}
               </div>
             )}
             <table>
@@ -135,7 +135,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSeleccion(c.id_corrida); } }}>
                     <td>{c.id_corrida}</td>
                     <td>{c.formulacion}</td>
-                    <td className="num">{formato(c.metricas.distancia_total)}{conAdvertencia.has(c.id_corrida) && <span className="icono-adv" title="Distancia inconsistente"> ⚠</span>}</td>
+                    <td className="num">{formato(c.metricas.distancia_total)}{conAdvertencia.has(c.id_corrida) && <span className="icono-adv" title="Distancia inconsistente"> *</span>}</td>
                     <td className="num">{c.gap === null ? <NoComparable /> : formato(c.gap)}</td>
                     <td className="num">{c.metricas.chain_break_fraction === null ? "No aplica" : formato(c.metricas.chain_break_fraction, 3)}</td>
                     <td>{c.ruta.factible ? <span className="etiqueta ok">Sí</span> : <span className="etiqueta mal">Infactible</span>}</td>
@@ -155,7 +155,6 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
 
       {exportacion && exportacion !== "generando" && (
         <div className={`aviso ${exportacion.ok ? "ok" : "error"}`} role={exportacion.ok ? "status" : "alert"}>
-          <span aria-hidden="true">{exportacion.ok ? "✓" : "⚠"}</span>
           <p>{exportacion.texto}</p>
           {!exportacion.ok && <button className="secundario" onClick={exportar}>Reintentar</button>}
           <button className="icono" onClick={() => setExportacion(null)} aria-label="Cerrar mensaje">×</button>
