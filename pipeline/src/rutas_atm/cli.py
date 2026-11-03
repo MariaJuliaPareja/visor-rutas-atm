@@ -78,6 +78,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Error de configuracion: {exc}", file=sys.stderr)
         return 2
     logging.basicConfig(level=cfg.nivel_log, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    for ruidoso in ("qiskit", "qiskit_ibm_runtime", "stevedore"):  # sus INFO ocultan el progreso del lote
+        logging.getLogger(ruidoso).setLevel(max(logging.WARNING, logging.getLevelName(cfg.nivel_log)))
 
     if args.validar:
         return _validar(args.validar)
