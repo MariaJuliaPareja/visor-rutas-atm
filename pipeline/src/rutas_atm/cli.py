@@ -3,6 +3,8 @@
   python -m rutas_atm --cajeros 5 --corridas 3     ejecuta el lote: .pkl crudo y .json de intercambio
   python -m rutas_atm --convertir LOTE.pkl         regenera el .json desde un .pkl del pipeline
   python -m rutas_atm --validar ARCHIVO.json       valida un archivo de intercambio
+  python -m rutas_atm --probar-leap                verifica el token y el solver de D-Wave Leap (sin usar el QPU)
+  python -m rutas_atm --sampler qpu ...            ejecuta en el QPU de D-Wave Leap (o RUTAS_SAMPLER=qpu)
 """
 
 import argparse
@@ -12,7 +14,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from .cliente_dwave import ErrorDeMuestreo
+from .cliente_dwave import ErrorDeMuestreo, probar_conexion
 from .config import Configuracion, ErrorDeConfiguracion, cargar_env
 from .conversor_resultados import ArchivoInvalido, convertir, escribir
 from .experimento import cargar_crudos, ejecutar_experimento
@@ -51,7 +53,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cajeros", type=int, default=5, help="numero de cajeros de la instancia (3 a 7 recomendado)")
     parser.add_argument("--corridas", type=int, default=3, help="corridas por formulacion")
     parser.add_argument("--instancia", type=int, default=1, help="identificador de la instancia")
+    parser.add_argument("--sampler", choices=("simulado", "qpu"), help="sobrescribe RUTAS_SAMPLER")
     grupo = parser.add_mutually_exclusive_group()
+    grupo.add_argument("--probar-leap", action="store_true", help="verifica la conexion con Leap sin usar el QPU")
     grupo.add_argument("--validar", metavar="ARCHIVO.json", help="solo valida un archivo de intercambio")
     grupo.add_argument("--convertir", metavar="LOTE.pkl", help="regenera el .json desde un .pkl del pipeline")
     args = parser.parse_args(argv)
@@ -59,6 +63,8 @@ def main(argv: list[str] | None = None) -> int:
     cargar_env(Path(".env"))
     try:
         cfg = Configuracion.desde_entorno()
+        if args.sampler:
+            cfg = cfg.con_sampler(args.sampler)
     except ErrorDeConfiguracion as exc:
         print(f"Error de configuracion: {exc}", file=sys.stderr)
         return 2
@@ -66,6 +72,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.validar:
         return _validar(args.validar)
+    if args.probar_leap:
+        try:
+            info = probar_conexion()
+        except ErrorDeMuestreo as exc:
+            log.error("%s", exc)
+            return 1
+        print(f"Conexion con D-Wave Leap correcta. Solver: {info['solver']} ({info['topologia']}, "
+              f"{info['qubits_activos']} qubits activos). No se uso tiempo de QPU.")
+        return 0
     if args.convertir:
         origen = Path(args.convertir)
         try:

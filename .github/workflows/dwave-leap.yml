@@ -1,0 +1,51 @@
+name: Ejecucion en D-Wave Leap
+
+# Se ejecuta solo a mano (Actions > Ejecucion en D-Wave Leap > Run workflow) porque consume
+# tiempo de QPU del plan de Leap (RNF04). El token se guarda como secreto del repositorio
+# DWAVE_API_TOKEN y nunca aparece en el codigo ni en los registros.
+on:
+  workflow_dispatch:
+    inputs:
+      cajeros:
+        description: "Numero de cajeros (3 a 5 recomendado para no agotar la cuota)"
+        default: "4"
+      corridas:
+        description: "Corridas por formulacion"
+        default: "1"
+      num_reads:
+        description: "Lecturas por corrida"
+        default: "100"
+
+jobs:
+  qpu:
+    name: Lote en el QPU
+    runs-on: ubuntu-latest
+    environment: dwave-leap
+    defaults:
+      run:
+        working-directory: pipeline
+    env:
+      DWAVE_API_TOKEN: ${{ secrets.DWAVE_API_TOKEN }}
+      RUTAS_SAMPLER: qpu
+      RUTAS_NUM_READS: ${{ inputs.num_reads }}
+      RUTAS_DIR_SALIDA: salidas
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pipeline/requirements-qpu.txt
+      - run: pip install -r requirements-qpu.txt
+      - name: Verificar conexion con Leap (no usa el QPU)
+        run: PYTHONPATH=src python -m rutas_atm --probar-leap
+      - name: Ejecutar el lote en el QPU
+        run: PYTHONPATH=src python -m rutas_atm --cajeros "${{ inputs.cajeros }}" --corridas "${{ inputs.corridas }}"
+      - name: Validar el archivo de intercambio
+        run: PYTHONPATH=src python -m rutas_atm --validar "$(ls salidas/*.json | head -1)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resultados-dwave-leap
+          path: |
+            pipeline/salidas/*.json
+            pipeline/salidas/crudos/*.pkl

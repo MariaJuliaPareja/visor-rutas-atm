@@ -71,21 +71,23 @@ Las mismas comprobaciones corren en GitHub Actions en cada *push* a `main` y en 
 | `RUTAS_SAMPLER` | `simulado` (local, sin costo) o `qpu` (D-Wave Leap) | `simulado` |
 | `RUTAS_NUM_READS` | Lecturas por corrida | `200` |
 | `RUTAS_SEMILLA` | Semilla de la instancia y del recocido simulado | `42` |
+| `RUTAS_ANNEALING_TIME` | Microsegundos de recocido por lectura en el QPU | `20` |
 | `RUTAS_DIR_SALIDA` | Carpeta de los `.json` generados | `salidas` |
 | `RUTAS_NIVEL_LOG` | Nivel de registro | `INFO` |
-| `DWAVE_API_TOKEN` | Token de Leap, solo con `qpu` | — |
+| `DWAVE_API_TOKEN` | Token de Leap, solo con `qpu` (mejor: `dwave config create`) | — |
 
 Las variables del entorno tienen prioridad sobre `.env`. **El token nunca va en el código ni en el repositorio**: usa `dwave config create` o una variable de entorno.
 
-### Ejecutar en el QPU real
+### Ejecutar en D-Wave Leap
 
 ```bash
 pip install -r requirements-qpu.txt
-dwave config create                # guarda el token fuera del repositorio
-RUTAS_SAMPLER=qpu RUTAS_NUM_READS=100 PYTHONPATH=src python -m rutas_atm --cajeros 4 --corridas 1
+dwave config create                                      # guarda el token fuera del repositorio
+PYTHONPATH=src python -m rutas_atm --probar-leap          # verifica token y solver, sin usar el QPU
+PYTHONPATH=src python -m rutas_atm --sampler qpu --cajeros 4 --corridas 1
 ```
 
-Cada corrida consume minutos del plan gratuito de Leap (RNF04): empieza con instancias pequeñas.
+También puede ejecutarse desde GitHub Actions (**Ejecucion en D-Wave Leap**, solo a mano), con el token guardado como secreto. Cada corrida consume tiempo de QPU del plan de Leap (RNF04): empieza con instancias pequeñas. Guía completa: `docs/ejecucion-dwave-leap.md`.
 
 ## Estructura
 

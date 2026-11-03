@@ -5,7 +5,7 @@ o desde su archivo de configuracion local, de modo que nunca pasa por el codigo 
 """
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 SAMPLERS_VALIDOS = ("simulado", "qpu")
@@ -52,6 +52,7 @@ class Configuracion:
     semilla: int
     directorio_salida: Path
     nivel_log: str
+    annealing_time_us: int = 20
 
     @classmethod
     def desde_entorno(cls) -> "Configuracion":
@@ -66,4 +67,10 @@ class Configuracion:
             semilla=_entero("RUTAS_SEMILLA", 42, minimo=0),
             directorio_salida=Path(os.getenv("RUTAS_DIR_SALIDA", "salidas")),
             nivel_log=os.getenv("RUTAS_NIVEL_LOG", "INFO").upper(),
+            annealing_time_us=_entero("RUTAS_ANNEALING_TIME", 20),
         )
+
+    def con_sampler(self, sampler: str) -> "Configuracion":
+        if sampler not in SAMPLERS_VALIDOS:
+            raise ErrorDeConfiguracion(f"El sampler debe ser uno de {SAMPLERS_VALIDOS}; se recibio {sampler!r}")
+        return replace(self, sampler=sampler)
