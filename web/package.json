@@ -1,0 +1,26 @@
+{
+  "name": "visor-rutas-atm",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Visor web del Sistema de Optimizacion de Rutas ATM (CMP-06 a CMP-08)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "leaflet": "1.9.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-leaflet": "4.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.7.0",
+    "vite": "6.4.5",
+    "vitest": "3.2.7"
+  }
+}
