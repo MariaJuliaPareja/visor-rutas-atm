@@ -1,0 +1,5 @@
+# Dependencias del pipeline con el sampler simulado (ambiente de desarrollo y pruebas)
+dimod==0.12.23
+dwave-samplers==1.8.0
+jsonschema==4.26.0
+numpy==2.5.4

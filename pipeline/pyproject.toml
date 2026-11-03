@@ -1,0 +1,16 @@
+[project]
+name = "rutas-atm"
+version = "0.1.0"
+description = "Pipeline de experimentacion del Sistema de Optimizacion de Rutas ATM (GPS y QUBO en D-Wave)"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
