@@ -3,23 +3,60 @@ import { FORMULACIONES, calcularMetricas, formato } from "../metricas/metricas.j
 import MapaRutas from "../visualizacion/MapaRutas.jsx";
 import DetalleCorrida from "../visualizacion/DetalleCorrida.jsx";
 
+const NOTA_NO_COMPARABLE = "La ruta repite u omite cajeros; su gap no es comparable y se excluye del resumen.";
+
+// Nota accesible: se muestra con el cursor, con el foco del teclado y al tocarla; Esc la cierra (WCAG 1.4.13).
+function NoComparable() {
+  const [abierta, setAbierta] = useState(false);
+  return (
+    <span className="nota-info" tabIndex={0} role="button" aria-label={`No comparable. ${NOTA_NO_COMPARABLE}`}
+      onMouseEnter={() => setAbierta(true)} onMouseLeave={() => setAbierta(false)}
+      onFocus={() => setAbierta(true)} onBlur={() => setAbierta(false)}
+      onClick={(e) => { e.stopPropagation(); setAbierta((v) => !v); }}
+      onKeyDown={(e) => { if (e.key === "Escape") setAbierta(false); }}>
+      No comparable ⓘ
+      {abierta && <span className="burbuja" role="tooltip">{NOTA_NO_COMPARABLE}</span>}
+    </span>
+  );
+}
+
 // PAN-03: barra superior, comparacion (tarjetas + tabla) y mapa, visibles a la vez.
-export default function VistaPrincipal({ doc, advertencias, nombre, onCargarOtro }) {
-  const { corridas, resumen } = useMemo(() => calcularMetricas(doc), [doc]);
+export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
+  const metricas = useMemo(() => calcularMetricas(doc), [doc]);
+  const { corridas, resumen } = metricas;
   const [seleccion, setSeleccion] = useState(null);
+  const [exportacion, setExportacion] = useState(null); // null | "generando" | { ok, texto }
   const corrida = corridas.find((c) => c.id_corrida === seleccion) ?? null;
   const inst = doc.instancia;
   const conAdvertencia = new Set(advertencias.map((a) => a.id_corrida));
+
+  async function exportar() {
+    setExportacion("generando");
+    try {
+      // CMP-09 se carga solo al exportar: jsPDF no pesa en la carga inicial del visor (RNF01).
+      const { contenidoReporte, generarPdf, nombreReporte } = await import("../reportes/reporte.js");
+      const contenido = contenidoReporte(doc, metricas, advertencias);
+      generarPdf(contenido).save(nombreReporte(doc));
+      const n = contenido.infactibles;
+      const extra = n ? ` · Incluye ${n} ${n === 1 ? "ruta infactible marcada" : "rutas infactibles marcadas"} con su nota explicativa` : "";
+      setExportacion({ ok: true, texto: `Reporte descargado: ${nombreReporte(doc)}${extra}` });
+    } catch (e) {
+      console.error(e);
+      setExportacion({ ok: false, texto: "No se pudo generar el reporte. No se descargó ningún archivo." });
+    }
+  }
 
   return (
     <div className="app">
       <header className="barra">
         <h1>Visor de Rutas ATM</h1>
         <p className="contexto">
-          Instancia {inst.id_instancia} · {inst.tipo_instancia} · {inst.cajeros.length} cajeros · esquema {doc.version_esquema} · <span title={nombre}>{nombre}</span>
+          Instancia {inst.id_instancia} · {inst.tipo_instancia} · {inst.cajeros.length} cajeros · esquema {doc.version_esquema}
         </p>
         <button className="secundario" onClick={onCargarOtro}>Cargar otro archivo</button>
-        <button className="principal" disabled title="Exportar reporte (RF05) queda para el siguiente incremento">Exportar reporte</button>
+        <button className="principal" onClick={exportar} disabled={exportacion === "generando"}>
+          {exportacion === "generando" ? "Generando reporte…" : "Exportar reporte"}
+        </button>
       </header>
 
       <main className="principal-grid">
@@ -35,7 +72,7 @@ export default function VistaPrincipal({ doc, advertencias, nombre, onCargarOtro
                   ) : (
                     <dl>
                       <div><dt>Mejor gap</dt><dd>{r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`}</dd></div>
-                      <div><dt>Rutas factibles</dt><dd>{r.factibles} de {r.total}</dd></div>
+                      <div><dt>Rutas factibles</dt><dd>{r.factibles} / {r.total}</dd></div>
                       <div><dt>% de ahorro respecto a GPS</dt><dd>{r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`}</dd></div>
                     </dl>
                   )}
@@ -44,49 +81,59 @@ export default function VistaPrincipal({ doc, advertencias, nombre, onCargarOtro
               );
             })}
           </div>
-          <p className="nota">El resumen solo considera rutas factibles. Línea base (Held-Karp): {formato(inst.linea_base.dist_optima)} km.</p>
 
-          {advertencias.length > 0 && (
-            <div className="mensaje advertencia" role="status">
-              {advertencias.map((a) => <p key={a.id_corrida}>⚠ <b>Advertencia:</b> {a.mensaje}</p>)}
-            </div>
-          )}
-
-          <table>
-            <caption>Corridas · selecciona una fila para ver su ruta</caption>
-            <thead>
-              <tr>
-                <th scope="col">Corrida</th><th scope="col">Formulación</th><th scope="col">Sampler</th>
-                <th scope="col">Distancia (km)</th><th scope="col">Gap (%)</th>
-                <th scope="col">Chain break fraction</th><th scope="col">Factible</th>
-              </tr>
-            </thead>
-            <tbody>
-              {corridas.map((c) => (
-                <tr key={c.id_corrida} className={c.id_corrida === seleccion ? "seleccionada" : ""}
-                  tabIndex={0} aria-selected={c.id_corrida === seleccion}
-                  onClick={() => setSeleccion(c.id_corrida)}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSeleccion(c.id_corrida); } }}>
-                  <td>{c.id_corrida}</td>
-                  <td>{c.formulacion}</td>
-                  <td>{c.sampler}</td>
-                  <td className="num">{formato(c.metricas.distancia_total)}{conAdvertencia.has(c.id_corrida) && <span className="icono-adv" title="Distancia inconsistente"> ⚠</span>}</td>
-                  <td className="num">{c.gap === null
-                    ? <span title="La ruta repite u omite cajeros; su gap no es comparable y se excluye del resumen.">No comparable ⓘ</span>
-                    : formato(c.gap)}</td>
-                  <td className="num">{c.metricas.chain_break_fraction === null ? "No aplica" : formato(c.metricas.chain_break_fraction, 3)}</td>
-                  <td>{c.ruta.factible ? <span className="etiqueta ok">Sí</span> : <span className="etiqueta mal">Infactible</span>}</td>
+          <section className="corridas">
+            <header className="corridas-cabecera">
+              <h2>Corridas</h2>
+              <p>Selecciona una fila para ver su ruta</p>
+            </header>
+            {advertencias.length > 0 && (
+              <div className="mensaje advertencia" role="status">
+                {advertencias.map((a) => <p key={a.id_corrida}><span aria-hidden="true">⚠</span> <b>Advertencia:</b> {a.mensaje}</p>)}
+              </div>
+            )}
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Corrida</th><th scope="col">Formulación</th>
+                  <th scope="col" className="num">Distancia (km)</th><th scope="col" className="num">Gap (%)</th>
+                  <th scope="col" className="num">Chain break fraction</th><th scope="col">Factible</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {corridas.map((c) => (
+                  <tr key={c.id_corrida} className={c.id_corrida === seleccion ? "seleccionada" : ""}
+                    tabIndex={0} aria-selected={c.id_corrida === seleccion}
+                    onClick={() => setSeleccion(c.id_corrida)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSeleccion(c.id_corrida); } }}>
+                    <td>{c.id_corrida}</td>
+                    <td>{c.formulacion}</td>
+                    <td className="num">{formato(c.metricas.distancia_total)}{conAdvertencia.has(c.id_corrida) && <span className="icono-adv" title="Distancia inconsistente"> ⚠</span>}</td>
+                    <td className="num">{c.gap === null ? <NoComparable /> : formato(c.gap)}</td>
+                    <td className="num">{c.metricas.chain_break_fraction === null ? "No aplica" : formato(c.metricas.chain_break_fraction, 3)}</td>
+                    <td>{c.ruta.factible ? <span className="etiqueta ok">Sí</span> : <span className="etiqueta mal">Infactible</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="nota">El resumen solo considera rutas factibles. Línea base (Held-Karp): {formato(inst.linea_base.dist_optima)} km.</p>
+          </section>
         </section>
 
         <section className="lado-mapa">
-          <MapaRutas instancia={inst} corrida={corrida} />
+          <MapaRutas instancia={inst} corrida={corrida} panelAbierto={Boolean(corrida)} />
           {corrida && <DetalleCorrida corrida={corrida} onCerrar={() => setSeleccion(null)} />}
         </section>
       </main>
+
+      {exportacion && exportacion !== "generando" && (
+        <div className={`aviso ${exportacion.ok ? "ok" : "error"}`} role={exportacion.ok ? "status" : "alert"}>
+          <span aria-hidden="true">{exportacion.ok ? "✓" : "⚠"}</span>
+          <p>{exportacion.texto}</p>
+          {!exportacion.ok && <button className="secundario" onClick={exportar}>Reintentar</button>}
+          <button className="icono" onClick={() => setExportacion(null)} aria-label="Cerrar mensaje">×</button>
+        </div>
+      )}
     </div>
   );
 }
