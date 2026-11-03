@@ -4,7 +4,7 @@ import { ErrorDeCarga, PASOS, leer, migrar, validarArchivo, validarEstructura, v
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // PAN-01 y PAN-02: zona de carga, validacion paso a paso y mensaje de rechazo.
-export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar }) {
+export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar, historial }) {
   const [arrastrando, setArrastrando] = useState(false);
   const [progreso, setProgreso] = useState(null); // { nombre, paso }
   const [rechazo, setRechazo] = useState(null);
@@ -102,7 +102,59 @@ export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar }
           </section>
         )}
         <p className="nota">Solo archivos .json generados por el pipeline de experimentación. El archivo se procesa en tu navegador y no se envía a ningún servidor.</p>
+        {historial && !progreso && <Historial {...historial} onError={(m) => setRechazo({ titulo: m, detalles: [] })} />}
       </main>
     </div>
+  );
+}
+
+const fecha = (iso) => new Date(iso).toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" });
+
+// Lotes guardados en IndexedDB: se reabren sin volver a subir el archivo. Eliminar pide confirmacion.
+function Historial({ estado, lotes, abrir, eliminar, borrarTodo, onError }) {
+  const [confirmando, setConfirmando] = useState(null); // clave | "todo" | null
+
+  if (estado === "no-disponible")
+    return <p className="nota">Este navegador no permite guardar el historial (por ejemplo, en navegación privada). El visor funciona igual, sin historial.</p>;
+  if (estado !== "lista" || lotes.length === 0) return null;
+
+  const intentar = (accion) => accion().catch((e) => onError(e.message || "No se pudo abrir el lote guardado."));
+  return (
+    <section className="historial" aria-labelledby="titulo-historial">
+      <header>
+        <h2 id="titulo-historial">Lotes guardados en este navegador</h2>
+        {confirmando === "todo" ? (
+          <span className="confirmar">
+            ¿Borrar todo el historial?
+            <button className="peligro" onClick={() => intentar(async () => { await borrarTodo(); setConfirmando(null); })}>Sí, borrar</button>
+            <button className="secundario" onClick={() => setConfirmando(null)}>Cancelar</button>
+          </span>
+        ) : (
+          <button className="secundario" onClick={() => setConfirmando("todo")}>Borrar historial</button>
+        )}
+      </header>
+      <ul>
+        {lotes.map((l) => (
+          <li key={l.clave}>
+            <div>
+              <b>Instancia {l.id_instancia}</b> · {l.tipo_instancia} · {l.num_cajeros} cajeros · {l.num_corridas} corridas
+              <p className="nota">{l.nombre_archivo} · generado el {fecha(l.fecha_generacion)}</p>
+            </div>
+            {confirmando === l.clave ? (
+              <span className="confirmar">
+                <button className="peligro" onClick={() => intentar(async () => { await eliminar(l.clave); setConfirmando(null); })}>Confirmar</button>
+                <button className="secundario" onClick={() => setConfirmando(null)}>Cancelar</button>
+              </span>
+            ) : (
+              <span className="confirmar">
+                <button className="principal" onClick={() => intentar(() => abrir(l.clave))}>Abrir</button>
+                <button className="secundario" onClick={() => setConfirmando(l.clave)} aria-label={`Eliminar el lote de la instancia ${l.id_instancia}`}>Eliminar</button>
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <p className="nota">Se guardan solo en este equipo y nunca se envían a un servidor. Al abrir un lote se vuelve a validar.</p>
+    </section>
   );
 }
