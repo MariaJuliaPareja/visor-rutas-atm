@@ -35,3 +35,14 @@ Implementa el modelo lógico de la Práctica 06 como colecciones de documentos. 
 - **Idempotencia:** volver a cargar el mismo archivo reemplaza el lote; no duplica corridas.
 - **Revalidación:** al reabrir un lote, el documento se reconstruye y pasa otra vez por el esquema y las reglas entre entidades. Lo guardado en el navegador no se da por confiable.
 - **Privacidad (RNF06):** IndexedDB es local al navegador y al sitio; nada se envía a un servidor. Solo se guardan datos sintéticos, y el usuario puede eliminar un lote o todo el historial.
+
+## Colección `preferencias` (versión 2 de la base del navegador)
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `clave` | string (clave primaria) | Nombre de la preferencia, p. ej. `supuestos_gerencia` |
+| `valor` | objeto | Supuestos del resumen para gerencia: rendimiento, precio del diésel, CO₂ por litro, recorridos al año, velocidad media |
+| `actualizado_en` | string ISO 8601 | Última modificación |
+
+Al reabrir un lote desde el historial se reconstruyen **todos** los campos de la instancia, incluidos los opcionales del esquema 1.2 (`matriz_tiempos`, `fuente`, nombre y rol de cada cajero).
+

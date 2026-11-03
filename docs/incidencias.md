@@ -16,3 +16,9 @@
 - **Causa:** Leap solo da servicio en una lista de países que no incluye Perú (soporte de D-Wave, «From What Countries Can I Access Leap?»).
 - **Solución:** la ruta del QPU de D-Wave se mantiene probada con `MockDWaveSampler`, y la ejecución en hardware real se hace con QAOA en IBM Quantum (DEC-08). Se descartó usar VPN u otra región para no incumplir la política del proveedor.
 
+## INC-09 · El historial perdía los tiempos de manejo y la fuente de los cajeros
+
+- **Síntoma:** al abrir desde el historial un lote con `--distancia vial`, el resumen para gerencia mostraba el tiempo «(estimado)» y el mapa no indicaba que los cajeros eran reales.
+- **Causa:** `cargarLote` reconstruía la instancia campo por campo y omitía `matriz_tiempos` y `fuente`, agregados en el esquema 1.2.
+- **Solución:** se reconstruye la instancia completa, quitando solo los metadatos de almacenamiento, y una prueba verifica que el lote reabierto sea idéntico al cargado.
+

@@ -8,12 +8,14 @@
 //   corridas    clave = [clave_instancia, id_corrida]
 //               { clave_instancia, id_corrida, formulacion, sampler, parametros, ruta{}, metricas{} }
 //               indices: por_instancia, por_formulacion ([clave_instancia, formulacion])
+//   preferencias clave = nombre de la preferencia (p. ej. "supuestos_gerencia")
+//               { clave, valor, actualizado_en }
 //
 // Los datos no salen del equipo del usuario (RNF06): IndexedDB es local al navegador y al sitio.
 import { validarEstructura, validarReglas } from "../carga/validacion.js";
 
 export const NOMBRE_BD = "rutas_atm";
-export const VERSION_BD = 1;
+export const VERSION_BD = 2; // 2: coleccion preferencias
 
 const promesa = (solicitud) =>
   new Promise((resolver, rechazar) => {
@@ -46,6 +48,7 @@ export function abrir() {
       corridas.createIndex("por_instancia", "clave_instancia");
       corridas.createIndex("por_formulacion", ["clave_instancia", "formulacion"]);
     }
+    if (!bd.objectStoreNames.contains("preferencias")) bd.createObjectStore("preferencias", { keyPath: "clave" });
   };
   return promesa(solicitud);
 }
@@ -92,11 +95,13 @@ export async function cargarLote(bd, clave) {
   const inst = await promesa(tx.objectStore("instancias").get(clave));
   if (!inst) throw new Error("El lote ya no existe en este navegador.");
   const corridas = await promesa(tx.objectStore("corridas").index("por_instancia").getAll(clave));
-  const { version_esquema, fecha_generacion, nombre_archivo, id_instancia, tipo_instancia, cajeros, matriz_distancias, linea_base } = inst;
+  // Todo lo que no es metadato de almacenamiento es la instancia original, incluidos los campos
+  // opcionales (matriz_tiempos, fuente): antes se perdian al reabrir desde el historial.
+  const { clave: _c, version_esquema, fecha_generacion, nombre_archivo, guardado_en: _g, num_corridas: _n, ...instancia } = inst;
   const doc = {
     version_esquema,
     fecha_generacion,
-    instancia: { id_instancia, tipo_instancia, cajeros, matriz_distancias, linea_base },
+    instancia,
     corridas: corridas
       .sort((a, b) => a.id_corrida - b.id_corrida)
       .map(({ clave_instancia: _, ...c }) => c),
@@ -121,8 +126,22 @@ export async function eliminarLote(bd, clave) {
 }
 
 export async function borrarTodo(bd) {
-  const tx = bd.transaction(["instancias", "corridas"], "readwrite");
+  const tx = bd.transaction(["instancias", "corridas", "preferencias"], "readwrite");
   tx.objectStore("instancias").clear();
   tx.objectStore("corridas").clear();
+  tx.objectStore("preferencias").clear();
   await terminada(tx);
+}
+
+// Preferencias del usuario (p. ej. los supuestos del resumen para gerencia).
+export async function guardarPreferencia(bd, clave, valor) {
+  const tx = bd.transaction("preferencias", "readwrite");
+  tx.objectStore("preferencias").put({ clave, valor, actualizado_en: new Date().toISOString() });
+  await terminada(tx);
+}
+
+export async function leerPreferencia(bd, clave) {
+  const tx = bd.transaction("preferencias", "readonly");
+  const doc = await promesa(tx.objectStore("preferencias").get(clave));
+  return doc?.valor ?? null;
 }

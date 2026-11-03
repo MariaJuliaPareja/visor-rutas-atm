@@ -1,8 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { abrir, disponible, guardarPreferencia, leerPreferencia } from "../persistencia/almacen.js";
 import { FORMULACIONES, SUPUESTOS, calcularMetricas, formato, resumenGerencial } from "../metricas/metricas.js";
 import PanelGerencia from "./PanelGerencia.jsx";
 import MapaRutas from "../visualizacion/MapaRutas.jsx";
 import DetalleCorrida from "../visualizacion/DetalleCorrida.jsx";
+
+const CLAVE_SUPUESTOS = "supuestos_gerencia";
 
 const NOTA_NO_COMPARABLE = "La ruta repite u omite cajeros; su gap no es comparable y se excluye del resumen.";
 
@@ -27,10 +30,25 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
   const { corridas, resumen } = metricas;
   const [supuestos, setSupuestos] = useState(SUPUESTOS);
   const gerencia = useMemo(() => resumenGerencial(doc, metricas, supuestos), [doc, metricas, supuestos]);
+
+  // Los supuestos se guardan en IndexedDB (coleccion preferencias) y se recuerdan entre sesiones.
+  useEffect(() => {
+    if (!disponible()) return;
+    abrir().then((bd) => leerPreferencia(bd, CLAVE_SUPUESTOS))
+      .then((guardados) => { if (guardados) setSupuestos({ ...SUPUESTOS, ...guardados }); })
+      .catch((e) => console.warn("No se pudieron leer los supuestos guardados", e));
+  }, []);
+  const persistir = (nuevos) => {
+    if (!disponible()) return;
+    abrir().then((bd) => guardarPreferencia(bd, CLAVE_SUPUESTOS, nuevos))
+      .catch((e) => console.warn("No se pudieron guardar los supuestos", e));
+  };
   const cambiarSupuesto = (clave, valor) => {
     const x = Number(valor);
-    if (Number.isFinite(x) && x > 0) setSupuestos((s) => ({ ...s, [clave]: x }));
+    if (!Number.isFinite(x) || x <= 0) return;
+    setSupuestos((s) => { const nuevos = { ...s, [clave]: x }; persistir(nuevos); return nuevos; });
   };
+  const restablecerSupuestos = () => { setSupuestos(SUPUESTOS); persistir(SUPUESTOS); };
   const [seleccion, setSeleccion] = useState(null);
   const [exportacion, setExportacion] = useState(null); // null | "generando" | { ok, texto }
   const corrida = corridas.find((c) => c.id_corrida === seleccion) ?? null;
@@ -68,7 +86,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
 
       <main className="principal-grid">
         <section className="comparacion">
-          <PanelGerencia resumen={gerencia} onCambiarSupuesto={cambiarSupuesto} />
+          <PanelGerencia resumen={gerencia} onCambiarSupuesto={cambiarSupuesto} onRestablecer={restablecerSupuestos} />
           <h2 className="subtitulo">Comparación técnica de formulaciones</h2>
           <div className="tarjetas">
             {FORMULACIONES.map((f) => {
@@ -82,7 +100,7 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
                     <dl>
                       <div><dt>Mejor gap</dt><dd>{r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`}</dd></div>
                       <div><dt>Rutas factibles</dt><dd>{r.factibles} / {r.total}</dd></div>
-                      <div><dt>% de ahorro respecto a GPS</dt><dd>{r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`}</dd></div>
+                      <div><dt>% de ahorro respecto a GPS</dt><dd>{f === "GPS" ? "Referencia" : r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`}</dd></div>
                     </dl>
                   )}
                   {r.motivoAhorro && <p className="nota">{r.motivoAhorro}</p>}

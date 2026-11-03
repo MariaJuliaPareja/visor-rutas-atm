@@ -164,3 +164,4 @@ th.num { text-align: right; }
 .subtitulo { font-size: 13px; text-transform: uppercase; color: var(--texto-2); margin: 8px 0; }
 .marcador.deposito { background: var(--oscuro); color: #fff; border-color: var(--oscuro); border-radius: 4px; }
 @media (max-width: 1100px) { .cifras { grid-template-columns: repeat(3, 1fr); } .supuestos .campos { grid-template-columns: 1fr; } }
+.enlace { background: none; border: none; padding: 0; min-height: 0; color: var(--oscuro); text-decoration: underline; font-size: inherit; }

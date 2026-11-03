@@ -11,7 +11,7 @@ const CAMPOS = [
 const entero = (x) => formato(x, 0);
 
 // Resumen para gerencia (DEC-09): lo que un gerente necesita saber, en km, minutos, soles y CO2.
-export default function PanelGerencia({ resumen, onCambiarSupuesto }) {
+export default function PanelGerencia({ resumen, onCambiarSupuesto, onRestablecer }) {
   const { habitual, propuesta, porRecorrido: r, porAnio: a, supuestos } = resumen;
   return (
     <section className="gerencia" aria-labelledby="titulo-gerencia">
@@ -61,7 +61,11 @@ export default function PanelGerencia({ resumen, onCambiarSupuesto }) {
             </label>
           ))}
         </div>
-        <p className="nota">Ajusta el precio del diésel al vigente y el rendimiento al de tu flota. El reporte PDF usa estos mismos valores.</p>
+        <p className="nota">
+          Ajusta el precio del diésel al vigente y el rendimiento al de tu flota. Se guardan en este navegador
+          y el reporte PDF usa estos mismos valores.{" "}
+          <button type="button" className="enlace" onClick={onRestablecer}>Restablecer valores por defecto</button>
+        </p>
       </details>
     </section>
   );

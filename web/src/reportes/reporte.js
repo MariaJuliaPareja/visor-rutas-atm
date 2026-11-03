@@ -53,7 +53,7 @@ export function contenidoReporte(doc, metricas, advertencias, gerencia = resumen
         f,
         r.total === 0 ? "Sin corridas" : `${r.factibles} / ${r.total}`,
         r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`,
-        r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`,
+        f === "GPS" ? "Referencia" : r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`,
       ];
     }),
     corridas: corridas.map((c) => [
