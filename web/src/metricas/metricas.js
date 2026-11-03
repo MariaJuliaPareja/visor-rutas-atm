@@ -48,4 +48,4 @@ export function calcularMetricas(doc) {
 }
 
 export const formato = (x, decimales = 2) =>
-  x === null || x === undefined ? "—" : x.toLocaleString("es-PE", { minimumFractionDigits: decimales, maximumFractionDigits: decimales });
+  x === null || x === undefined ? "—" : x.toLocaleString("es-ES", { minimumFractionDigits: decimales, maximumFractionDigits: decimales });

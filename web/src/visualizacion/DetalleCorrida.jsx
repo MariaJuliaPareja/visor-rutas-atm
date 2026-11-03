@@ -16,6 +16,7 @@ export default function DetalleCorrida({ corrida, onCerrar }) {
 
       <h3>Métricas</h3>
       <dl className="metricas">
+        <div><dt>Sampler</dt><dd>{corrida.sampler === "qpu" ? "QPU (D-Wave Leap)" : "Recocido simulado"}</dd></div>
         <div><dt>Distancia total</dt><dd>{formato(metricas.distancia_total)} km</dd></div>
         <div><dt>Gap respecto a la línea base</dt><dd>{corrida.gap === null ? "No comparable" : `${formato(corrida.gap)} %`}</dd></div>
         <div><dt>Tiempo de recocido</dt><dd>{metricas.tiempo_anneal === null ? "No aplica (simulado)" : `${formato(metricas.tiempo_anneal, 0)} µs`}</dd></div>

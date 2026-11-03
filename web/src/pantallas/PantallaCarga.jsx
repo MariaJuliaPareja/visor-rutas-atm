@@ -60,7 +60,10 @@ export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar }
                 {rechazo.detalles.map((d) => <li key={d}><code>{d}</code></li>)}
               </ul>
             )}
-            <p>No se cargaron datos. Corrige el archivo y vuelve a intentarlo.</p>
+            <div className="pie-mensaje">
+              <p>No se cargaron datos. Corrige el archivo y vuelve a intentarlo.</p>
+              <button className="secundario" onClick={() => entrada.current.click()}>Cargar otro archivo</button>
+            </div>
           </section>
         )}
 
@@ -86,10 +89,14 @@ export default function PantallaCarga({ onCargado, hayDatosPrevios, onCancelar }
             onDrop={alSoltar}
           >
             <h2>{arrastrando ? "Suelta el archivo para cargarlo" : "Arrastra aquí el archivo de corridas (.json)"}</h2>
-            <p>o</p>
-            <button className="principal" onClick={() => entrada.current.click()}>
-              {rechazo ? "Cargar otro archivo" : "Cargar archivo"}
-            </button>
+            {rechazo ? (
+              <p>o usa “Cargar otro archivo” para seleccionarlo</p>
+            ) : (
+              <>
+                <p>o</p>
+                <button className="principal" onClick={() => entrada.current.click()}>Cargar archivo</button>
+              </>
+            )}
             <input ref={entrada} type="file" accept=".json,application/json" hidden
               onChange={(e) => { if (e.target.files[0]) procesar(e.target.files[0]); e.target.value = ""; }} />
           </section>
