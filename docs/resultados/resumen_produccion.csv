@@ -1,0 +1,16 @@
+instancia,formulacion,politica,factibles,N,wilson_95_inf,wilson_95_sup,distancia_media_km,distancia_sd_km,gap_km,gap_relativo,pct_optimo,qubits_logicos,profundidad_transpilada,profundidad_decompose,puertas_2q,shots,backend,archivo
+3,GPS,angulos_fijos,0,1,0.0000,0.7935,pendiente,pendiente,pendiente,pendiente,0.0000,30,312,3,221,200,ibm_marrakesh,corridas_i3_n3_ibm_20261111-201254-775.json
+3,GPS,angulos_elegidos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+3,QUBO,angulos_fijos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+3,QUBO,optimizado,1,1,0.2065,1.0000,12.734,pendiente,0.000,0.0000,1.0000,9,262,3,130,200,ibm_marrakesh,corridas_i3_n3_ibm_20261111-201254-775.json
+3,control,aleatorio,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+4,GPS,angulos_fijos,1,10,0.0179,0.4042,14.665,pendiente,0.169,0.0117,0.0000,54,570-751,3,693-735,200,ibm_kingston,corridas_i4_n4_ibm_20261111-201713-615.json
+4,GPS,angulos_elegidos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+4,QUBO,angulos_fijos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+4,QUBO,optimizado,6,10,0.3127,0.8318,14.524,0.069,0.028,0.0019,0.5000,16,493-824,3,421-490,200,ibm_kingston,corridas_i4_n4_ibm_20261111-201713-615.json
+4,control,aleatorio,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+5,GPS,angulos_fijos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+5,GPS,angulos_elegidos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+5,QUBO,angulos_fijos,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+5,QUBO,optimizado,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente
+5,control,aleatorio,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente,pendiente

@@ -145,15 +145,53 @@ def _rotar_al_deposito(secuencia: list) -> list:
 
 
 def es_permutacion(secuencia: list, n: int) -> bool:
-    """Una ruta es factible si visita cada cajero exactamente una vez."""
+    """Una ruta visita cada cajero exactamente una vez."""
     return len(secuencia) == n and sorted(secuencia) == list(range(n))
 
 
-def decodificar(modelo: ModeloQUBO, bits: dict) -> tuple[list, bool]:
-    """Devuelve (secuencia, factible). La secuencia es abierta y empieza en el cajero 0 si aparece.
+def factible_estricto(modelo: ModeloQUBO, bits: dict) -> bool:
+    """True solo si cada grupo exactamente-uno de la formulacion suma 1.
 
-    Una ruta infactible se reconstruye igual (repeticiones u omisiones incluidas) para que
-    el visor pueda mostrar donde falla; nunca se 'repara'.
+    QUBO: cada cajero en una sola posicion y cada posicion con un solo cajero.
+    GPS: un solo r en {0,1,2} por arista, una sola salida r=1, una sola entrada r=1
+    y una sola orientacion r=2. La penalizacion triangular no es one-hot y no entra.
+    Un subciclo puede cumplir estos grupos y no ser una permutacion; el flag del lote
+    exige ademas es_permutacion sobre la secuencia decodificada.
+    """
+    if modelo.formulacion == "QUBO":
+        n = modelo.n
+        por_cajero = all(sum(bits.get(i * n + p, 0) for p in range(n)) == 1 for i in range(n))
+        por_posicion = all(sum(bits.get(i * n + p, 0) for i in range(n)) == 1 for p in range(n))
+        return por_cajero and por_posicion
+    if modelo.formulacion != "GPS":
+        raise ValueError(f"Formulacion desconocida: {modelo.formulacion!r}")
+    N, vi = modelo.N, modelo.var_index
+    fin, num_aug = N + 1, N + 2
+    pares = {(i, j) for (i, j, _) in vi}
+
+    def uno(terminos: list) -> bool:
+        return sum(bits.get(v, 0) for v in terminos) == 1
+
+    if any(not uno([vi[(i, j, r)] for r in range(3)]) for i, j in pares):
+        return False
+    for i in range(0, N + 1):
+        if not uno([vi[(i, j, 1)] for j in range(num_aug) if (i, j) in pares]):
+            return False
+    for j in range(1, N + 2):
+        if not uno([vi[(i, j, 1)] for i in range(0, N + 1) if (i, j) in pares]):
+            return False
+    for i, j in pares:
+        if i < j and {i, j} != {0, fin} and not uno([vi[(i, j, 2)], vi[(j, i, 2)]]):
+            return False
+    return True
+
+
+def decodificar(modelo: ModeloQUBO, bits: dict) -> tuple[list, bool]:
+    """Devuelve (secuencia, es_permutacion). La secuencia es abierta y empieza en el cajero 0 si aparece.
+
+    El booleano dice si la secuencia visita cada cajero una vez. El flag del lote exige ademas
+    factible_estricto. Una ruta que no lo cumple se reconstruye igual, con repeticiones u
+    omisiones, para que el visor pueda mostrar donde falla; nunca se repara.
     """
     n = modelo.n
     if modelo.formulacion == "QUBO":

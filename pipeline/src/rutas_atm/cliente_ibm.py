@@ -86,18 +86,26 @@ def energia_qaoa(diagonal: np.ndarray, angulos, reps: int) -> float:
     return float(np.real(np.vdot(psi, diagonal * psi)))
 
 
-def elegir_angulos(ansatz, hamiltoniano, reps: int, semilla: int) -> tuple[list[float], str]:
-    """Angulos de QAOA sin usar el QPU. Devuelve (valores, metodo)."""
-    if ansatz.num_qubits > MAX_QUBITS_OPTIMIZACION_LOCAL:
-        return _rampa(reps), "rampa_lineal"
+def elegir_angulos(ansatz, hamiltoniano, reps: int, semilla: int,
+                   maxiter: int = 120, metodo: str | None = None) -> tuple[list[float], str, int | None]:
+    """Angulos de QAOA sin usar el QPU. Devuelve (valores, optimizador, maxiter usado).
+
+    El optimizador es COBYLA o rampa_lineal. La rampa no itera, asi que su maxiter queda vacio.
+    metodo=None conserva el corte de 18 qubits. "rampa_lineal" fuerza la rampa y "optimizado" fuerza COBYLA.
+    """
+    if metodo == "rampa_lineal" or (metodo is None and ansatz.num_qubits > MAX_QUBITS_OPTIMIZACION_LOCAL):
+        return _rampa(reps), "rampa_lineal", None
+    if metodo == "optimizado" and ansatz.num_qubits > MAX_QUBITS_OPTIMIZACION_LOCAL:
+        raise ErrorDeMuestreo(
+            f"{ansatz.num_qubits} qubits superan el maximo local ({MAX_QUBITS_OPTIMIZACION_LOCAL}).")
     from scipy.optimize import minimize
 
     diagonal = np.real(hamiltoniano.to_matrix(sparse=True).diagonal())  # H solo tiene Z y ZZ
     rng = np.random.default_rng(semilla)
     inicios = [np.array(_rampa(reps))] + [rng.uniform(0, np.pi / 2, 2 * reps) for _ in range(3)]
     mejor = min((minimize(lambda x: energia_qaoa(diagonal, x, reps), x0, method="COBYLA",
-                          options={"maxiter": 120}) for x0 in inicios), key=lambda r: r.fun)
-    return [float(v) for v in mejor.x], "optimizado_local"
+                          options={"maxiter": maxiter}) for x0 in inicios), key=lambda r: r.fun)
+    return [float(v) for v in mejor.x], "COBYLA", maxiter
 
 
 def _conectar_servicio():
@@ -116,11 +124,13 @@ def _conectar_servicio():
 _backend_en_cache = None
 
 
-def _backend(qubits: int, fabrica: Callable | None):
-    """Un solo backend por ejecucion del pipeline. RUTAS_IBM_BACKEND fija uno; si no, el menos ocupado."""
+def _backend(qubits: int, fabrica: Callable | None, nombre: str | None = None):
+    """Un solo backend por ejecucion del pipeline. Un nombre fijo tiene prioridad; si no, RUTAS_IBM_BACKEND o el menos ocupado."""
     global _backend_en_cache
     if fabrica is not None:
         return fabrica()
+    if nombre:
+        return _conectar_servicio().backend(nombre)
     if _backend_en_cache is not None and _backend_en_cache.num_qubits >= qubits:
         return _backend_en_cache
     servicio = _conectar_servicio()
@@ -155,23 +165,29 @@ def _qubits_usados(circuito) -> int:
 
 
 def muestrear_ibm(modelo: ModeloQUBO, shots: int, semilla: int, reps: int = 1,
-                  fabrica_backend: Callable | None = None) -> ResultadoMuestreo:
+                  fabrica_backend: Callable | None = None, maxiter: int = 120,
+                  metodo_angulos: str | None = None, backend_nombre: str | None = None) -> ResultadoMuestreo:
     """Ejecuta QAOA en IBM Quantum y devuelve la cadena medida de menor energia.
     `fabrica_backend` permite inyectar un backend simulado (fake_provider) en las pruebas."""
     QAOAAnsatz, _, generate_preset_pass_manager, _, SamplerV2 = _importar_qiskit()
     hamiltoniano, variables, escala = hamiltoniano_ising(modelo)
     ansatz = QAOAAnsatz(hamiltoniano, reps=reps)
-    angulos, metodo = elegir_angulos(ansatz, hamiltoniano, reps, semilla)
+    angulos, optimizador, maxiter_usado = elegir_angulos(
+        ansatz, hamiltoniano, reps, semilla, maxiter, metodo_angulos)
     circuito = ansatz.assign_parameters(angulos)
+    descompuesto = circuito.decompose()
+    qubits_logicos = _qubits_usados(descompuesto)
+    profundidad_decompose = descompuesto.depth()
     circuito.measure_all()
 
-    backend = _backend(len(variables), fabrica_backend)
+    backend = _backend(len(variables), fabrica_backend, backend_nombre)
     transpilado = generate_preset_pass_manager(optimization_level=3, backend=backend,
                                                seed_transpiler=semilla).run(circuito)
     ops = transpilado.count_ops()
     puertas_2q = sum(ops.get(g, 0) for g in ("ecr", "cz", "cx", "rzz"))
-    log.info("%s en %s: %d qubits logicos, %d fisicos, profundidad %d, %d puertas de 2 qubits", modelo.formulacion,
-             backend.name, len(variables), _qubits_usados(transpilado), transpilado.depth(), puertas_2q)
+    log.info("%s en %s: %d qubits logicos, %d fisicos, profundidad tras decompose %d, %d puertas de 2 qubits",
+             modelo.formulacion, backend.name, qubits_logicos, _qubits_usados(transpilado),
+             profundidad_decompose, puertas_2q)
     try:
         job = SamplerV2(mode=backend).run([transpilado], shots=shots)
         resultado = job.result()
@@ -195,12 +211,16 @@ def muestrear_ibm(modelo: ModeloQUBO, shots: int, semilla: int, reps: int = 1,
         "backend": backend.name,
         "job_id": job.job_id(),
         "shots": shots,
+        "semilla": semilla,
         "reps": reps,
         "angulos": [round(a, 4) for a in angulos],
-        "metodo_angulos": metodo,
-        "qubits_logicos": len(variables),
+        "optimizador": optimizador,
+        "maxiter": maxiter_usado,
+        "metodo_angulos": "rampa_lineal" if optimizador == "rampa_lineal" else "optimizado_local",
+        "qubits_logicos": qubits_logicos,
         "qubits_fisicos": _qubits_usados(transpilado),
         "profundidad": transpilado.depth(),
+        "profundidad_decompose": profundidad_decompose,
         "puertas_2q": puertas_2q,
         "cadenas_distintas": len(conteos),
         "escala_hamiltoniano": round(float(escala), 4),

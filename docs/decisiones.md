@@ -16,11 +16,11 @@ Cambios o precisiones respecto al diseño de las prácticas 05 (arquitectura), 0
 - **Motivo:** el recocido simulado no tiene tiempo de recocido físico ni embedding; registrar un tiempo de reloj como `tiempo_anneal` falsearía la métrica.
 - **Migración:** `1.0 → 1.1` marca cada corrida con `sampler = "qpu"`. Implementada igual en Python y en JavaScript.
 
-## DEC-03 · La factibilidad se evalúa sobre la ruta decodificada
+## DEC-03 · Factibilidad estricta de la formulación
 
-- **Diseño original:** "`factible` coincide con el contenido de `secuencia`" (diccionario de datos).
-- **Precisión:** una corrida es factible si su secuencia decodificada visita cada cajero exactamente una vez.
-- **Consecuencia:** si el estado del QUBO viola una restricción pero la ruta decodificada es válida, se considera factible. Las rutas infactibles se registran tal como salieron, con repeticiones y omisiones; nunca se "reparan".
+- **Diseño original:** "`factible` coincide con el contenido de `secuencia`" (diccionario de datos). Una precisión intermedia aceptaba la secuencia decodificada aunque el one-hot estuviera roto.
+- **Cambio:** `factible` es verdadero solo si la cadena cumple todas las restricciones exactamente-uno de la formulación y la secuencia decodificada es una permutación. Los lotes nuevos guardan `parametros.criterio_factibilidad = "estricto"`.
+- **Consecuencia:** una cadena que deletrea la ruta y viola el one-hot queda infactible. La secuencia se sigue registrando sin reparar. Un subciclo que cumple los grupos exactamente-uno y no la permutación tampoco es factible, porque la penalización triangular no entra en el criterio.
 
 ## DEC-04 · Persistencia NoSQL en IndexedDB
 

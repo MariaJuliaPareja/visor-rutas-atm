@@ -1,0 +1,50 @@
+% Calculado solo desde JSON cerrados en pipeline/salidas.
+% Serie BBVA vial, shots 200. No incluye recocido simulado ni los lotes de 1000 shots.
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1.6cm}
+\begin{document}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Celdas por instancia. Factibles con intervalo de Wilson al 95\,\% ($z=1{,}96$).
+La distancia y el gap usan solo réplicas factibles. El porcentaje en el óptimo usa el total $N$.
+La desviación es muestral ($n-1$) y el IC del gap es $t$ de Student al 95\,\%; con menos de dos factibles queda pendiente.}
+\label{tab:produccion}
+\begin{tabular}{@{}llrrllrrr@{}}
+\toprule
+$n$ & Celda & Factibles & Wilson 95\,\% & Distancia (km) & Gap vs Held-Karp & Óptimo & Qubits & Prof.\ / 2q \\
+\midrule
+3 & GPS, ángulos fijos & 0/1 & 0{,}0--79{,}3\,\% & pendiente & pendiente & 0\,\% & 30 & 312 / 221 \\
+3 & GPS, ángulos elegidos & \multicolumn{7}{l}{pendiente} \\
+3 & QUBO, ángulos fijos & \multicolumn{7}{l}{pendiente} \\
+3 & QUBO, optimizado & 1/1 & 20{,}7--100\,\% & $12{,}734 \pm$ pendiente & 0{,}000 km (0{,}0\,\%) & 100\,\% & 9 & 262 / 130 \\
+3 & Control aleatorio & \multicolumn{7}{l}{pendiente} \\
+\midrule
+4 & GPS, ángulos fijos & 1/10 & 1{,}8--40{,}4\,\% & $14{,}665 \pm$ pendiente & 0{,}169 km (1{,}17\,\%) & 0\,\% & 54 & 570--751 / 693--735 \\
+4 & GPS, ángulos elegidos & \multicolumn{7}{l}{pendiente} \\
+4 & QUBO, ángulos fijos & \multicolumn{7}{l}{pendiente} \\
+4 & QUBO, optimizado & 6/10 & 31{,}3--83{,}2\,\% & $14{,}524 \pm 0{,}069$ & 0{,}028 km (0{,}19\,\%; IC $-0{,}31$--$0{,}69$\,\%) & 50\,\% & 16 & 493--824 / 421--490 \\
+4 & Control aleatorio & \multicolumn{7}{l}{pendiente} \\
+\midrule
+5 & GPS, ángulos fijos & \multicolumn{7}{l}{pendiente} \\
+5 & GPS, ángulos elegidos & \multicolumn{7}{l}{pendiente} \\
+5 & QUBO, ángulos fijos & \multicolumn{7}{l}{pendiente} \\
+5 & QUBO, optimizado & \multicolumn{7}{l}{pendiente} \\
+5 & Control aleatorio & \multicolumn{7}{l}{pendiente} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Held-Karp del archivo: $n=3$, 12{,}734 km, ruta $[0,2,1]$;
+$n=4$, 14{,}496 km, ruta $[0,1,2,3]$.
+Profundidad transpilada; tras \texttt{decompose} es 3 en las cuatro celdas con dato.
+Shots: 200. Backend: \texttt{ibm\_marrakesh} en $n=3$ y \texttt{ibm\_kingston} en $n=4$.
+GPS con ángulos $[0{,}375,\,0{,}375]$ (\texttt{rampa\_lineal}); QUBO con COBYLA, pares distintos entre réplicas.
+No hay archivo de $n=5$. Ninguna celda tiene 20 réplicas.
+
+\end{document}

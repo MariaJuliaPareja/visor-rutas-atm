@@ -62,7 +62,9 @@ export const SUPUESTOS = {
   recorridos_anio: 300, // recorridos de esta ruta al anio
 };
 
-export const NOMBRE_SAMPLER = { simulado: "recocido simulado", qpu: "D-Wave Leap", ibm: "IBM Quantum" };
+export const NOMBRE_SAMPLER = {
+  simulado: "recocido simulado", qpu: "D-Wave Leap", ibm: "IBM Quantum", aleatorio: "control aleatorio",
+};
 
 export function evaluarRuta(secuencia, matriz) {
   if (secuencia.length < 2) return 0;

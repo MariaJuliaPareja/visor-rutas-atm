@@ -19,14 +19,16 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from .cajeros_osm import ErrorDeCatalogo
 from .cliente_dwave import ErrorDeMuestreo, probar_conexion
 from .config import Configuracion, ErrorDeConfiguracion, cargar_env
 from .conversor_resultados import ArchivoInvalido, convertir, escribir
 from .distancias_viales import ErrorDeDistancias
-from .experimento import cargar_crudos, ejecutar_experimento
+from .experimento import cargar_crudos, directorio_de_salida, ejecutar_experimento
 from .validacion import migrar, validar
 
 log = logging.getLogger("rutas_atm")
+FORMULACIONES_CLI = {"gps": ("GPS",), "qubo": ("QUBO",), "ambas": ("GPS", "QUBO")}
 
 
 def _validar(ruta: str) -> int:
@@ -59,7 +61,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cajeros", type=int, default=5, help="numero de cajeros de la instancia (3 a 7 recomendado)")
     parser.add_argument("--corridas", type=int, default=3, help="corridas por formulacion")
     parser.add_argument("--instancia", type=int, default=1, help="identificador de la instancia")
-    parser.add_argument("--sampler", choices=("simulado", "qpu", "ibm"), help="sobrescribe RUTAS_SAMPLER")
+    parser.add_argument("--sampler", choices=("simulado", "qpu", "ibm", "aleatorio"),
+                        help="sobrescribe RUTAS_SAMPLER")
+    parser.add_argument("--formulaciones", choices=tuple(FORMULACIONES_CLI), default="ambas")
+    parser.add_argument("--angulos-gps", choices=("rampa_lineal", "optimizado"), default="rampa_lineal")
+    parser.add_argument("--angulos-qubo", choices=("rampa_lineal", "optimizado"), default="optimizado")
+    parser.add_argument("--shots", type=int, help="sobrescribe RUTAS_NUM_READS")
+    parser.add_argument("--backend", help="backend IBM fijo; si se omite, RUTAS_IBM_BACKEND o el menos ocupado")
+    parser.add_argument("--semilla-base", type=int,
+                        help="la replica i usa esta semilla + i; la instancia sigue con RUTAS_SEMILLA")
     parser.add_argument("--fuente", choices=("sintetica", "osm"),
                         help="sobrescribe RUTAS_FUENTE (osm = cajeros reales del catalogo de OpenStreetMap)")
     parser.add_argument("--distancia", choices=("linea_recta", "vial"),
@@ -82,6 +92,14 @@ def main(argv: list[str] | None = None) -> int:
             cfg = cfg.con_distancia(args.distancia)
         if args.fuente:
             cfg = cfg.con_fuente(args.fuente)
+        if args.shots is not None:
+            cfg = cfg.con_shots(args.shots)
+        if args.backend:
+            cfg = cfg.con_backend(args.backend)
+        if cfg.sampler == "ibm" and args.angulos_gps == "optimizado":
+            raise ErrorDeConfiguracion(
+                "--angulos-gps optimizado no esta permitido con --sampler ibm: "
+                "GPS en n=4 son 54 qubits y optimizarlos en local no justifica gastar la cuota. Usa rampa_lineal.")
     except ErrorDeConfiguracion as exc:
         print(f"Error de configuracion: {exc}", file=sys.stderr)
         return 2
@@ -101,7 +119,7 @@ def main(argv: list[str] | None = None) -> int:
               f"{info['qubits_activos']} qubits activos). No se uso tiempo de QPU.")
         return 0
     if args.descargar_cajeros:
-        from .cajeros_osm import ErrorDeCatalogo, descargar, guardar_catalogo
+        from .cajeros_osm import descargar, guardar_catalogo
         try:
             catalogo = descargar(args.descargar_cajeros)
         except ErrorDeCatalogo as exc:
@@ -132,14 +150,19 @@ def main(argv: list[str] | None = None) -> int:
 
     marca = datetime.now().strftime("%Y%m%d-%H%M%S-%f")[:-3]
     nombre = f"corridas_i{args.instancia}_n{args.cajeros}_{cfg.sampler}_{marca}"
-    ruta_pkl = cfg.directorio_salida / "crudos" / f"{nombre}.pkl"
+    destino = directorio_de_salida(cfg)
+    ruta_pkl = destino / "crudos" / f"{nombre}.pkl"
     try:
-        lote = ejecutar_experimento(args.cajeros, args.corridas, cfg, args.instancia, ruta_pkl)
-    except (ErrorDeDistancias, ErrorDeCatalogo, ValueError, ErrorDeMuestreo) as exc:
+        lote = ejecutar_experimento(
+            args.cajeros, args.corridas, cfg, args.instancia, ruta_pkl,
+            formulaciones=FORMULACIONES_CLI[args.formulaciones],
+            angulos={"GPS": args.angulos_gps, "QUBO": args.angulos_qubo},
+            semilla_base=args.semilla_base)
+    except (ErrorDeDistancias, ErrorDeCatalogo, ValueError, ErrorDeMuestreo, FileExistsError) as exc:
         log.error("%s", exc)
         return 1
     log.info("Lote crudo guardado en %s", ruta_pkl)
-    return _escribir_json(lote, cfg.directorio_salida / f"{nombre}.json")
+    return _escribir_json(lote, destino / f"{nombre}.json")
 
 
 if __name__ == "__main__":

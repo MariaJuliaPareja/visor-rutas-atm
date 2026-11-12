@@ -1,0 +1,34 @@
+% Tabla del poster. Generada por scripts/figuras_poster.py.
+% Incluir el entorno table; el documento es compilable con XeLaTeX.
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage[paperwidth=42cm,paperheight=16cm,margin=0.8cm]{geometry}
+\begin{document}
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}llrlllll@{}}
+\toprule
+$n$ & Formulación y condición & $N$ & Factibles estrictas & Rutas óptimas & Brecha mediana & Qubits & Puertas de 2 qubits \\
+ &  &  & $k/N$ (Wilson 95\,\%) & $k/N$ & $(E-E^*)/|E^*|$ &  & mín.--máx. \\
+\midrule
+3 & QUBO, azar & 20 & 17/20 (0{,}64--0{,}95) & 17/20 & 0 & 9 & pendiente \\
+3 & QUBO, rampa fija & pendiente & pendiente & pendiente & pendiente & pendiente & pendiente \\
+3 & QUBO, ángulos optimizados (ibm_fez) & 10 & 10/10 (0{,}72--1{,}00) & 10/10 & 0 & 9 & 118--145 \\
+3 & GPS, azar & 20 & 0/20 (0{,}00--0{,}16) & 0/20 & 0{,}335 & 30 & pendiente \\
+3 & GPS, rampa fija (ibm_fez) & 10 & 0/10 (0{,}00--0{,}28) & 0/10 & 0{,}484 & 30 & 208--235 \\
+3 & GPS, ángulos optimizados & pendiente & pendiente & pendiente & pendiente & pendiente & pendiente \\
+\midrule
+4 & QUBO, azar & 20 & 0/20 (0{,}00--0{,}16) & 0/20 & 0{,}254 & 16 & pendiente \\
+4 & QUBO, rampa fija (ibm_kingston) & 20 & 0/20 (0{,}00--0{,}16) & 0/20 & 0{,}254 & 16 & 421--502 \\
+4 & QUBO, ángulos optimizados (ibm_kingston) & 20 & 12/20 (0{,}39--0{,}78) & 8/20 & 0{,}0024 & 16 & 421--502 \\
+4 & GPS, azar & 20 & 0/20 (0{,}00--0{,}16) & 0/20 & 0{,}462 & 54 & pendiente \\
+4 & GPS, rampa fija (ibm_kingston) & 10 & 0/10 (0{,}00--0{,}28) & 0/10 & 0{,}590 & 54 & 693--735 \\
+4 & GPS, ángulos optimizados & pendiente & pendiente & pendiente & pendiente & pendiente & pendiente \\
+\bottomrule
+\end{tabular}
+\par\vspace{0.5em}
+{\normalsize criterio estricto; un solo backend por celda; 200 shots; simulador e IBM no se mezclan\par}
+\end{table}
+\end{document}

@@ -54,10 +54,17 @@ describe("CMP-06 validacion compartida con el pipeline", () => {
   it("rechaza referencias a cajeros inexistentes y factibilidad incoherente", () => {
     const d = doc();
     d.corridas[0].ruta.secuencia = [0, 1, 7];
-    d.corridas[1].ruta.factible = !d.corridas[1].ruta.factible;
+    d.corridas[1].ruta.secuencia = [0, 0, 1];
+    d.corridas[1].ruta.factible = true;
     const e = rechazoEn(JSON.stringify(d));
     expect(e.paso).toBe(5);
     expect(e.detalles).toHaveLength(2);
+  });
+
+  it("admite factible falso aunque la secuencia sea una permutacion", () => {
+    const d = doc();
+    d.corridas[0].ruta.factible = false;
+    expect(procesarTexto(JSON.stringify(d)).advertencias).toEqual([]);
   });
 
   it("advierte, sin bloquear, si la distancia almacenada no coincide", () => {

@@ -5,7 +5,7 @@ import { autoTable } from "jspdf-autotable";
 import { FORMULACIONES, formato, resumenGerencial } from "../metricas/metricas.js";
 
 export const NOTA_INFACTIBLE =
-  "Ruta infactible: no visita cada cajero exactamente una vez. Su gap no es comparable y se excluye del resumen.";
+  "Ruta infactible: no cumple las restricciones de la formulación. Su gap no es comparable y se excluye del resumen.";
 
 export function nombreReporte(doc) {
   return `reporte_instancia${doc.instancia.id_instancia}.pdf`;

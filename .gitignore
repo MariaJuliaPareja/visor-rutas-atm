@@ -15,6 +15,7 @@ venv/
 
 # Resultados generados por el pipeline (se regeneran; el ejemplo versionado esta en ejemplos/)
 pipeline/salidas/
+pipeline/runs_test/
 *.pkl
 
 # Node

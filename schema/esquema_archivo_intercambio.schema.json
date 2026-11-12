@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "esquema_archivo_intercambio_v1.2",
+  "$id": "esquema_archivo_intercambio_v1.3",
   "title": "Archivo de intercambio - Sistema de Optimizacion de Rutas ATM",
-  "description": "Contrato entre el pipeline (CMP-05) y el visor web (CMP-06). Version 1.2: agrega el sampler ibm (QAOA en IBM Quantum, DEC-08), la metrica opcional de la matriz de distancias (DEC-07) y, opcionales, nombre/direccion/rol de cada cajero, la matriz de tiempos de manejo y la fuente de las ubicaciones (DEC-09). Version 1.1: agrega el campo sampler a cada corrida y admite null en las metricas propias del QPU cuando la corrida no usa D-Wave (DEC-01). Las reglas entre entidades se verifican por programacion en ambos lados.",
+  "description": "Contrato entre el pipeline (CMP-05) y el visor web (CMP-06). Version 1.3: admite el sampler aleatorio, un control local sin hardware. Version 1.2: agrega el sampler ibm (QAOA en IBM Quantum, DEC-08), la metrica opcional de la matriz de distancias (DEC-07) y, opcionales, nombre/direccion/rol de cada cajero, la matriz de tiempos de manejo y la fuente de las ubicaciones (DEC-09). Version 1.1: agrega el campo sampler a cada corrida y admite null en las metricas propias del QPU cuando la corrida no usa D-Wave (DEC-01). Las reglas entre entidades se verifican por programacion en ambos lados.",
   "type": "object",
   "required": ["version_esquema", "fecha_generacion", "instancia", "corridas"],
   "additionalProperties": false,
@@ -134,14 +134,17 @@
       "properties": {
         "id_corrida": { "type": "integer", "minimum": 1 },
         "formulacion": { "type": "string", "enum": ["GPS", "QUBO"] },
-        "sampler": { "type": "string", "enum": ["simulado", "qpu", "ibm"] },
+        "sampler": { "type": "string", "enum": ["simulado", "qpu", "ibm", "aleatorio"] },
         "parametros": { "type": ["object", "null"] },
         "ruta": {
           "type": "object",
           "required": ["factible", "secuencia"],
           "additionalProperties": false,
           "properties": {
-            "factible": { "type": "boolean" },
+            "factible": {
+              "type": "boolean",
+              "description": "True solo si la cadena cumple todas las restricciones exactamente-uno de la formulacion (QUBO: cada cajero en una posicion y cada posicion con un cajero; GPS: un r por arista, una salida y una entrada r=1, una orientacion r=2) y la secuencia decodificada es una permutacion de los cajeros. False puede coincidir con una secuencia que igual es una permutacion."
+            },
             "secuencia": {
               "type": "array",
               "minItems": 1,

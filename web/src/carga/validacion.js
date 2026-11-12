@@ -4,7 +4,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import esquema from "../../../schema/esquema_archivo_intercambio.schema.json";
 
-export const VERSION_ESQUEMA = "1.2";
+export const VERSION_ESQUEMA = "1.3";
 export const LIMITE_BYTES = 1024 * 1024; // 1 MB: una instancia de 100 cajeros con decenas de corridas ocupa menos
 
 const ajv = new Ajv2020({ allErrors: true, strict: false, verbose: true });
@@ -19,6 +19,8 @@ const MIGRACIONES = {
   }),
   // 1.2 solo agrega valores opcionales (sampler ibm, metrica, nombres, tiempos y fuente)
   "1.1": (doc) => ({ ...doc, version_esquema: "1.2" }),
+  // 1.3 admite el sampler aleatorio; los documentos 1.2 no cambian de datos
+  "1.2": (doc) => ({ ...doc, version_esquema: "1.3" }),
 };
 
 export class ErrorDeCarga extends Error {
@@ -114,7 +116,7 @@ export function validarReglas(doc, toleranciaKm = 0.01) {
       errores.push(`Corrida ${c.id_corrida}: la ruta referencia a un cajero inexistente`);
       continue;
     }
-    if (c.ruta.factible !== esPermutacion(s)) errores.push(`Corrida ${c.id_corrida}: el campo 'factible' no coincide con la secuencia`);
+    if (c.ruta.factible && !esPermutacion(s)) errores.push(`Corrida ${c.id_corrida}: 'factible' exige una secuencia que visite cada cajero una vez`);
     if (c.sampler === "qpu" && c.metricas.tiempo_anneal === null)
       errores.push(`Corrida ${c.id_corrida}: una corrida en QPU debe registrar tiempo_anneal`);
     if (Math.abs(distanciaRuta(s, d) - c.metricas.distancia_total) > toleranciaKm)

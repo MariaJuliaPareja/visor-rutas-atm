@@ -11,6 +11,8 @@ import logging
 from collections.abc import Callable
 from dataclasses import dataclass
 
+import numpy as np
+
 from .formulacion_tsp import ModeloQUBO
 
 log = logging.getLogger(__name__)
@@ -90,6 +92,25 @@ def _metadatos_qpu(respuesta, sampler) -> dict:
         "chain_strength": contexto.get("chain_strength"),
         "qpu_access_time_us": timing.get("qpu_access_time"),
     }
+
+
+def muestrear_aleatorio(modelo: ModeloQUBO, shots: int, semilla: int) -> ResultadoMuestreo:
+    """Bits uniformes, misma energia del BQM. Sin hardware. La semilla fija la muestra."""
+    rng = np.random.default_rng(semilla)
+    variables = list(modelo.bqm.variables)
+    mejor_bits, mejor_energia = None, float("inf")
+    for _ in range(shots):
+        bits = {v: int(rng.integers(0, 2)) for v in variables}
+        energia = modelo.bqm.energy(bits)
+        if energia < mejor_energia:
+            mejor_bits, mejor_energia = bits, energia
+    return ResultadoMuestreo(mejor_bits, float(mejor_energia), None, None, {
+        "shots": shots, "semilla": semilla, "backend": None, "job_id": None,
+        "optimizador": None, "maxiter": None, "metodo_angulos": None,
+        "qubits_logicos": modelo.num_variables, "qubits_fisicos": None,
+        "profundidad": None, "profundidad_decompose": None, "puertas_2q": None,
+        "qpu_segundos": None,
+    })
 
 
 def muestrear(modelo: ModeloQUBO, sampler: str, num_reads: int, semilla: int,

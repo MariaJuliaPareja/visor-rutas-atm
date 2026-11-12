@@ -8,7 +8,7 @@ import os
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-SAMPLERS_VALIDOS = ("simulado", "qpu", "ibm")
+SAMPLERS_VALIDOS = ("simulado", "qpu", "ibm", "aleatorio")
 DISTANCIAS_VALIDAS = ("linea_recta", "vial")
 FUENTES_VALIDAS = ("sintetica", "osm")
 CATALOGO_POR_DEFECTO = "datos/cajeros_bbva_arequipa.json"
@@ -91,6 +91,7 @@ class Configuracion:
     directorio_salida: Path
     nivel_log: str
     annealing_time_us: int = 20
+    maxiter: int = 120
     distancia: str = "linea_recta"
     osrm_url: str = OSRM_PUBLICO
     qaoa_reps: int = 1
@@ -98,6 +99,7 @@ class Configuracion:
     catalogo: Path = Path(CATALOGO_POR_DEFECTO)
     base: tuple = BASE_POR_DEFECTO
     radio_km: float = 4.0
+    ibm_backend: str | None = None
 
     @classmethod
     def desde_entorno(cls) -> "Configuracion":
@@ -118,6 +120,7 @@ class Configuracion:
             directorio_salida=Path(os.getenv("RUTAS_DIR_SALIDA", "salidas")),
             nivel_log=os.getenv("RUTAS_NIVEL_LOG", "INFO").upper(),
             annealing_time_us=_entero("RUTAS_ANNEALING_TIME", 20),
+            maxiter=_entero("RUTAS_MAXITER", 120),
             distancia=distancia,
             qaoa_reps=_entero("RUTAS_QAOA_REPS", 1),
             fuente=_opcion("RUTAS_FUENTE", "sintetica", FUENTES_VALIDAS),
@@ -141,3 +144,14 @@ class Configuracion:
         if fuente not in FUENTES_VALIDAS:
             raise ErrorDeConfiguracion(f"La fuente debe ser una de {FUENTES_VALIDAS}; se recibio {fuente!r}")
         return replace(self, fuente=fuente)
+
+    def con_shots(self, shots: int) -> "Configuracion":
+        if shots < 1:
+            raise ErrorDeConfiguracion(f"Los shots deben ser un entero positivo; se recibio {shots}")
+        return replace(self, num_reads=shots)
+
+    def con_backend(self, nombre: str) -> "Configuracion":
+        nombre = nombre.strip()
+        if not nombre:
+            raise ErrorDeConfiguracion("El backend IBM no puede ser vacio")
+        return replace(self, ibm_backend=nombre)

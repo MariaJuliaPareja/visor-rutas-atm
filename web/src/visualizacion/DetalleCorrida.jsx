@@ -1,6 +1,9 @@
 import { formato } from "../metricas/metricas.js";
+import Termino from "../glosario/Termino.jsx";
 
-const NOMBRE_SAMPLER = { simulado: "Recocido simulado", qpu: "QPU (D-Wave Leap)", ibm: "QAOA (IBM Quantum)" };
+const NOMBRE_SAMPLER = {
+  simulado: "Recocido simulado", qpu: "QPU (D-Wave Leap)", ibm: "QAOA (IBM Quantum)", aleatorio: "Control aleatorio",
+};
 
 // PAN-04: detalle de una corrida. La secuencia en texto es la alternativa accesible del mapa.
 export default function DetalleCorrida({ corrida, onCerrar }) {
@@ -11,25 +14,25 @@ export default function DetalleCorrida({ corrida, onCerrar }) {
   return (
     <aside className="detalle" aria-label={`Detalle de la corrida ${corrida.id_corrida}`}>
       <header>
-        <h2>Corrida {corrida.id_corrida} · {corrida.formulacion}</h2>
+        <h2>Corrida {corrida.id_corrida} · <Termino id={corrida.formulacion === "GPS" ? "gps" : "qubo"}>{corrida.formulacion}</Termino></h2>
         <button className="icono" onClick={onCerrar} aria-label="Cerrar detalle">×</button>
       </header>
-      {ruta.factible ? <span className="etiqueta ok">Factible</span> : <span className="etiqueta mal">Infactible</span>}
-      {!ruta.factible && <p className="mensaje advertencia">Esta ruta no visita cada cajero exactamente una vez.</p>}
+      {ruta.factible ? <span className="etiqueta ok"><Termino id="factibilidad">Factible</Termino></span> : <span className="etiqueta mal"><Termino id="factibilidad">Infactible</Termino></span>}
+      {!ruta.factible && <p className="mensaje advertencia">Esta cadena no cumple las <Termino id="criterio-estricto">restricciones de la formulación</Termino>.</p>}
 
       <h3>Métricas</h3>
       <dl className="metricas">
-        <div><dt>Sampler</dt><dd>{NOMBRE_SAMPLER[corrida.sampler] ?? corrida.sampler}</dd></div>
-        {corrida.parametros?.backend && <div><dt>Backend</dt><dd>{corrida.parametros.backend}</dd></div>}
+        <div><dt><Termino id="sampler">Sampler</Termino></dt><dd>{NOMBRE_SAMPLER[corrida.sampler] ?? corrida.sampler}</dd></div>
+        {corrida.parametros?.backend && <div><dt><Termino id="backend">Backend</Termino></dt><dd>{corrida.parametros.backend}</dd></div>}
         {corrida.parametros?.solver && <div><dt>Solver</dt><dd>{corrida.parametros.solver}</dd></div>}
         {corrida.parametros?.qubits_fisicos && corrida.sampler === "qpu" && (
-          <div><dt>Qubits físicos (cadena máx.)</dt><dd>{corrida.parametros.qubits_fisicos} ({corrida.parametros.cadena_max})</dd></div>
+          <div><dt><Termino id="qubits">Qubits físicos</Termino> (cadena máx.)</dt><dd>{corrida.parametros.qubits_fisicos} ({corrida.parametros.cadena_max})</dd></div>
         )}
         {corrida.sampler === "ibm" && corrida.parametros && (
-          <div><dt>Circuito QAOA</dt><dd>{corrida.parametros.qubits_fisicos} qubits · profundidad {corrida.parametros.profundidad} · {corrida.parametros.puertas_2q} puertas de 2 qubits</dd></div>
+          <div><dt><Termino id="qaoa">Circuito QAOA</Termino></dt><dd>{corrida.parametros.qubits_fisicos} <Termino id="qubits">qubits</Termino> · profundidad {corrida.parametros.profundidad} · {corrida.parametros.puertas_2q} <Termino id="puertas-2q">puertas de 2 qubits</Termino></dd></div>
         )}
         <div><dt>Distancia total</dt><dd>{formato(metricas.distancia_total)} km</dd></div>
-        <div><dt>Gap respecto a la línea base</dt><dd>{corrida.gap === null ? "No comparable" : `${formato(corrida.gap)} %`}</dd></div>
+        <div><dt><Termino id="brecha">Gap</Termino> respecto a la <Termino id="linea-base">línea base</Termino></dt><dd>{corrida.gap === null ? "No comparable" : `${formato(corrida.gap)} %`}</dd></div>
         <div><dt>Tiempo de recocido</dt><dd>{metricas.tiempo_anneal === null ? noAplica : `${formato(metricas.tiempo_anneal, 0)} µs`}</dd></div>
         <div><dt>Chain break fraction</dt><dd>{metricas.chain_break_fraction === null ? noAplica : formato(metricas.chain_break_fraction, 3)}</dd></div>
       </dl>

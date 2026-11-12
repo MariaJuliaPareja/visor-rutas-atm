@@ -1,5 +1,25 @@
 # Registro de cambios
 
+## Ayuda contextual del visor
+
+### Visor web
+- El encabezado abre un glosario con búsqueda. Los términos técnicos de la comparación, la tabla de corridas, el detalle y la leyenda del mapa muestran su definición al pasar el cursor, al enfocarlos o al tocarlos.
+- El esquema del archivo de intercambio y la validación no cambian.
+
+## Factibilidad estricta
+
+### Pipeline (Python)
+- `factible` es verdadero solo si la cadena cumple las restricciones exactamente-uno de la formulación y la secuencia decodificada es una permutación. Los lotes nuevos guardan `parametros.criterio_factibilidad = "estricto"`.
+- Los lotes ya escritos no se modifican. `scripts/copias_estrictas.py` genera `*_estricto.json` desde el `.pkl`.
+- `scripts/resumen_celdas.py` no mezcla criterios y, si existe la copia estricta, ignora el JSON laxo original.
+- Esquema 1.3: el sampler admite `aleatorio`. Flags `--formulaciones`, `--angulos-gps`, `--angulos-qubo`, `--shots`, `--backend` y `--semilla-base`. La semilla de la instancia no cambia con `--semilla-base`. `--angulos-gps optimizado` con IBM se rechaza antes de muestrear.
+
+### Visor web
+- La validación solo rechaza `factible: true` cuando la secuencia no es una permutación. `factible: false` sigue siendo válido aunque la secuencia sí lo sea.
+
+### Contrato
+- La descripción del campo `factible` pasa a ser la factibilidad estricta de la formulación, no solo la permutación de la secuencia.
+
 ## v0.9.0 · Hardware cuántico real, cajeros reales y resumen para gerencia
 
 ### Pipeline (Python)

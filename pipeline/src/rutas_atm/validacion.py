@@ -29,7 +29,17 @@ def _1_1_a_1_2(doc: dict) -> dict:
     return doc
 
 
-MIGRACIONES = {"1.0": ("1.1", _1_0_a_1_1), "1.1": ("1.2", _1_1_a_1_2)}
+def _1_2_a_1_3(doc: dict) -> dict:
+    """La 1.3 admite el sampler aleatorio. Los documentos 1.2 no cambian de datos."""
+    doc["version_esquema"] = "1.3"
+    return doc
+
+
+MIGRACIONES = {
+    "1.0": ("1.1", _1_0_a_1_1),
+    "1.1": ("1.2", _1_1_a_1_2),
+    "1.2": ("1.3", _1_2_a_1_3),
+}
 
 
 def migrar(doc: dict) -> dict:
@@ -80,8 +90,9 @@ def validar_reglas(doc: dict, tolerancia_km: float = 0.01) -> tuple[list[str], l
         if any(i >= n for i in sec):
             errores.append(f"corrida {c['id_corrida']}: referencia a un cajero inexistente")
             continue
-        if c["ruta"]["factible"] != (sorted(sec) == list(range(n))):
-            errores.append(f"corrida {c['id_corrida']}: 'factible' no coincide con la secuencia")
+        if c["ruta"]["factible"] and sorted(sec) != list(range(n)):
+            errores.append(
+                f"corrida {c['id_corrida']}: 'factible' exige una secuencia que visite cada cajero una vez")
         if c["sampler"] == "qpu" and c["metricas"]["tiempo_anneal"] is None:
             errores.append(f"corrida {c['id_corrida']}: una corrida en QPU debe registrar tiempo_anneal")
         recalculada = sum(d[sec[k]][sec[(k + 1) % len(sec)]] for k in range(len(sec))) if len(sec) > 1 else 0

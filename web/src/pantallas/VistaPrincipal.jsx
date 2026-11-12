@@ -4,6 +4,8 @@ import { FORMULACIONES, SUPUESTOS, calcularMetricas, formato, resumenGerencial }
 import PanelGerencia from "./PanelGerencia.jsx";
 import MapaRutas from "../visualizacion/MapaRutas.jsx";
 import DetalleCorrida from "../visualizacion/DetalleCorrida.jsx";
+import PanelGlosario from "../glosario/PanelGlosario.jsx";
+import Termino from "../glosario/Termino.jsx";
 
 const CLAVE_SUPUESTOS = "supuestos_gerencia";
 
@@ -76,8 +78,9 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
       <header className="barra">
         <h1>Visor de Rutas ATM</h1>
         <p className="contexto">
-          Instancia {inst.id_instancia} · {inst.fuente?.tipo === "osm" ? `cajeros reales ${inst.fuente.entidad ?? ""} (OpenStreetMap)` : "datos sintéticos"} · {inst.cajeros.length} puntos · esquema {doc.version_esquema}
+          <Termino id="instancia">Instancia</Termino> {inst.id_instancia} · {inst.fuente?.tipo === "osm" ? `cajeros reales ${inst.fuente.entidad ?? ""} (OpenStreetMap)` : "datos sintéticos"} · {inst.cajeros.length} puntos · esquema {doc.version_esquema}
         </p>
+        <PanelGlosario />
         <button className="secundario" onClick={onCargarOtro}>Cargar otro archivo</button>
         <button className="principal" onClick={exportar} disabled={exportacion === "generando"}>
           {exportacion === "generando" ? "Generando reporte…" : "Exportar reporte"}
@@ -93,14 +96,14 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
               const r = resumen[f];
               return (
                 <article key={f} className="tarjeta">
-                  <h2>{f}</h2>
+                  <h2><Termino id={f === "GPS" ? "gps" : "qubo"}>{f}</Termino></h2>
                   {r.total === 0 ? (
                     <p className="vacio">Sin corridas en este archivo</p>
                   ) : (
                     <dl>
-                      <div><dt>Mejor gap</dt><dd>{r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`}</dd></div>
-                      <div><dt>Rutas factibles</dt><dd>{r.factibles} / {r.total}</dd></div>
-                      <div><dt>% de ahorro respecto a GPS</dt><dd>{f === "GPS" ? "Referencia" : r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`}</dd></div>
+                      <div><dt><Termino id="brecha">Mejor gap</Termino></dt><dd>{r.mejorGap === null ? "Sin rutas factibles" : `${formato(r.mejorGap)} %`}</dd></div>
+                      <div><dt><Termino id="factibilidad">Rutas factibles</Termino></dt><dd>{r.factibles} / {r.total}</dd></div>
+                      <div><dt>% de ahorro respecto a <Termino id="gps">GPS</Termino></dt><dd>{f === "GPS" ? "Referencia" : r.ahorroVsGps === null ? "No calculable" : `${formato(r.ahorroVsGps)} %`}</dd></div>
                     </dl>
                   )}
                   {r.motivoAhorro && <p className="nota">{r.motivoAhorro}</p>}
@@ -123,8 +126,8 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
               <thead>
                 <tr>
                   <th scope="col">Corrida</th><th scope="col">Formulación</th>
-                  <th scope="col" className="num">Distancia (km)</th><th scope="col" className="num">Gap (%)</th>
-                  <th scope="col" className="num">Chain break fraction</th><th scope="col">Factible</th>
+                  <th scope="col" className="num">Distancia (km)</th><th scope="col" className="num"><Termino id="brecha">Gap</Termino> (%)</th>
+                  <th scope="col" className="num">Chain break fraction</th><th scope="col"><Termino id="factibilidad">Factible</Termino></th>
                 </tr>
               </thead>
               <tbody>
@@ -134,16 +137,16 @@ export default function VistaPrincipal({ doc, advertencias, onCargarOtro }) {
                     onClick={() => setSeleccion(c.id_corrida)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSeleccion(c.id_corrida); } }}>
                     <td>{c.id_corrida}</td>
-                    <td>{c.formulacion}</td>
+                    <td><Termino id={c.formulacion === "GPS" ? "gps" : "qubo"}>{c.formulacion}</Termino></td>
                     <td className="num">{formato(c.metricas.distancia_total)}{conAdvertencia.has(c.id_corrida) && <span className="icono-adv" title="Distancia inconsistente"> *</span>}</td>
                     <td className="num">{c.gap === null ? <NoComparable /> : formato(c.gap)}</td>
                     <td className="num">{c.metricas.chain_break_fraction === null ? "No aplica" : formato(c.metricas.chain_break_fraction, 3)}</td>
-                    <td>{c.ruta.factible ? <span className="etiqueta ok">Sí</span> : <span className="etiqueta mal">Infactible</span>}</td>
+                    <td>{c.ruta.factible ? <span className="etiqueta ok">Sí</span> : <span className="etiqueta mal"><Termino id="factibilidad">Infactible</Termino></span>}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <p className="nota">El resumen solo considera rutas factibles. Línea base (Held-Karp): {formato(inst.linea_base.dist_optima)} km.</p>
+            <p className="nota">El resumen solo considera <Termino id="factibilidad">rutas factibles</Termino>. <Termino id="linea-base">Línea base (Held-Karp)</Termino>: {formato(inst.linea_base.dist_optima)} km.</p>
           </section>
         </section>
 

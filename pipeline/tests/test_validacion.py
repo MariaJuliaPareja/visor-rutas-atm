@@ -33,7 +33,7 @@ def test_ejemplo_del_repositorio_es_valido():
     (lambda d: d["corridas"][0].update(formulacion="GPU"), "formulacion"),
     (lambda d: d["instancia"]["matriz_distancias"]["distancias"][1].pop(), "matriz"),
     (lambda d: d["corridas"][0]["ruta"].update(secuencia=[0, 1, 7]), "inexistente"),
-    (lambda d: d["corridas"][0]["ruta"].update(factible=not d["corridas"][0]["ruta"]["factible"]), "factible"),
+    (lambda d: d["corridas"][0]["ruta"].update(secuencia=[0, 0, 1], factible=True), "factible"),
     (lambda d: d["corridas"][0].update(sampler="qpu"), "tiempo_anneal"),
 ])
 def test_rechazos(documento, romper, fragmento):
@@ -41,6 +41,13 @@ def test_rechazos(documento, romper, fragmento):
     romper(roto)
     errores, _ = validar(roto)
     assert errores and any(fragmento in e for e in errores)
+
+
+def test_factible_falso_sigue_siendo_valido_si_la_secuencia_es_permutacion(documento):
+    alterado = copy.deepcopy(documento)
+    alterado["corridas"][0]["ruta"]["factible"] = False
+    errores, _ = validar(alterado)
+    assert errores == []
 
 
 def test_advertencia_por_distancia_inconsistente(documento):

@@ -44,7 +44,11 @@ Escribe el lote crudo `salidas/crudos/corridas_i1_n5_simulado_<fecha>.pkl` (desp
 ```bash
 PYTHONPATH=src python -m rutas_atm --convertir salidas/crudos/<lote>.pkl   # regenera el .json desde el .pkl
 PYTHONPATH=src python -m rutas_atm --validar salidas/<archivo>.json        # valida un .json existente
+python scripts/copias_estrictas.py                                         # *_estricto.json desde cada .pkl, sin tocar el original
+python scripts/resumen_celdas.py salidas                                   # no mezcla criterios; ignora el laxo si existe la copia
 ```
+
+`factible` es verdadero solo si la cadena cumple las restricciones exactamente-uno de su formulación y la secuencia decodificada visita cada cajero una vez. Una secuencia que es permutación puede seguir marcada como infactible. Los lotes nuevos lo registran en `parametros.criterio_factibilidad`.
 
 ### 2. Visor web
 
@@ -54,7 +58,7 @@ npm ci
 npm run dev        # http://localhost:5173
 ```
 
-Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador; para dibujar las rutas por las calles, solo las coordenadas de los cajeros (sintéticas) se envían al servicio de rutas OSRM. Con `VITE_OSRM_URL=off` se dibujan en línea recta y nada sale del navegador. Cada archivo válido queda en el historial del navegador (IndexedDB) para reabrirlo sin volver a subirlo; **Exportar reporte** descarga un PDF con las mismas cifras de la pantalla.
+Carga el `.json` generado, o el de ejemplo en `ejemplos/corridas_ejemplo.json`. El archivo se procesa en el navegador; para dibujar las rutas por las calles, solo las coordenadas de los cajeros (sintéticas) se envían al servicio de rutas OSRM. Con `VITE_OSRM_URL=off` se dibujan en línea recta y nada sale del navegador. Cada archivo válido queda en el historial del navegador (IndexedDB) para reabrirlo sin volver a subirlo; **Exportar reporte** descarga un PDF con las mismas cifras de la pantalla. El botón **Glosario** del encabezado lista los términos técnicos; en la pantalla, cada término muestra su definición al pasar el cursor, al enfocarlos o al tocarlos, sin pasos extra para cargar un archivo o leer las métricas.
 
 ### 3. Pruebas
 
@@ -119,7 +123,7 @@ Guía completa: `docs/ejecucion-ibm-quantum.md`.
 ```
 schema/        contrato del archivo de intercambio (JSON Schema 2020-12), compartido
 pipeline/      src/rutas_atm (un módulo por componente CMP-01 a CMP-05), tests/, requirements*.txt
-web/src/       carga/, metricas/, visualizacion/, reportes/ (CMP-06 a CMP-09), persistencia/ (IndexedDB), pantallas/
+web/src/       carga/, metricas/, visualizacion/, reportes/ (CMP-06 a CMP-09), persistencia/ (IndexedDB), pantallas/, glosario/
 ejemplos/      archivo de intercambio de ejemplo (datos sintéticos)
 docs/          decisiones, integración, incidencias, modelo de datos NoSQL y evidencias
 ```

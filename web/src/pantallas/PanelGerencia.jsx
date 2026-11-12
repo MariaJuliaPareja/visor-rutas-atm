@@ -1,4 +1,5 @@
 import { formato } from "../metricas/metricas.js";
+import Termino from "../glosario/Termino.jsx";
 
 const CAMPOS = [
   ["rendimiento_km_l", "Rendimiento del vehículo", "km/l"],
@@ -22,7 +23,7 @@ export default function PanelGerencia({ resumen, onCambiarSupuesto, onRestablece
 
       {resumen.sinAhorro ? (
         <p className="mensaje advertencia">
-          En esta instancia el orden de la planilla ya es la mejor ruta: no hay ahorro que reportar. Con más
+          En esta <Termino id="instancia">instancia</Termino> el orden de la planilla ya es la mejor ruta: no hay ahorro que reportar. Con más
           cajeros por recorrido es menos probable que el orden de la planilla sea el óptimo.
         </p>
       ) : (
@@ -46,7 +47,7 @@ export default function PanelGerencia({ resumen, onCambiarSupuesto, onRestablece
       </table>
       <p className="nota">
         Propuesta: {propuesta.origen}.{" "}
-        {resumen.alcanzaOptimo ? "Coincide con la mejor ruta posible (Held-Karp)." : `La mejor ruta posible mide ${formato(resumen.optimoKm)} km (Held-Karp).`}
+        {resumen.alcanzaOptimo ? <>Coincide con la mejor ruta posible (<Termino id="linea-base">Held-Karp</Termino>).</> : <>La mejor ruta posible mide {formato(resumen.optimoKm)} km (<Termino id="linea-base">Held-Karp</Termino>).</>}
       </p>
 
       <details className="supuestos">

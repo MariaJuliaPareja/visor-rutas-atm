@@ -3,6 +3,7 @@ import { MapContainer, Marker, Polyline, TileLayer, Tooltip, useMap } from "reac
 import L from "leaflet";
 import { formato } from "../metricas/metricas.js";
 import { TRAZADO_ACTIVO, trazarPorCalles } from "./trazadoVial.js";
+import Termino from "../glosario/Termino.jsx";
 
 const icono = (id, alerta, deposito) =>
   L.divIcon({
@@ -73,7 +74,7 @@ export default function MapaRutas({ instancia, corrida, panelAbierto = false }) 
           <h2>Mapa de rutas</h2>
           <p>{real ? `${instancia.cajeros.length - 1} cajeros ${instancia.fuente.entidad ?? ""} · base de operaciones (B) en el punto 0` : `${instancia.cajeros.length} cajeros · depósito en el punto 0`} · distancias {metrica === "vial" ? "por calles" : "en línea recta"}</p>
         </div>
-        {corrida && <p className="chip">Corrida {corrida.id_corrida} · <b>{corrida.formulacion}</b> · {formato(corrida.metricas.distancia_total)} km</p>}
+        {corrida && <p className="chip">Corrida {corrida.id_corrida} · <b><Termino id={corrida.formulacion === "GPS" ? "gps" : "qubo"}>{corrida.formulacion}</Termino></b> · {formato(corrida.metricas.distancia_total)} km</p>}
       </div>
       <MapContainer bounds={limites} scrollWheelZoom className="lienzo">
         <AjustarVista limites={limites} panelAbierto={panelAbierto} />
@@ -93,7 +94,7 @@ export default function MapaRutas({ instancia, corrida, panelAbierto = false }) 
         ))}
       </MapContainer>
       <ul className="leyenda">
-        <li><span className="linea punteada" /> Ruta óptima (Held-Karp)</li>
+        <li><span className="linea punteada" /> Ruta óptima (<Termino id="linea-base">Held-Karp</Termino>)</li>
         <li><span className="linea continua" /> Ruta seleccionada</li>
         {TRAZADO_ACTIVO && <li className="nota-trazado">{porCalles ? "Trazado por calles (OpenStreetMap · OSRM)"
           : fallo ? "Servicio de rutas no disponible: trazado en línea recta" : "Trazando por calles…"}</li>}

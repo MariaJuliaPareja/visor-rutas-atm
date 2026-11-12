@@ -1,0 +1,100 @@
+[
+  {
+    "id": "factibilidad",
+    "termino": "Factibilidad",
+    "definicion": "Una ruta es factible solo si la solución cumple todas las reglas del modelo: cada cajero en una sola posición y cada posición con un solo cajero. Que la secuencia parezca completa no basta.",
+    "detalle": "El criterio estricto revisa esos grupos de la formulación y, además, que la secuencia visite cada cajero una vez."
+  },
+  {
+    "id": "criterio-estricto",
+    "termino": "Criterio estricto",
+    "definicion": "La ruta cuenta como factible solo si cumple las reglas del modelo, no solo si la secuencia parece completa."
+  },
+  {
+    "id": "brecha",
+    "termino": "Brecha respecto al óptimo",
+    "definicion": "Cuánto más larga es la ruta frente a la mejor posible, en porcentaje. 0 % es el óptimo. Solo se calcula sobre rutas factibles.",
+    "detalle": "En el visor es (distancia − óptimo) / óptimo × 100. Una ruta infactible queda como no comparable y no entra en el resumen."
+  },
+  {
+    "id": "brecha-energia",
+    "termino": "Brecha de energía",
+    "definicion": "Qué tan lejos queda la mejor solución encontrada de la mejor que admite el modelo. 0 significa que se alcanzó. Sirve para comparar aunque ninguna ruta sea factible."
+  },
+  {
+    "id": "linea-base",
+    "termino": "Línea base exacta (Held-Karp)",
+    "definicion": "Método clásico que calcula la ruta realmente óptima cuando hay pocos cajeros. Es la referencia contra la que se mide todo."
+  },
+  {
+    "id": "qubo",
+    "termino": "QUBO",
+    "definicion": "Forma de plantear el problema con variables 0/1, una por cajero y posición. Usa menos qubits que GPS."
+  },
+  {
+    "id": "gps",
+    "termino": "GPS",
+    "definicion": "Otra forma de plantear el problema (González-Bermejo et al., 2022). En estas pruebas usó unas 3,4 veces más qubits que QUBO.",
+    "fuente": "González-Bermejo, Alonso-Linaje y Atchade-Adelomou, 2022."
+  },
+  {
+    "id": "qaoa",
+    "termino": "QAOA",
+    "definicion": "Algoritmo híbrido: un circuito cuántico con ángulos ajustables se mide muchas veces y un optimizador clásico mejora los ángulos."
+  },
+  {
+    "id": "shots",
+    "termino": "Shots",
+    "definicion": "Cuántas veces se mide el circuito en una ejecución. En estas corridas, 200."
+  },
+  {
+    "id": "angulos",
+    "termino": "Ángulos",
+    "definicion": "Parámetros del circuito. «Rampa fija» son valores predefinidos, sin ajustar. «Optimizados» se afinan con un optimizador clásico."
+  },
+  {
+    "id": "qubits",
+    "termino": "Qubits lógicos y físicos",
+    "definicion": "Los lógicos son las variables del problema. Los físicos son los que el chip usa de verdad después de adaptar el circuito."
+  },
+  {
+    "id": "puertas-2q",
+    "termino": "Puertas de 2 qubits",
+    "definicion": "Operaciones entre pares de qubits. Son las más propensas a error: más puertas suele significar más ruido."
+  },
+  {
+    "id": "ruido",
+    "termino": "Ruido",
+    "definicion": "Errores del hardware cuántico actual que empeoran el resultado de la medición."
+  },
+  {
+    "id": "azar",
+    "termino": "Control aleatorio",
+    "definicion": "Resultado de elegir bits al azar con el mismo número de shots. Sirve para ver si el circuito aporta algo."
+  },
+  {
+    "id": "replica",
+    "termino": "Réplica",
+    "definicion": "Repetición independiente del mismo experimento con otra semilla."
+  },
+  {
+    "id": "wilson",
+    "termino": "Intervalo de Wilson 95 %",
+    "definicion": "Rango plausible de la proporción real de aciertos, dado el número de réplicas. Con pocas réplicas el rango es muy ancho."
+  },
+  {
+    "id": "backend",
+    "termino": "Backend",
+    "definicion": "El computador cuántico de IBM que ejecutó el circuito, por ejemplo ibm_kingston."
+  },
+  {
+    "id": "sampler",
+    "termino": "Sampler",
+    "definicion": "De dónde salen las muestras: ibm es el hardware, simulado es el recocido clásico y aleatorio es el control."
+  },
+  {
+    "id": "instancia",
+    "termino": "Instancia",
+    "definicion": "El conjunto de cajeros y las distancias de un problema concreto."
+  }
+]

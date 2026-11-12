@@ -16,6 +16,7 @@ def test_lote_crudo_se_guarda_y_se_reconvierte_igual(tmp_path):
     assert ruta.exists() and not ruta.with_suffix(".pkl.tmp").exists()
     recargado = cargar_crudos(ruta)
     assert len(recargado.corridas) == 4
+    assert all(c.parametros["criterio_factibilidad"] == "estricto" for c in lote.corridas)
     assert convertir(recargado) == convertir(lote)  # el .json se puede regenerar desde el .pkl
 
 
