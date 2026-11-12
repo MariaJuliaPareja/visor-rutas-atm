@@ -1,0 +1,2 @@
+instancia,formulacion,replica,semilla,maxiter,optimizador,backend,shots,qubits_logicos,profundidad
+31,QUBO,8,50,,,,200,9,

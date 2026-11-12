@@ -1,0 +1,174 @@
+{
+  "version_esquema": "1.2",
+  "fecha_generacion": "2026-11-12T01:12:55+00:00",
+  "instancia": {
+    "id_instancia": 3,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.3989,
+        "longitud": -71.535,
+        "nombre": "Base de operaciones",
+        "rol": "deposito"
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.42313,
+        "longitud": -71.544873,
+        "nombre": "BBVA",
+        "osm_id": "node/10910525152",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.389518,
+        "longitud": -71.550353,
+        "nombre": "Cajero BBVA",
+        "osm_id": "node/5813092796",
+        "rol": "cajero"
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "vial",
+      "distancias": [
+        [
+          0.0,
+          4.267,
+          2.951
+        ],
+        [
+          4.267,
+          0.0,
+          5.516
+        ],
+        [
+          2.951,
+          5.516,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 12.734,
+      "ruta": [
+        0,
+        2,
+        1
+      ]
+    },
+    "matriz_tiempos": {
+      "unidad": "min",
+      "tiempos": [
+        [
+          0.0,
+          8.02,
+          5.83
+        ],
+        [
+          8.02,
+          0.0,
+          10.18
+        ],
+        [
+          5.83,
+          10.18,
+          0.0
+        ]
+      ]
+    },
+    "fuente": {
+      "tipo": "osm",
+      "entidad": "BBVA",
+      "atribucion": "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)",
+      "descargado": "2026-11-03T17:03:16+00:00"
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_marrakesh",
+        "job_id": "dbqh5a8k09pc73at8nn0",
+        "shots": 200,
+        "semilla": 42,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 30,
+        "qubits_fisicos": 37,
+        "profundidad": 312,
+        "profundidad_decompose": 3,
+        "puertas_2q": 221,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 53.6947,
+        "qpu_segundos": 2,
+        "replica": 0,
+        "num_variables": 30,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_marrakesh",
+        "job_id": "dbqh5d1abdes73fo90rg",
+        "shots": 200,
+        "semilla": 42,
+        "reps": 1,
+        "angulos": [
+          0.4291,
+          2.9432
+        ],
+        "optimizador": "COBYLA",
+        "maxiter": 120,
+        "metodo_angulos": "optimizado_local",
+        "qubits_logicos": 9,
+        "qubits_fisicos": 9,
+        "profundidad": 262,
+        "profundidad_decompose": 3,
+        "puertas_2q": 130,
+        "cadenas_distintas": 148,
+        "escala_hamiltoniano": 55.8283,
+        "qpu_segundos": 0,
+        "replica": 0,
+        "num_variables": 9,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 12.734,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

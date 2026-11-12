@@ -1,0 +1,431 @@
+{
+  "circuito": "QAOA reps=1 sin ruido, evolucion de energia_qaoa / QAOAAnsatz",
+  "shots": 200,
+  "repeticiones": 1000,
+  "semilla_muestreo": 42,
+  "memoria_gps_30": {
+    "qubits": 30,
+    "bytes_statevector_complex128": 17179869184,
+    "bytes_diagonal_float64": 8589934592,
+    "bytes_pico_con_copia_del_mezclador": 42949672960,
+    "bytes_ram_total": 8427319296,
+    "bytes_ram_libre": 977027072,
+    "cabe": false
+  },
+  "memoria_gps_30_ec2_32gib": {
+    "complex64_bytes": 8589934592,
+    "diagonal_float32_bytes": 4294967296,
+    "temporal_mitad_complex64_bytes": 4294967296,
+    "pico_bytes": 17179869184,
+    "cabe_bajo_28gib": true,
+    "ejecutado": false
+  },
+  "hardware": {
+    "n3_archivo": "corridas_i3_n3_ibm_20261111-211121-481.pkl",
+    "n4_archivo": "corridas_i4_n4_ibm_20261111-201713-615.pkl",
+    "GPS_n3": {
+      "N": 10,
+      "factibles": 0,
+      "optimas": 0,
+      "energia_min": -654.9599499999999,
+      "energia_max": -448.6483000000002
+    },
+    "QUBO_n3": {
+      "N": 10,
+      "factibles": 10,
+      "optimas": 10,
+      "energia_min": -292.8866,
+      "energia_max": -292.8866
+    },
+    "QUBO_n4": {
+      "N": 10,
+      "factibles": 6,
+      "optimas": 5,
+      "energia_min": -737.4268,
+      "energia_max": -558.6384499999999
+    }
+  },
+  "simulaciones": [
+    {
+      "etiqueta": "GPS n=3 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "estado": "no_cabe",
+      "memoria": {
+        "qubits": 30,
+        "bytes_statevector_complex128": 17179869184,
+        "bytes_diagonal_float64": 8589934592,
+        "bytes_pico_con_copia_del_mezclador": 42949672960,
+        "bytes_ram_total": 8427319296,
+        "bytes_ram_libre": 977027072,
+        "cabe": false
+      }
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [0.4291, 2.9432]",
+      "angulos": [
+        0.4291,
+        2.9432
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.29829811216646496,
+      "probabilidad_decodifica_optima": 0.29829811216646496,
+      "probabilidad_energia_fundamental": 0.1996025000779498,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 1.0,
+      "formula_fundamental": 1.0,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 1000,
+        "fraccion_argmin": 1.0,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        0,
+        2,
+        8
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [-0.4037, 0.3524]",
+      "angulos": [
+        -0.4037,
+        0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.25050292667044244,
+      "probabilidad_decodifica_optima": 0.25050292667044244,
+      "probabilidad_energia_fundamental": 0.11908860475195414,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 1.0,
+      "formula_fundamental": 0.9999999999903073,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 1000,
+        "fraccion_argmin": 1.0,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        1
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [3.5453, -0.3524]",
+      "angulos": [
+        3.5453,
+        -0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0,
+      "probabilidad_factible": 0.2505018410532719,
+      "probabilidad_decodifica_optima": 0.2505018410532719,
+      "probabilidad_energia_fundamental": 0.1190889971213667,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 1.0,
+      "formula_fundamental": 0.9999999999903082,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 1000,
+        "fraccion_argmin": 1.0,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        3
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [0.4291, 2.9431]",
+      "angulos": [
+        0.4291,
+        2.9431
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999997,
+      "probabilidad_factible": 0.2983767130436578,
+      "probabilidad_decodifica_optima": 0.2983767130436578,
+      "probabilidad_energia_fundamental": 0.1996638057651252,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 1.0,
+      "formula_fundamental": 1.0,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 1000,
+        "fraccion_argmin": 1.0,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        4
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [2.7379, 0.3524]",
+      "angulos": [
+        2.7379,
+        0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999993,
+      "probabilidad_factible": 0.25050401191061344,
+      "probabilidad_decodifica_optima": 0.25050401191061344,
+      "probabilidad_energia_fundamental": 0.11908821221306765,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 1.0,
+      "formula_fundamental": 0.9999999999903064,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 1000,
+        "fraccion_argmin": 1.0,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0000000000000002,
+      "probabilidad_factible": 0.015590337520127529,
+      "probabilidad_decodifica_optima": 0.015590337520127529,
+      "probabilidad_energia_fundamental": 0.00041273570700557503,
+      "energia_fundamental_bqm": -292.8866,
+      "cadenas_que_decodifican_optima": 27,
+      "cadenas_en_energia_fundamental": 6,
+      "formula_alguna": 0.9568308423511683,
+      "formula_fundamental": 0.07924765899872976,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 169,
+        "fraccion_argmin": 0.169,
+        "alguna_de_200_decodifica_optima": 944,
+        "fraccion_alguna": 0.944
+      }
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [2.6821, 0.4424]",
+      "angulos": [
+        2.6821,
+        0.4424
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.10403620487980325,
+      "probabilidad_decodifica_optima": 0.035193950253734396,
+      "probabilidad_energia_fundamental": 0.00872670232229314,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.9992273130039769,
+      "formula_fundamental": 0.8267467003480734,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 823,
+        "fraccion_argmin": 0.823,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        0,
+        3,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [-0.4595, 0.4424]",
+      "angulos": [
+        -0.4595,
+        0.4424
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.10403550976002465,
+      "probabilidad_decodifica_optima": 0.03519368281392353,
+      "probabilidad_energia_fundamental": 0.008726742192118959,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.9992272701657374,
+      "formula_fundamental": 0.8267480940204871,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 822,
+        "fraccion_argmin": 0.822,
+        "alguna_de_200_decodifica_optima": 1000,
+        "fraccion_alguna": 1.0
+      },
+      "hardware_replicas_con_estos_angulos": [
+        1
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [-0.4595, 0.4423]",
+      "angulos": [
+        -0.4595,
+        0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.10402282825387868,
+      "probabilidad_decodifica_optima": 0.035189522126585354,
+      "probabilidad_energia_fundamental": 0.00872376815698249,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.9992266034065893,
+      "formula_fundamental": 0.8266441043087343,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 816,
+        "fraccion_argmin": 0.816,
+        "alguna_de_200_decodifica_optima": 999,
+        "fraccion_alguna": 0.999
+      },
+      "hardware_replicas_con_estos_angulos": [
+        2
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [3.6011, -0.4423]",
+      "angulos": [
+        3.6011,
+        -0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999993,
+      "probabilidad_factible": 0.10402213491264282,
+      "probabilidad_decodifica_optima": 0.03518925527940996,
+      "probabilidad_energia_fundamental": 0.008723808098136655,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.9992265606242231,
+      "formula_fundamental": 0.8266455012970959,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 818,
+        "fraccion_argmin": 0.818,
+        "alguna_de_200_decodifica_optima": 999,
+        "fraccion_alguna": 0.999
+      },
+      "hardware_replicas_con_estos_angulos": [
+        4
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [2.6821, 0.4423]",
+      "angulos": [
+        2.6821,
+        0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.10402352129654052,
+      "probabilidad_decodifica_optima": 0.035189788874157454,
+      "probabilidad_energia_fundamental": 0.008723728192502212,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.9992266461706333,
+      "formula_fundamental": 0.8266427064933032,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 817,
+        "fraccion_argmin": 0.817,
+        "alguna_de_200_decodifica_optima": 998,
+        "fraccion_alguna": 0.998
+      },
+      "hardware_replicas_con_estos_angulos": [
+        8,
+        9
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0,
+      "probabilidad_factible": 0.0005968411690158934,
+      "probabilidad_decodifica_optima": 0.0003170293000877569,
+      "probabilidad_energia_fundamental": 5.291527003922683e-06,
+      "energia_fundamental_bqm": -737.4268,
+      "cadenas_que_decodifican_optima": 96,
+      "cadenas_en_energia_fundamental": 8,
+      "formula_alguna": 0.06144696381435277,
+      "formula_fundamental": 0.0010577483901939022,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 1000,
+        "semilla_generador": 42,
+        "argmin_bqm_decodifica_optima": 13,
+        "fraccion_argmin": 0.013,
+        "alguna_de_200_decodifica_optima": 54,
+        "fraccion_alguna": 0.054
+      }
+    }
+  ]
+}

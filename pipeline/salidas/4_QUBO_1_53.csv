@@ -1,0 +1,2 @@
+instancia,formulacion,replica,semilla,maxiter,optimizador,backend,shots,qubits_logicos,profundidad
+4,QUBO,1,53,120,COBYLA,ibm_kingston,200,16,3

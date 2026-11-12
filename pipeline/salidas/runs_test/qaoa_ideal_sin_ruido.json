@@ -1,0 +1,4276 @@
+{
+  "circuito": "QAOA reps=1 sin ruido, evolucion de energia_qaoa / QAOAAnsatz",
+  "shots": 200,
+  "repeticiones": 20,
+  "semilla_muestreo": 42,
+  "memoria_gps_30": {
+    "qubits": 30,
+    "bytes_statevector_complex128": 17179869184,
+    "bytes_diagonal_float64": 8589934592,
+    "bytes_pico_con_copia_del_mezclador": 42949672960,
+    "bytes_ram_total": 8427319296,
+    "bytes_ram_libre": 713789440,
+    "cabe": false
+  },
+  "hardware": {
+    "n3_archivo": "corridas_i3_n3_ibm_20261111-211121-481.pkl",
+    "n4_archivo": "corridas_i4_n4_ibm_20261111-201713-615.pkl",
+    "GPS_n3": {
+      "N": 10,
+      "factibles": 0,
+      "optimas": 0,
+      "energia_min": -654.9599499999999,
+      "energia_max": -448.6483000000002
+    },
+    "QUBO_n3": {
+      "N": 10,
+      "factibles": 10,
+      "optimas": 10,
+      "energia_min": -292.8866,
+      "energia_max": -292.8866
+    },
+    "QUBO_n4": {
+      "N": 10,
+      "factibles": 6,
+      "optimas": 5,
+      "energia_min": -737.4268,
+      "energia_max": -558.6384499999999
+    }
+  },
+  "simulaciones": [
+    {
+      "etiqueta": "GPS n=3 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "estado": "no_cabe",
+      "memoria": {
+        "qubits": 30,
+        "bytes_statevector_complex128": 17179869184,
+        "bytes_diagonal_float64": 8589934592,
+        "bytes_pico_con_copia_del_mezclador": 42949672960,
+        "bytes_ram_total": 8427319296,
+        "bytes_ram_libre": 713789440,
+        "cabe": false
+      }
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [0.4291, 2.9432]",
+      "angulos": [
+        0.4291,
+        2.9432
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.29829811216646496,
+      "probabilidad_factible_y_optima": 0.29829811216646496,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 20,
+        "fraccion": 1.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        0,
+        2,
+        8
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [-0.4037, 0.3524]",
+      "angulos": [
+        -0.4037,
+        0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.25050292667044244,
+      "probabilidad_factible_y_optima": 0.25050292667044244,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 20,
+        "fraccion": 1.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 4,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 5,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        1
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [3.5453, -0.3524]",
+      "angulos": [
+        3.5453,
+        -0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0,
+      "probabilidad_factible": 0.2505018410532719,
+      "probabilidad_factible_y_optima": 0.2505018410532719,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 20,
+        "fraccion": 1.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 4,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 5,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        3
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [0.4291, 2.9431]",
+      "angulos": [
+        0.4291,
+        2.9431
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999997,
+      "probabilidad_factible": 0.2983767130436578,
+      "probabilidad_factible_y_optima": 0.2983767130436578,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 20,
+        "fraccion": 1.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        4
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 COBYLA [2.7379, 0.3524]",
+      "angulos": [
+        2.7379,
+        0.3524
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 0.9999999999999993,
+      "probabilidad_factible": 0.25050401191061344,
+      "probabilidad_factible_y_optima": 0.25050401191061344,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 20,
+        "fraccion": 1.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 161,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 4,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 98,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 5,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 84,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 140,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 6,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=3 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "qubits": 9,
+      "escala_hamiltoniano": 55.828250000000025,
+      "norma": 1.0000000000000002,
+      "probabilidad_factible": 0.015590337520127529,
+      "probabilidad_factible_y_optima": 0.015590337520127529,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 3,
+        "fraccion": 0.15,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 12,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 66,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 68,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 10,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 258,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 258,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 74,
+            "energia_bqm": -196.52875,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 133,
+            "energia_bqm": -197.8446,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              0
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 12,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 384,
+            "energia_bqm": -101.87360000000001,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              2,
+              2
+            ],
+            "distancia_km": 0.0,
+            "cadenas_empatadas_en_energia": 13,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 12,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 20,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 273,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 168,
+            "energia_bqm": -192.71570000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              1,
+              2,
+              1
+            ],
+            "distancia_km": 11.031500000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 258,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 136,
+            "energia_bqm": -198.23145000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              1,
+              2
+            ],
+            "distancia_km": 11.031500000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 66,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 266,
+            "energia_bqm": -292.8866,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              2,
+              1
+            ],
+            "distancia_km": 12.734200000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 68,
+            "energia_bqm": -200.79590000000002,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 5.9026000000000005,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 12,
+            "energia_bqm": -199.48005000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      }
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [2.6821, 0.4424]",
+      "angulos": [
+        2.6821,
+        0.4424
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.10403620487980325,
+      "probabilidad_factible_y_optima": 0.035193950253734396,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 12,
+        "fraccion": 0.6,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 20513,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 33313,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 17448,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 4372,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 1348,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 32962,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 12545,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 2580,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 10753,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        0,
+        3,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [-0.4595, 0.4424]",
+      "angulos": [
+        -0.4595,
+        0.4424
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.10403550976002465,
+      "probabilidad_factible_y_optima": 0.03519368281392353,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 12,
+        "fraccion": 0.6,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 20513,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 33313,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 17448,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 4372,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 1348,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 32962,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 12545,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 2580,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 10753,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        1
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [-0.4595, 0.4423]",
+      "angulos": [
+        -0.4595,
+        0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0000000000000004,
+      "probabilidad_factible": 0.10402282825387868,
+      "probabilidad_factible_y_optima": 0.035189522126585354,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 12,
+        "fraccion": 0.6,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 20513,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 33313,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 17448,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 4372,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 1348,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 32962,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 12545,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 2580,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 10753,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        2
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [3.6011, -0.4423]",
+      "angulos": [
+        3.6011,
+        -0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999993,
+      "probabilidad_factible": 0.10402213491264282,
+      "probabilidad_factible_y_optima": 0.03518925527940996,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 12,
+        "fraccion": 0.6,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 20513,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 33313,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 17448,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 4372,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 1348,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 32962,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 12545,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 2580,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 10753,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        4
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 COBYLA [2.6821, 0.4423]",
+      "angulos": [
+        2.6821,
+        0.4423
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 0.9999999999999998,
+      "probabilidad_factible": 0.10402352129654052,
+      "probabilidad_factible_y_optima": 0.035189788874157454,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 12,
+        "fraccion": 0.6,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 20513,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 33313,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 18497,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 17448,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9730,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 4372,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 1348,
+            "energia_bqm": -734.0889500000001,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "distancia_km": 17.834249999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 2,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 32962,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 12545,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 2580,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 3,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 9480,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              3,
+              2,
+              1
+            ],
+            "distancia_km": 14.496400000000001,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 2244,
+            "energia_bqm": -737.4268,
+            "factible": true,
+            "optima": true,
+            "secuencia": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 14.4964,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 10753,
+            "energia_bqm": -737.2586499999999,
+            "factible": true,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      },
+      "hardware_replicas_con_estos_angulos": [
+        8,
+        9
+      ]
+    },
+    {
+      "etiqueta": "QUBO n=4 rampa",
+      "angulos": [
+        0.375,
+        0.375
+      ],
+      "qubits": 16,
+      "escala_hamiltoniano": 195.03215000000003,
+      "norma": 1.0,
+      "probabilidad_factible": 0.0005968411690158934,
+      "probabilidad_factible_y_optima": 0.0003170293000877569,
+      "muestreo": {
+        "shots": 200,
+        "repeticiones": 20,
+        "exitos_factible_y_optima": 0,
+        "fraccion": 0.0,
+        "ensayos": [
+          {
+            "replica_muestreo": 0,
+            "semilla_generador": 42,
+            "indice": 33798,
+            "energia_bqm": -186.50469999999996,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              0,
+              3,
+              3
+            ],
+            "distancia_km": 1.4761,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 1,
+            "semilla_generador": 42,
+            "indice": 18432,
+            "energia_bqm": -371.3957,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              3,
+              2
+            ],
+            "distancia_km": 9.131799999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 2,
+            "semilla_generador": 42,
+            "indice": 4384,
+            "energia_bqm": -375.9616,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              1,
+              2,
+              3
+            ],
+            "distancia_km": 13.880899999999999,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 3,
+            "semilla_generador": 42,
+            "indice": 132,
+            "energia_bqm": -375.9616,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2
+            ],
+            "distancia_km": 9.222999999999999,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 4,
+            "semilla_generador": 42,
+            "indice": 3328,
+            "energia_bqm": -183.4149,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              3,
+              2,
+              3
+            ],
+            "distancia_km": 9.131799999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 5,
+            "semilla_generador": 42,
+            "indice": 40,
+            "energia_bqm": -375.9616,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1
+            ],
+            "distancia_km": 8.5343,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 6,
+            "semilla_generador": 42,
+            "indice": 9217,
+            "energia_bqm": -375.9616,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1
+            ],
+            "distancia_km": 9.3949,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 7,
+            "semilla_generador": 42,
+            "indice": 9356,
+            "energia_bqm": -366.3448999999999,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              0,
+              2,
+              3
+            ],
+            "distancia_km": 18.44975,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 8,
+            "semilla_generador": 42,
+            "indice": 16409,
+            "energia_bqm": -367.08295,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "distancia_km": 13.80395,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 9,
+            "semilla_generador": 42,
+            "indice": 2120,
+            "energia_bqm": -375.9616,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              3
+            ],
+            "distancia_km": 9.394899999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 10,
+            "semilla_generador": 42,
+            "indice": 37889,
+            "energia_bqm": 0.738049999999987,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              3,
+              3
+            ],
+            "distancia_km": 1.4761,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 11,
+            "semilla_generador": 42,
+            "indice": 4099,
+            "energia_bqm": -375.22355,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              0,
+              3
+            ],
+            "distancia_km": 1.4761,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 12,
+            "semilla_generador": 42,
+            "indice": 16945,
+            "energia_bqm": -357.23234999999994,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              1,
+              2,
+              2
+            ],
+            "distancia_km": 13.80395,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 13,
+            "semilla_generador": 42,
+            "indice": 2147,
+            "energia_bqm": 9.272350000000017,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              0,
+              1,
+              3,
+              1
+            ],
+            "distancia_km": 17.313699999999997,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 14,
+            "semilla_generador": 42,
+            "indice": 9280,
+            "energia_bqm": -371.57189999999997,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              3,
+              1,
+              1
+            ],
+            "distancia_km": 8.779399999999999,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 15,
+            "semilla_generador": 42,
+            "indice": 49153,
+            "energia_bqm": -375.9615999999999,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              3
+            ],
+            "distancia_km": 9.915449999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 16,
+            "semilla_generador": 42,
+            "indice": 10305,
+            "energia_bqm": -554.5474999999999,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              1
+            ],
+            "distancia_km": 9.3949,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 17,
+            "semilla_generador": 42,
+            "indice": 33288,
+            "energia_bqm": -370.65765,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              2,
+              3
+            ],
+            "distancia_km": 9.915449999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 18,
+            "semilla_generador": 42,
+            "indice": 12466,
+            "energia_bqm": -156.56440000000003,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              1,
+              1,
+              3,
+              1,
+              2
+            ],
+            "distancia_km": 22.583349999999996,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          },
+          {
+            "replica_muestreo": 19,
+            "semilla_generador": 42,
+            "indice": 20632,
+            "energia_bqm": -348.94995000000006,
+            "factible": false,
+            "optima": false,
+            "secuencia": [
+              0,
+              3,
+              1,
+              2,
+              2
+            ],
+            "distancia_km": 14.664549999999998,
+            "cadenas_empatadas_en_energia": 1,
+            "empate_mixto": false
+          }
+        ]
+      }
+    }
+  ]
+}

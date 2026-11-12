@@ -1,0 +1,440 @@
+{
+  "version_esquema": "1.2",
+  "fecha_generacion": "2026-11-03T17:04:24+00:00",
+  "instancia": {
+    "id_instancia": 1,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.3989,
+        "longitud": -71.535,
+        "nombre": "Base de operaciones",
+        "rol": "deposito"
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.42313,
+        "longitud": -71.544873,
+        "nombre": "BBVA",
+        "osm_id": "node/10910525152",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.396942,
+        "longitud": -71.547218,
+        "nombre": "BBVA",
+        "osm_id": "node/3929538795",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.374762,
+        "longitud": -71.557802,
+        "nombre": "BBVA",
+        "osm_id": "node/4018911855",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 4,
+        "latitud": -16.417797,
+        "longitud": -71.51388,
+        "nombre": "BBVA",
+        "osm_id": "node/4020677848",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 5,
+        "latitud": -16.416296,
+        "longitud": -71.513886,
+        "nombre": "BBVA",
+        "osm_id": "node/4354902492",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 6,
+        "latitud": -16.389518,
+        "longitud": -71.550353,
+        "nombre": "Cajero BBVA",
+        "osm_id": "node/5813092796",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 7,
+        "latitud": -16.39819,
+        "longitud": -71.535766,
+        "nombre": "BBVA",
+        "direccion": "San Francisco 108",
+        "osm_id": "way/534115321",
+        "rol": "cajero"
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "vial",
+      "distancias": [
+        [
+          0.0,
+          4.267,
+          1.874,
+          4.856,
+          4.25,
+          4.611,
+          2.951,
+          0.738
+        ],
+        [
+          4.267,
+          0.0,
+          4.42,
+          7.415,
+          4.673,
+          4.925,
+          5.516,
+          4.39
+        ],
+        [
+          1.874,
+          4.42,
+          0.0,
+          3.389,
+          5.255,
+          5.909,
+          1.303,
+          1.874
+        ],
+        [
+          4.856,
+          7.415,
+          3.389,
+          0.0,
+          8.399,
+          8.634,
+          2.941,
+          4.852
+        ],
+        [
+          4.25,
+          4.673,
+          5.255,
+          8.399,
+          0.0,
+          0.863,
+          6.431,
+          4.41
+        ],
+        [
+          4.611,
+          4.925,
+          5.909,
+          8.634,
+          0.863,
+          0.0,
+          6.729,
+          4.566
+        ],
+        [
+          2.951,
+          5.516,
+          1.303,
+          2.941,
+          6.431,
+          6.729,
+          0.0,
+          3.05
+        ],
+        [
+          0.738,
+          4.39,
+          1.874,
+          4.852,
+          4.41,
+          4.566,
+          3.05,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 24.292,
+      "ruta": [
+        0,
+        7,
+        3,
+        6,
+        2,
+        1,
+        5,
+        4
+      ]
+    },
+    "matriz_tiempos": {
+      "unidad": "min",
+      "tiempos": [
+        [
+          0.0,
+          8.02,
+          3.69,
+          9.65,
+          9.14,
+          9.55,
+          5.83,
+          1.61
+        ],
+        [
+          8.02,
+          0.0,
+          8.16,
+          13.93,
+          8.47,
+          8.73,
+          10.18,
+          8.36
+        ],
+        [
+          3.69,
+          8.16,
+          0.0,
+          6.71,
+          11.01,
+          11.95,
+          2.5,
+          3.69
+        ],
+        [
+          9.65,
+          13.93,
+          6.71,
+          0.0,
+          17.42,
+          17.6,
+          5.79,
+          9.89
+        ],
+        [
+          9.14,
+          8.47,
+          11.01,
+          17.42,
+          0.0,
+          3.2,
+          13.19,
+          9.47
+        ],
+        [
+          9.55,
+          8.73,
+          11.95,
+          17.6,
+          3.2,
+          0.0,
+          13.78,
+          9.47
+        ],
+        [
+          5.83,
+          10.18,
+          2.5,
+          5.79,
+          13.19,
+          13.78,
+          0.0,
+          5.87
+        ],
+        [
+          1.61,
+          8.36,
+          3.69,
+          9.89,
+          9.47,
+          9.47,
+          5.87,
+          0.0
+        ]
+      ]
+    },
+    "fuente": {
+      "tipo": "osm",
+      "entidad": "BBVA",
+      "atribucion": "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)",
+      "descargado": "2026-11-03T17:03:16+00:00"
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 42,
+        "replica": 0,
+        "num_variables": 210
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          6,
+          5,
+          4,
+          7,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 32.007,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 43,
+        "replica": 1,
+        "num_variables": 210
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          1,
+          4,
+          5,
+          6,
+          7,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 29.702,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 3,
+      "formulacion": "GPS",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 44,
+        "replica": 2,
+        "num_variables": 210
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          3,
+          2,
+          7,
+          5,
+          4,
+          1,
+          6
+        ]
+      },
+      "metricas": {
+        "distancia_total": 28.688,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 4,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 42,
+        "replica": 0,
+        "num_variables": 64
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          4,
+          5,
+          1,
+          2,
+          6,
+          3,
+          7
+        ]
+      },
+      "metricas": {
+        "distancia_total": 24.292,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 5,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 43,
+        "replica": 1,
+        "num_variables": 64
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          4,
+          5,
+          1,
+          3,
+          6,
+          2,
+          7
+        ]
+      },
+      "metricas": {
+        "distancia_total": 24.309,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 6,
+      "formulacion": "QUBO",
+      "sampler": "simulado",
+      "parametros": {
+        "num_reads": 1000,
+        "seed": 44,
+        "replica": 2,
+        "num_variables": 64
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          4,
+          5,
+          1,
+          2,
+          6,
+          3,
+          7
+        ]
+      },
+      "metricas": {
+        "distancia_total": 24.292,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

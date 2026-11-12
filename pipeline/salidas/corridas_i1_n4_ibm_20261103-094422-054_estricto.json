@@ -1,0 +1,151 @@
+{
+  "version_esquema": "1.2",
+  "fecha_generacion": "2026-11-03T14:44:23+00:00",
+  "instancia": {
+    "id_instancia": 1,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.382463,
+        "longitud": -71.538667
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.377384,
+        "longitud": -71.523158
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.423249,
+        "longitud": -71.506463
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.383232,
+        "longitud": -71.517836
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "vial",
+      "distancias": [
+        [
+          0.0,
+          2.796,
+          7.215,
+          3.095
+        ],
+        [
+          2.796,
+          0.0,
+          6.336,
+          1.145
+        ],
+        [
+          7.215,
+          6.336,
+          0.0,
+          5.683
+        ],
+        [
+          3.095,
+          1.145,
+          5.683,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 16.839,
+      "ruta": [
+        0,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_fez",
+        "job_id": "dbkv6monceqs73ammv60",
+        "shots": 1000,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 54,
+        "qubits_fisicos": 59,
+        "profundidad": 572,
+        "puertas_2q": 704,
+        "cadenas_distintas": 1000,
+        "escala_hamiltoniano": 213.7748,
+        "qpu_segundos": 2,
+        "replica": 0,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 17.792,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_fez",
+        "job_id": "dbkv8ed6p51s73cneso0",
+        "shots": 1000,
+        "reps": 1,
+        "angulos": [
+          -0.4595,
+          0.4458
+        ],
+        "metodo_angulos": "optimizado_local",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 642,
+        "puertas_2q": 484,
+        "cadenas_distintas": 916,
+        "escala_hamiltoniano": 219.7846,
+        "qpu_segundos": 0,
+        "replica": 0,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": true,
+        "secuencia": [
+          0,
+          1,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 16.839,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

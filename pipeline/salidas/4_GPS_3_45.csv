@@ -1,0 +1,2 @@
+instancia,formulacion,replica,semilla,maxiter,optimizador,backend,shots,qubits_logicos,profundidad
+4,GPS,3,45,,rampa_lineal,ibm_kingston,200,54,3

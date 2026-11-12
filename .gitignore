@@ -13,10 +13,10 @@ venv/
 .ruff_cache/
 *.egg-info/
 
-# Resultados generados por el pipeline (se regeneran; el ejemplo versionado esta en ejemplos/)
-pipeline/salidas/
+# Corridas de prueba fuera de salidas. Los .pkl se ignoran salvo los de salidas.
 pipeline/runs_test/
 *.pkl
+!pipeline/salidas/**/*.pkl
 
 # Node
 web/node_modules/

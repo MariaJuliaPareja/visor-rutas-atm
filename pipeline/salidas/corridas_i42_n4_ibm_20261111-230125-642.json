@@ -1,0 +1,998 @@
+{
+  "version_esquema": "1.3",
+  "fecha_generacion": "2026-11-12T04:01:26+00:00",
+  "instancia": {
+    "id_instancia": 42,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.3989,
+        "longitud": -71.535,
+        "nombre": "Base de operaciones",
+        "rol": "deposito"
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.42313,
+        "longitud": -71.544873,
+        "nombre": "BBVA",
+        "osm_id": "node/10910525152",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.416296,
+        "longitud": -71.513886,
+        "nombre": "BBVA",
+        "osm_id": "node/4354902492",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.39819,
+        "longitud": -71.535766,
+        "nombre": "BBVA",
+        "direccion": "San Francisco 108",
+        "osm_id": "way/534115321",
+        "rol": "cajero"
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "vial",
+      "distancias": [
+        [
+          0.0,
+          4.267,
+          4.611,
+          0.738
+        ],
+        [
+          4.267,
+          0.0,
+          4.925,
+          4.39
+        ],
+        [
+          4.611,
+          4.925,
+          0.0,
+          4.566
+        ],
+        [
+          0.738,
+          4.39,
+          4.566,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 14.496,
+      "ruta": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "matriz_tiempos": {
+      "unidad": "min",
+      "tiempos": [
+        [
+          0.0,
+          8.02,
+          9.55,
+          1.61
+        ],
+        [
+          8.02,
+          0.0,
+          8.73,
+          8.36
+        ],
+        [
+          9.55,
+          8.73,
+          0.0,
+          9.47
+        ],
+        [
+          1.61,
+          8.36,
+          9.47,
+          0.0
+        ]
+      ]
+    },
+    "fuente": {
+      "tipo": "osm",
+      "entidad": "BBVA",
+      "atribucion": "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)",
+      "descargado": "2026-11-03T17:03:16+00:00"
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjk97v5hds73dg66ng",
+        "shots": 200,
+        "semilla": 42,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 641,
+        "profundidad_decompose": 3,
+        "puertas_2q": 484,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 0,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.665,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjkngk09pc73atc9p0",
+        "shots": 200,
+        "semilla": 43,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 648,
+        "profundidad_decompose": 3,
+        "puertas_2q": 475,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 1,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          3,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 3,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjlipabdes73fockig",
+        "shots": 200,
+        "semilla": 44,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 18,
+        "profundidad": 698,
+        "profundidad_decompose": 3,
+        "puertas_2q": 478,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 2,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 4,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjlo6jjaos73ahdji0",
+        "shots": 200,
+        "semilla": 45,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 20,
+        "profundidad": 643,
+        "profundidad_decompose": 3,
+        "puertas_2q": 455,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 3,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 23.104,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 5,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjlsok09pc73atcb0g",
+        "shots": 200,
+        "semilla": 46,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 612,
+        "profundidad_decompose": 3,
+        "puertas_2q": 461,
+        "cadenas_distintas": 197,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 4,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          3,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 17.834,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 6,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjm1pabdes73focl5g",
+        "shots": 200,
+        "semilla": 47,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 620,
+        "profundidad_decompose": 3,
+        "puertas_2q": 447,
+        "cadenas_distintas": 196,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 5,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 17.834,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 7,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjm6gk09pc73atcbg0",
+        "shots": 200,
+        "semilla": 48,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 611,
+        "profundidad_decompose": 3,
+        "puertas_2q": 461,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 6,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.395,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 8,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjn00k09pc73atccag",
+        "shots": 200,
+        "semilla": 49,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 824,
+        "profundidad_decompose": 3,
+        "puertas_2q": 490,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 7,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.496,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 9,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjn4ujjaos73ahdl4g",
+        "shots": 200,
+        "semilla": 50,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 496,
+        "profundidad_decompose": 3,
+        "puertas_2q": 421,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 8,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          1,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 18.695,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 10,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjn99abdes73focmh0",
+        "shots": 200,
+        "semilla": 51,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 569,
+        "profundidad_decompose": 3,
+        "puertas_2q": 436,
+        "cadenas_distintas": 196,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 9,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 11,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjne6jjaos73ahdle0",
+        "shots": 200,
+        "semilla": 52,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 18,
+        "profundidad": 640,
+        "profundidad_decompose": 3,
+        "puertas_2q": 470,
+        "cadenas_distintas": 200,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 10,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          0,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 10.699,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 12,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjniujjaos73ahdlj0",
+        "shots": 200,
+        "semilla": 53,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 548,
+        "profundidad_decompose": 3,
+        "puertas_2q": 433,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 11,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.496,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 13,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjnn7v5hds73dg6ac0",
+        "shots": 200,
+        "semilla": 54,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 626,
+        "profundidad_decompose": 3,
+        "puertas_2q": 465,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 12,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.395,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 14,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjnrmjjaos73ahdlrg",
+        "shots": 200,
+        "semilla": 55,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 724,
+        "profundidad_decompose": 3,
+        "puertas_2q": 486,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 13,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 19.766,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 15,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjo09abdes73focn8g",
+        "shots": 200,
+        "semilla": 56,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 717,
+        "profundidad_decompose": 3,
+        "puertas_2q": 477,
+        "cadenas_distintas": 198,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 14,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          0,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 1.476,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 16,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjo99abdes73focnjg",
+        "shots": 200,
+        "semilla": 57,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 19,
+        "profundidad": 661,
+        "profundidad_decompose": 3,
+        "puertas_2q": 502,
+        "cadenas_distintas": 197,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 15,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          1,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.395,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 17,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjovnv5hds73dg6c50",
+        "shots": 200,
+        "semilla": 58,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 645,
+        "profundidad_decompose": 3,
+        "puertas_2q": 469,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 16,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          0,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 18,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjp4vv5hds73dg6cf0",
+        "shots": 200,
+        "semilla": 59,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 596,
+        "profundidad_decompose": 3,
+        "puertas_2q": 476,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 17,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 19,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjp9nv5hds73dg6ct0",
+        "shots": 200,
+        "semilla": 60,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 657,
+        "profundidad_decompose": 3,
+        "puertas_2q": 485,
+        "cadenas_distintas": 199,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 0,
+        "replica": 18,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.665,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 20,
+      "formulacion": "QUBO",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbqjpegk09pc73atcfk0",
+        "shots": 200,
+        "semilla": 61,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "optimizador": "rampa_lineal",
+        "maxiter": null,
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 16,
+        "qubits_fisicos": 16,
+        "profundidad": 651,
+        "profundidad_decompose": 3,
+        "puertas_2q": 453,
+        "cadenas_distintas": 197,
+        "escala_hamiltoniano": 195.0322,
+        "qpu_segundos": 2,
+        "replica": 19,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.665,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

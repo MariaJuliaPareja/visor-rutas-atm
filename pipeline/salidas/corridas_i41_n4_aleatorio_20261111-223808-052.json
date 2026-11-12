@@ -1,0 +1,1573 @@
+{
+  "version_esquema": "1.3",
+  "fecha_generacion": "2026-11-12T03:38:09+00:00",
+  "instancia": {
+    "id_instancia": 41,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.3989,
+        "longitud": -71.535,
+        "nombre": "Base de operaciones",
+        "rol": "deposito"
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.42313,
+        "longitud": -71.544873,
+        "nombre": "BBVA",
+        "osm_id": "node/10910525152",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.416296,
+        "longitud": -71.513886,
+        "nombre": "BBVA",
+        "osm_id": "node/4354902492",
+        "rol": "cajero"
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.39819,
+        "longitud": -71.535766,
+        "nombre": "BBVA",
+        "direccion": "San Francisco 108",
+        "osm_id": "way/534115321",
+        "rol": "cajero"
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "vial",
+      "distancias": [
+        [
+          0.0,
+          4.267,
+          4.611,
+          0.738
+        ],
+        [
+          4.267,
+          0.0,
+          4.925,
+          4.39
+        ],
+        [
+          4.611,
+          4.925,
+          0.0,
+          4.566
+        ],
+        [
+          0.738,
+          4.39,
+          4.566,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 14.496,
+      "ruta": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "matriz_tiempos": {
+      "unidad": "min",
+      "tiempos": [
+        [
+          0.0,
+          8.02,
+          9.55,
+          1.61
+        ],
+        [
+          8.02,
+          0.0,
+          8.73,
+          8.36
+        ],
+        [
+          9.55,
+          8.73,
+          0.0,
+          9.47
+        ],
+        [
+          1.61,
+          8.36,
+          9.47,
+          0.0
+        ]
+      ]
+    },
+    "fuente": {
+      "tipo": "osm",
+      "entidad": "BBVA",
+      "atribucion": "© Colaboradores de OpenStreetMap, datos bajo licencia ODbL (openstreetmap.org/copyright)",
+      "descargado": "2026-11-03T17:03:16+00:00"
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 42,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 0,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 2,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 43,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 1,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 22.583,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 3,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 44,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 2,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 4,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 45,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 3,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 5,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 46,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 4,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 6,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 47,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 5,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 7,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 48,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 6,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 8,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 49,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 7,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 8.534,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 9,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 50,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 8,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.223,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 10,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 51,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 9,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 1.476,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 11,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 52,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 10,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 0.0,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 12,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 53,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 11,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 22.936,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 13,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 54,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 12,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 8.534,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 14,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 55,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 13,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 15,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 56,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 14,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 18.385,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 16,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 57,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 15,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.395,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 17,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 58,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 16,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 18,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 59,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 17,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 1.476,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 19,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 60,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 18,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 23.104,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 20,
+      "formulacion": "GPS",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 61,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 54,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 19,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 21,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 42,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 0,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          3,
+          1,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 17.834,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 22,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 43,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 1,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 23,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 44,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 2,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.395,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 24,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 45,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 3,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 25,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 46,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 4,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          1,
+          0,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 18.618,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 26,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 47,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 5,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.496,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 27,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 48,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 6,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 28,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 49,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 7,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          2,
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 29,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 50,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 8,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          2,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 30,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 51,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 9,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 15.357,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 31,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 52,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 10,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 17.314,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 32,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 53,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 11,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          1,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 33,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 54,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 12,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          2,
+          3,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.881,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 34,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 55,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 13,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          0,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 1.476,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 35,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 56,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 14,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 36,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 57,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 15,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 14.496,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 37,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 58,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 16,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          3,
+          2
+        ]
+      },
+      "metricas": {
+        "distancia_total": 9.915,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 38,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 59,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 17,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          1,
+          3,
+          2,
+          3
+        ]
+      },
+      "metricas": {
+        "distancia_total": 18.527,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 39,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 60,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 18,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 13.804,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    },
+    {
+      "id_corrida": 40,
+      "formulacion": "QUBO",
+      "sampler": "aleatorio",
+      "parametros": {
+        "shots": 200,
+        "semilla": 61,
+        "backend": null,
+        "job_id": null,
+        "optimizador": null,
+        "maxiter": null,
+        "metodo_angulos": null,
+        "qubits_logicos": 16,
+        "qubits_fisicos": null,
+        "profundidad": null,
+        "profundidad_decompose": null,
+        "puertas_2q": null,
+        "qpu_segundos": null,
+        "replica": 19,
+        "num_variables": 16,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          2,
+          3,
+          2,
+          1
+        ]
+      },
+      "metricas": {
+        "distancia_total": 18.982,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

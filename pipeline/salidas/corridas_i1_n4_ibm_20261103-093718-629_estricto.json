@@ -1,0 +1,111 @@
+{
+  "version_esquema": "1.2",
+  "fecha_generacion": "2026-11-03T14:37:18+00:00",
+  "instancia": {
+    "id_instancia": 1,
+    "tipo_instancia": "reducida",
+    "cajeros": [
+      {
+        "id_cajero": 0,
+        "latitud": -16.382463,
+        "longitud": -71.538667
+      },
+      {
+        "id_cajero": 1,
+        "latitud": -16.377384,
+        "longitud": -71.523158
+      },
+      {
+        "id_cajero": 2,
+        "latitud": -16.423249,
+        "longitud": -71.506463
+      },
+      {
+        "id_cajero": 3,
+        "latitud": -16.383232,
+        "longitud": -71.517836
+      }
+    ],
+    "matriz_distancias": {
+      "unidad": "km",
+      "metrica": "linea_recta",
+      "distancias": [
+        [
+          0.0,
+          1.748,
+          5.689,
+          2.224
+        ],
+        [
+          1.748,
+          0.0,
+          5.402,
+          0.863
+        ],
+        [
+          5.689,
+          5.402,
+          0.0,
+          4.612
+        ],
+        [
+          2.224,
+          0.863,
+          4.612,
+          0.0
+        ]
+      ]
+    },
+    "linea_base": {
+      "dist_optima": 12.913,
+      "ruta": [
+        0,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "corridas": [
+    {
+      "id_corrida": 1,
+      "formulacion": "GPS",
+      "sampler": "ibm",
+      "parametros": {
+        "backend": "ibm_kingston",
+        "job_id": "dbkv3c8nceqs73ammo7g",
+        "shots": 1000,
+        "reps": 1,
+        "angulos": [
+          0.375,
+          0.375
+        ],
+        "metodo_angulos": "rampa_lineal",
+        "qubits_logicos": 54,
+        "qubits_fisicos": 59,
+        "profundidad": 576,
+        "puertas_2q": 704,
+        "cadenas_distintas": 1000,
+        "escala_hamiltoniano": 167.1552,
+        "qpu_segundos": 0,
+        "replica": 0,
+        "num_variables": 54,
+        "criterio_factibilidad": "estricto"
+      },
+      "ruta": {
+        "factible": false,
+        "secuencia": [
+          0,
+          2,
+          1,
+          0
+        ]
+      },
+      "metricas": {
+        "distancia_total": 12.84,
+        "tiempo_anneal": null,
+        "chain_break_fraction": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+instancia,formulacion,replica,semilla,maxiter,optimizador,backend,shots,qubits_logicos,profundidad
+59,QUBO,0,42,,rampa_lineal,ibm_fez,200,25,3
